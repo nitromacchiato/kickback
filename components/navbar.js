@@ -2,6 +2,16 @@ import 'bulma/css/bulma.css'
 import React, { useState } from "react"
 
 
+
+
+
+
+
+
+
+
+
+
 export default function Navbar(){
 
     const [isActive, setisActive] = React.useState(false);
@@ -47,10 +57,10 @@ export default function Navbar(){
 					      <div class="navbar-item">
 					        <div class="buttons">
 					          <a class="button is-primary">
-					            <strong>Login w/ Spotify</strong>
+					            <strong>Sign Up</strong>
 					          </a>
 					          <a class="button is-light">
-					            Add Playlist
+					        	Login
 					          </a>
 					        </div>
 					      </div>

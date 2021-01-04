@@ -1,0 +1,119 @@
+
+/* 
+    REGION STYLES 
+    ../components/home/region.js 
+
+*/
+
+/* Alignment */
+.region_column_adjustment{
+    margin-top:0px;
+    overflow-x:scroll; 
+    
+}
+
+
+.title_adjustment{
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+/* 
+
+    INDEX LAYOUT STYLES
+    ../components/home/index_layout.js 
+
+*/
+
+
+/* Alignment */
+.margin_section{
+    margin-left:1em;
+    margin-right:1em;
+}
+
+
+
+
+
+
+
+
+/* 
+
+    ADS LAYOUT STYLES
+    ../components/home/ad_section.js 
+
+*/
+
+/* Alignment */ 
+.ad_placement{
+    margin-top:4.3em !important;
+    margin-left:2em !important;
+     
+}
+
+/* Size */
+
+.ad_size{
+    height:600px; 
+    width:500px;
+    
+}
+
+
+.inner_ad_size{
+    height:400px;
+    width:400px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+  
+/* Screen */
+@media screen and (max-width:768px){
+	.hide_mobile{
+		display: none !important;
+    }
+
+}
+
+
+
+
+
+
+
+/* 
+
+    TILE LAYOUT STYLES
+    ../components/home/tile.js 
+
+*/
+
+
+/* Alignment */ 
+.image_placement{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+
+
+/* Typography */ 
+
+.playlist_name{
+    font-size: 12pt;
+}
+
+.playlist_subtitles{
+    font-size: 9pt;
+}
