@@ -1,6 +1,6 @@
 import 'bulma/css/bulma.css'
 import React, { useState } from "react"
-
+import Link from 'next/link'
 
 
 
@@ -46,7 +46,7 @@ export default function Navbar(){
 						  		<div class="control has-icons-left has-icons-right my-2">
 								  <input class="input is-normal" type="email" placeholder="Search" />
 								  <span class="icon is-small is-left">
-								    <i class="fas fa-search"></i>
+								    <i class="fas fa-search fa-lg"></i>
 								  </span>
 								</div>
 							</div>
@@ -56,12 +56,18 @@ export default function Navbar(){
 						 <div class="navbar-end">
 					      <div class="navbar-item">
 					        <div class="buttons">
-					          <a class="button is-primary">
-					            <strong>Sign Up</strong>
+
+								<Link href="user/login">
+									<a class="button is-primary">
+										<strong>Connect</strong>
+									</a>
+							    </Link>
+
+					          <a class="button is-danger">
+					            <strong>Donate</strong>
 					          </a>
-					          <a class="button is-light">
-					        	Login
-					          </a>
+
+
 					        </div>
 					      </div>
 					    </div>
