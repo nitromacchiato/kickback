@@ -86,7 +86,7 @@ export default function Navbar(){
 										<div class="block">
 											<p class="title">Connect Account</p>
 											<p class="subtitle">To follow, add and sync playlist you must connect with your music provider</p>
-										</div>
+										</div> 
 
 
 										<div class="block">
