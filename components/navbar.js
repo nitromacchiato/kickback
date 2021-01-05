@@ -1,9 +1,7 @@
 import 'bulma/css/bulma.css'
 import React, { useState } from "react"
 import Link from 'next/link'
-
-
-
+import authLogin from '../lib/spotify_login.js'
 
 
 
@@ -14,67 +12,120 @@ import Link from 'next/link'
 
 export default function Navbar(){
 
-    const [isActive, setisActive] = React.useState(false);
+	const [isActive, setisActive] = React.useState(false);
 
+	const [isShown, isHidden] = React.useState(false);
+	
 
 
     return(
-        
+		<>
+        <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
         <nav class="navbar" role="navigation" aria-label="main navigation">
-            <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
+			<div class="navbar-brand">
+				
+				<a class="navbar-item" href="">
+					<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
+				</a>
 
-					<div class="navbar-brand">
-
-					  	<a class="navbar-item" href="">
-					      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
-					    </a>
-
-					    <a role="button" className={`navbar-burger burger ${isActive ? "is-active" : ""}`} aria-label="menu" aria-expanded="false" onClick={() => {setisActive(!isActive);}}>
-							<span aria-hidden="true"></span>
-							<span aria-hidden="true"></span>
-							<span aria-hidden="true"></span>
-						</a>
-				    </div>
+				<a role="button" className={`navbar-burger burger ${isActive ? "is-active" : ""}`} aria-label="menu" aria-expanded="false" onClick={() => {setisActive(!isActive);}}>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</a>
+				
+			</div>
 
 
 				  
-				    <div className={`navbar-menu ${isActive ? "is-active" : ""}`}>
+			<div className={`navbar-menu ${isActive ? "is-active" : ""}`}>
 
 					  	
-					  	<div class="navbar-start">
-					  		<div class="navbar-item">
-						  		<div class="control has-icons-left has-icons-right my-2">
-								  <input class="input is-normal" type="email" placeholder="Search" />
-								  <span class="icon is-small is-left">
-								    <i class="fas fa-search fa-lg"></i>
-								  </span>
-								</div>
-							</div>
+				<div class="navbar-start">
+					<div class="navbar-item">
+						<div class="control has-icons-left has-icons-right my-2">
+							<input class="input is-normal" type="email" placeholder="Search" />
+							<span class="icon is-small is-left">
+							<i class="fas fa-search fa-lg"></i>
+							</span>
 						</div>
+					</div>
+				</div>
 
 						
-						 <div class="navbar-end">
-					      <div class="navbar-item">
-					        <div class="buttons">
+				<div class="navbar-end">
+					<div class="navbar-item">
+						<div class="buttons">
 
-								<Link href="user/login">
-									<a class="button is-primary">
-										<strong>Connect</strong>
-									</a>
-							    </Link>
-
-					          <a class="button is-danger">
-					            <strong>Donate</strong>
-					          </a>
+					
+							<button class="button is-primary" onClick={() => {isHidden(!isShown);}}>
+								<strong>Connect</strong>
+							</button>
 
 
-					        </div>
-					      </div>
-					    </div>
+							
+
+							<a class="button is-danger">
+							<strong>Donate</strong>
+							</a>
 
 
-				    </div>
-				</nav>
+							<div class={`modal ${isShown ? "is-active" : ""}`}>
+								<div class="modal-background"></div>
+								<div class="modal-content">
+									<div class="box is-primary has-text-centered">
+
+										<div class="is-right small_height">
+											<button class="button is-white exit_icon" onClick={() => {isHidden(!isShown);}}>
+												<span class="icon is-small">
+													<i class="fas fa-times"></i>
+												</span>
+											</button>
+										</div>
+										
+										<div class="block">
+											<p class="title">Connect Account</p>
+											<p class="subtitle">To follow, add and sync playlist you must connect with your music provider</p>
+										</div>
+
+
+										<div class="block">
+											
+											<button class="button is-success is-rounded" onClick={authLogin}>
+												<span class="icon">
+													<i class="fab fa-spotify"></i>
+												</span>
+												<span>
+													Spotify
+												</span>
+											</button>
+										
+
+											<button class="button is-light is-rounded">
+												<span class="icon">
+													<i class="fab fa-apple"></i>
+												</span>
+												<span>
+													Apple
+												</span>
+											</button>										
+										</div>							
+																			
+									</div>
+
+								</div>
+								
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+		     </div>
+		</nav>
+
+		</>
+
 
     )
 }

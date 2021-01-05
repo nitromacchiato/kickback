@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import RegionColumn from "../../components/home/region.js"
+import RegionColumn from "@/components/home/region.js"
 import Ads from "../home/ad_section.js"
 import 'bulma/css/bulma.css'
 

@@ -117,3 +117,21 @@
 .playlist_subtitles{
     font-size: 9pt;
 }
+
+
+
+
+
+
+/* 
+    NAVBAR 
+    components/navbar.js    
+*/ 
+
+.exit_icon{
+    margin-left: 90%;
+}
+
+.small_height{
+    height:25px;
+}
