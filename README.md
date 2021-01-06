@@ -35,5 +35,31 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 
+
+## Documentation 
+
+Set Up 
+To set up the project first run "npm install"
+
+
+
+
+## Production 
+You must set the NEXTAUTH_URL environment variable with the URL of your site, before deploying to production.
+
+e.g. NEXTAUTH_URL=https://example.com
+
+To do this in on Vercel, you can use the Vercel project dashboard or the now env command:
+
+now env add NEXTAUTH_URL production
+
+
+
+
+
+
+
+
+
 ## Disable Telemetry data sharing to NextJS
 npx next telemetry disable

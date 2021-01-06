@@ -1,7 +1,7 @@
 import 'bulma/css/bulma.css'
 import React, { useState } from "react"
 import Link from 'next/link'
-import authLogin from '../lib/spotify_login.js'
+import { signIn, signOut, useSession, providers } from 'next-auth/client'
 
 
 
@@ -9,12 +9,13 @@ import authLogin from '../lib/spotify_login.js'
 
 
 
-
-export default function Navbar(){
+export default function Navbar({ providers }){
 
 	const [isActive, setisActive] = React.useState(false);
 
 	const [isShown, isHidden] = React.useState(false);
+
+	const [ session, loading ] = useSession();
 	
 
 
@@ -57,13 +58,29 @@ export default function Navbar(){
 					<div class="navbar-item">
 						<div class="buttons">
 
-					
-							<button class="button is-primary" onClick={() => {isHidden(!isShown);}}>
-								<strong>Connect</strong>
-							</button>
+							{!session && 
 
+								
+								
+								<button class="button is-primary" onClick={() => {isHidden(!isShown);}}>
+									<strong>Connect</strong>
+								</button>
+
+							}
+
+
+
+							{session && 
+							<>
+								<button class="button is-warning" onClick={signOut}>
+									<strong>Sign Out</strong>
+								</button>
+							
+							</>}
 
 							
+
+
 
 							<a class="button is-danger">
 							<strong>Donate</strong>
@@ -91,7 +108,8 @@ export default function Navbar(){
 
 										<div class="block">
 											
-											<button class="button is-success is-rounded" onClick={authLogin}>
+											
+											<button class="button is-success is-rounded" onClick={e => { e.preventDefault(); signIn('spotify') }}>
 												<span class="icon">
 													<i class="fab fa-spotify"></i>
 												</span>
@@ -99,16 +117,8 @@ export default function Navbar(){
 													Spotify
 												</span>
 											</button>
-										
-
-											<button class="button is-light is-rounded">
-												<span class="icon">
-													<i class="fab fa-apple"></i>
-												</span>
-												<span>
-													Apple
-												</span>
-											</button>										
+											
+																				
 										</div>							
 																			
 									</div>
