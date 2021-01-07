@@ -9,6 +9,7 @@ import { signIn, signOut, useSession, providers } from 'next-auth/client'
 
 
 
+
 export default function Navbar({ providers }){
 
 	const [isActive, setisActive] = React.useState(false);
@@ -58,9 +59,9 @@ export default function Navbar({ providers }){
 					<div class="navbar-item">
 						<div class="buttons">
 
-							{!session && 
 
-								
+
+							{!session && 
 								
 								<button class="button is-primary" onClick={() => {isHidden(!isShown);}}>
 									<strong>Connect</strong>
@@ -75,7 +76,9 @@ export default function Navbar({ providers }){
 								<button class="button is-warning" onClick={signOut}>
 									<strong>Sign Out</strong>
 								</button>
-							
+								
+								{console.log(session)}
+
 							</>}
 
 							

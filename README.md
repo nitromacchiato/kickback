@@ -54,7 +54,17 @@ To do this in on Vercel, you can use the Vercel project dashboard or the now env
 now env add NEXTAUTH_URL production
 
 
+#DAtabse 
+  database: 'mysql://root:LOB2RLcx4Rm2h0fnDHhJmA==@127.0.0.1:3306/collegeplaylist', 
 
+  database: {
+    type: process.env.DB_TYPE,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    username: process.env.DB_USER_NAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DATABASE
+  },
 
 
 
