@@ -13,6 +13,17 @@ const options = {
         accessTokenUrl: 'https://accounts.spotify.com/api/token'
 
     }),
+    Providers.Email({
+        server:{
+            host:" ",
+            port:" ",
+            auth:{
+                user:" ",
+                pass:" "
+            }
+        },
+        from: " ",
+    })
   ],
   // Database optional. MySQL, Maria DB, Postgres and MongoDB are supported.
   // https://next-auth.js.org/configuration/databases
