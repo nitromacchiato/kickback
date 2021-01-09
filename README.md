@@ -67,6 +67,16 @@ now env add NEXTAUTH_URL production
   },
 
 
+## Login 
+							
+  <>
+    <button class="button is-warning" onClick={signOut}>
+      <strong>Sign Out</strong>
+    </button>
+    
+    {console.log(session)}
+
+  </>}
 
 
 
