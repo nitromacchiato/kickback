@@ -1,7 +1,7 @@
 import 'bulma/css/bulma.css'
 import React, { useState } from "react"
 import Link from 'next/link'
-
+import { signIn, signOut, useSession } from 'next-auth/client'
 
 
 
@@ -15,6 +15,8 @@ export default function Navbar({ providers }){
 	const [isActive, setisActive] = React.useState(false);
 
 	const [isShown, isHidden] = React.useState(false);
+
+	const [ session, loading ] = useSession(); 
 
 	
 
@@ -59,10 +61,22 @@ export default function Navbar({ providers }){
 						<div class="buttons">
 
 
-								
-							<button class="button is-primary" onClick={() => {isHidden(!isShown);}}>
-								<strong>Connect</strong>
-							</button>
+							{!session && 
+							
+								<button class="button is-primary" onClick={() => {isHidden(!isShown);}}>
+									<strong>Connect</strong>
+								</button>
+
+							}
+
+
+							{session &&
+							<>
+								<button class="button is-warning" onClick={signOut}>
+									<strong>Sign Out</strong>
+								</button>
+							</>
+							}
 
 
 
@@ -97,12 +111,9 @@ export default function Navbar({ providers }){
 
 										<div class="block">
 											
-											<Link href="https://accounts.spotify.com/authorize?client_id=8e94bde7dd
-												b84a1f7a0e51bf3bc95be8&response_type=code&redirect_uri=http
-												%3A%2F%2Flocalhost:3000&scope=user-read-currently-playing%20
-												user-top-read">
-
-											<button class="button is-success is-rounded">
+											
+											
+											<button class="button is-success is-rounded" onClick={e => { e.preventDefault(); signIn('spotify') }}>
 												<span class="icon">
 													<i class="fab fa-spotify"></i>
 												</span>
@@ -110,7 +121,8 @@ export default function Navbar({ providers }){
 													Spotify
 												</span>
 											</button>
-											</Link>
+											
+											
 											
 																				
 										</div>							
