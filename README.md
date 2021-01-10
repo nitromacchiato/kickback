@@ -83,3 +83,8 @@ now env add NEXTAUTH_URL production
 
 ## Disable Telemetry data sharing to NextJS
 npx next telemetry disable
+
+
+
+## connect 
+onClick={() => {isHidden(!isShown);}}

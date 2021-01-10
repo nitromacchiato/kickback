@@ -7,11 +7,11 @@ function MyApp({ Component, pageProps }) {
   return (
 
     <Provider session={pageProps.session}>
-    <Component {...pageProps} />
+      <Component {...pageProps} />
     </Provider>
 
 
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

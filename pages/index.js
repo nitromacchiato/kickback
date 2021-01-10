@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Navbar from '@/components/navbar.js'
-import IndexLayout from '@/components/home/index_layout.js'
+import Navbar from '../components/navbar.js'
+import IndexLayout from '../components/home/index_layout.js'
 import 'bulma/css/bulma.css'
 
 
