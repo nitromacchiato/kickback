@@ -2,7 +2,7 @@ import 'bulma/css/bulma.css'
 import React, { useState } from "react"
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
-import getUserPlaylist from "../lib/getUserPlaylist"
+
 
 
 
@@ -91,8 +91,6 @@ export default function Navbar({ providers }){
 
 							{session &&
 							<>
-								<button class="button is-warning">{session.accessToken} </button>
-								{console.log(session)}
 								<button class="button is-warning" onClick={signOut}>
 									<strong>Sign Out</strong>
 								</button>
