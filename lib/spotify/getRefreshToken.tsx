@@ -12,6 +12,11 @@ export default async function handler(req: any, res: any) {
             equals: 'pinex08',
           },
         },
+      }).catch(e => {
+        throw e
+      })
+      .finally(async () => {
+        await prisma.$disconnect()
       })
       
     const refresh_token = await result[0]['refreshToken']
