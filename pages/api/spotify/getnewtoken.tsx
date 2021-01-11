@@ -1,5 +1,5 @@
 import * as querystring from "querystring";
-import prisma from '../../lib/db/prisma'
+import prisma from '../../../lib/db/prisma'
 
 
 export default async function handler(req: any, res: any) {

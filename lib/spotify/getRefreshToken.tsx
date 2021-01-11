@@ -40,21 +40,6 @@ export default async function handler(req: any, res: any) {
 
       const resJson = await response.json();
 
-      // Connect To Spotify Web Api and request user playlist 
-      var SpotifyWebApi = require('spotify-web-api-node');
-      var spotifyApi = new SpotifyWebApi({
-        accessToken: resJson['access_token']
-      });
-
-      spotifyApi.getUserPlaylists('pinex08')
-      .then(function(data) {
-          console.log('Retrieved playlists', data.body);
-      },function(err) {
-          console.log('Something went wrong!', err);
-      });
-
-
-
       return res.status(200).json(resJson);
     };
 
