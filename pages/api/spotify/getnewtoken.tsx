@@ -4,6 +4,16 @@ import prisma from '../../../lib/db/prisma'
 
 export default async function handler(req: any, res: any) {
   try {
+    
+    
+
+
+
+
+
+
+
+
 
     // Request access to database and find userId
     const result = await prisma.account.findMany({
@@ -12,6 +22,12 @@ export default async function handler(req: any, res: any) {
             equals: 'pinex08',
           },
         },
+      })
+      .catch(e => {
+            throw e
+      })
+      .finally(async () => {
+        await prisma.$disconnect()
       })
       
     const refresh_token = await result[0]['refreshToken']
@@ -39,22 +55,6 @@ export default async function handler(req: any, res: any) {
       });
 
       const resJson = await response.json();
-
-      // Connect To Spotify Web Api and request user playlist 
-      var SpotifyWebApi = require('spotify-web-api-node');
-      var spotifyApi = new SpotifyWebApi({
-        accessToken: resJson['access_token']
-      });
-
-      spotifyApi.getUserPlaylists('pinex08')
-      .then(function(data) {
-          console.log('Retrieved playlists', data.body);
-      },function(err) {
-          console.log('Something went wrong!', err);
-      });
-
-
-
       return res.status(200).json(resJson);
     };
 

@@ -1,14 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 // lib/prisma.ts
 
-import getUser from "../../lib/spotify/db_requests/getUserId"
-
-
 export default async function (req, res) {
+  
+  const response = await fetch('http://localhost:3000/api/spotify/user/getUserId');
+  //const data = await response.json();
 
-  const user = getUser()
 
   res.statusCode = 200
-  res.json({ name: user })
+  console.log(response)
 
 }
