@@ -3,8 +3,8 @@
 
 export default async function (req, res) {
   
-  const response = await fetch('http://localhost:3000/api/spotify/user/getUserId');
-  //const data = await response.json();
+  const response = await fetch('http://localhost:3000/api/spotify/getUserId');
+  const data = await response.json();
 
 
   res.statusCode = 200
