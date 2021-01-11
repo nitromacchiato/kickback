@@ -69,3 +69,12 @@ model VerificationRequest {
 
   @@map(name: "verification_requests")
 }
+
+
+
+model Schools {
+  id         Int      @default(autoincrement()) @id
+  name       String?
+  email     String?   @unique
+
+}
