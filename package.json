@@ -25,7 +25,7 @@
     "superagent": "^6.1.0"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.14.0",
+    "@prisma/cli": "^2.0.0-alpha.1314",
     "@prisma/client": "^2.14.0",
     "@types/node": "^14.14.20",
     "@types/react": "^17.0.0",
