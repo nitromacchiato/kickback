@@ -3,7 +3,6 @@ import React, { useState } from "react"
 import { signIn, signOut, useSession } from 'next-auth/client'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { schools } from "../lib/db/getListOfSchools"
 
 
 
@@ -12,7 +11,9 @@ import { schools } from "../lib/db/getListOfSchools"
 
 
 
-export default function Navbar({ providers, listOfSchools }){
+
+
+export default function Navbar({ listOfSchools }){
 
 	//Drop down burger menu 
 	const [isActive, setisActive] = React.useState(false);
@@ -157,6 +158,7 @@ export default function Navbar({ providers, listOfSchools }){
 							
 
 										{/* Search Bar for School */}
+										
 										<Autocomplete
 										id="combo-box-demo"
 										options={listOfSchools}
@@ -265,7 +267,7 @@ export default function Navbar({ providers, listOfSchools }){
 
 const schoolChoice = function(school){
 	if (school != null){
-		console.log(school.title)
+		console.log(school.name)
 	} else {
 		console.log('Enter a School')
 	}
@@ -285,18 +287,5 @@ const userSchoolEmail = function(email,school){
 
 
 
-export async function getStaticProps() {
 
-	 // Get external data from the file system, API, DB, etc.
-	const listOfSchools = await schools()
-
-	
-  
-	return {
-  
-	  props : { listOfSchools }
-  
-	}
-  
-  }
 

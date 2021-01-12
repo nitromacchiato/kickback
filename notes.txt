@@ -1,0 +1,25 @@
+
+## TOP PLAYLIST FOR EACH COAST 
+Include with get static props to refresh the props in a component
+Reccomend using it for updating top tracks of the day and week  
+ - unstable_revalidate: [time 1 = 1 second]
+
+
+
+#School profiles
+getstatic paths setpaths fallback to true 
+
+
+#School email verifcation process 
+First i would create a table in my database for email verfication process 
+
+Then in NextJs I would create static paths based on the id's in the table email verifciation process
+
+So when a user clicks submit to submit their email and other info 
+
+I'll take that information and update the database for the user table but leave the coloum email_verfied null until the user visits the static path to confirm email
+ 
+once the user clicks the link in the email it will take them to the static path that was generated 
+
+it'll run a function to confirm their email and update the email_verfied to verfied instead of null in the user table 
+then i'll delete the id in the static paths to remove the link

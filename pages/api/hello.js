@@ -1,16 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
+import {schools} from "../../lib/db/getListOfSchools"
 
-import prisma from '../../lib/db/prisma'
 
 export default async function (req, res) {
   
   
-	const schools = await prisma.schools.findMany()
+	const school = await schools()
 	
 
-    res.statusCode = 200
-    console.log(schools)
-    res.json(schools)
+
+    console.log(school)
+    res.send(school.schools)
 
 }
