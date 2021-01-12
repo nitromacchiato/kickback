@@ -1,13 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-// lib/prisma.ts
+
+
+import prisma from '../../lib/db/prisma'
 
 export default async function (req, res) {
   
-  const response = await fetch('http://localhost:3000/api/spotify/getUserId');
-  const data = await response.json();
+  
+	const schools = await prisma.schools.findMany()
+	
 
-
-  res.statusCode = 200
-  console.log(response)
+    res.statusCode = 200
+    console.log(schools)
+    res.json(schools)
 
 }
