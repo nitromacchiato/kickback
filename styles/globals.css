@@ -135,3 +135,23 @@
 .small_height{
     height:25px;
 }
+
+
+
+
+
+
+/* 
+
+    VERIFY USER EMAIL 
+    components/schoolEmail/verified
+
+*/ 
+
+/* Screen */
+@media screen and (max-width:1408px){
+	.make_verify_box{
+        height: 300px;
+        width: 400px;
+    }
+}
