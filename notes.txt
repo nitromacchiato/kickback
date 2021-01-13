@@ -1,3 +1,8 @@
+#REMEMBER 
+- Remove comments from javascript files 
+
+
+
 
 ## TOP PLAYLIST FOR EACH COAST 
 Include with get static props to refresh the props in a component

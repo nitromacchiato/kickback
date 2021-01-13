@@ -33,6 +33,8 @@ export default function Navbar({ listOfSchools }){
 	//User School selection 
 	const [schoolChoice, setSchoolChoice] = React.useState('')
 	
+	//Show error message for school submission
+	const [isShownError, isHiddenError] = React.useState(false);
 
 
 	//Router to redirect user to pages 
@@ -40,6 +42,32 @@ export default function Navbar({ listOfSchools }){
 
 
 
+	//Handle School Email Submit 
+	function handleSchoolSubmission(school,email) { 
+
+
+		// Validates user email is correct 
+		if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
+
+			{
+				console.log('Real Email',email)
+				console.log('Valid School',school)
+
+
+
+				router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', query: { email: schoolEmail, school: schoolChoice, username: session.user.name }})
+
+			} else {
+
+				isHiddenError(!isShownError)
+
+				console.log("You have entered an invalid email address!")
+			}
+			
+		
+	
+
+	}
 
 
 
@@ -155,22 +183,31 @@ export default function Navbar({ listOfSchools }){
 
 									<section class="modal-card-body" style={{height:"auto"}}>
 										{/* <!-- Content ... --> */}
-							
+
+
+
+
+
 
 										{/* Search Bar for School */}
-										
+										<div class='block'>
+											<p class={`error_message_font_color ${isShownError ? " ": "hide_error_message"}`}>Pick a school and enter a valid email</p>
+										</div>
+
+
 										<Autocomplete
 										id="combo-box-demo"
+										disableClearable
 										options={listOfSchools}
 										getOptionLabel={(option) => option.name}
 										style={{ width: 300 }}
-										renderInput={(params) => <TextField {...params} label="" variant="outlined" />}
+										renderInput={(params) => <TextField {...params} label="Search" variant="outlined" />}
 										onChange={(event, value) => setSchoolChoice(value.name)}
 										/>
 										
 										<div class="block" style={{marginTop:"4em"}}>
 											<p class=""> Enter your school email </p>
-											<input class="input is-info block" type="text" placeholder="ex kickback@kyleroger.uni.edu" onChange={event => setSchoolEmail(event.target.value)}></input>
+											<input required minlength="8" class="input is-info block" type="email" placeholder="ex kickback@kyleroger.uni.edu" onChange={event => setSchoolEmail(event.target.value)}></input>
 										</div>
 
 
@@ -178,7 +215,21 @@ export default function Navbar({ listOfSchools }){
 									</section>
 
 									<footer class="modal-card-foot">
-										<button class="button is-success" onClick={() => {router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', query: { email: schoolEmail, school: schoolChoice }})}}>Send Email</button>
+
+										{/* Checks to see whether the user has entered a schoolemail and school choice */}
+										{schoolEmail && schoolChoice &&
+											<>
+											{/* <button class="button is-success" onClick={() => {router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', query: { email: schoolEmail, school: schoolChoice }})}}>Send Email</button> */}
+											<button class="button is-success" onClick={e => { e.preventDefault(); handleSchoolSubmission(schoolChoice,schoolEmail)}}>Submit</button>
+											
+											
+											</>
+										}
+
+										
+
+
+
 									</footer>
 
 								</div>
