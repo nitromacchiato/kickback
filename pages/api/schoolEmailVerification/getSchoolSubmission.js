@@ -1,6 +1,8 @@
 
 export default function handler(req, res) {
-    console.log(res)
+    const school = req.query.school 
+    const email = req.query.email
+    
 
-    res.send('You made it')
+    res.send('Email:' + email + ' School: ' +school)
   }
