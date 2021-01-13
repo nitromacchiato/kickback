@@ -43,9 +43,21 @@ export async function getServerSideProps(context) {
   const school = await schools()
   const colleges = school.schools
   
-  return {
-    props: {colleges}, // will be passed to the page component as props
-  }
+    if (colleges != null){
+
+
+      return {
+        props: {colleges}, // will be passed to the page component as props
+      }
+
+
+    } else {
+
+      const colleges =  { name: 'Error Loading Schools' };
+      return{
+        props:{colleges}
+      }
+    }
 }
 
 

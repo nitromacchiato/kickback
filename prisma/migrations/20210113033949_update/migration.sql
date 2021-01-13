@@ -73,3 +73,16 @@ UNIQUE INDEX `schools.email_unique`(`email`),
 
     PRIMARY KEY (`school_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `schoolemailverificaiton` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `user_name` VARCHAR(191) NOT NULL,
+    `school_email` VARCHAR(191) NOT NULL,
+    `random_school_index` VARCHAR(191) NOT NULL,
+UNIQUE INDEX `schoolemailverificaiton.user_name_unique`(`user_name`),
+UNIQUE INDEX `schoolemailverificaiton.school_email_unique`(`school_email`),
+UNIQUE INDEX `schoolemailverificaiton.random_school_index_unique`(`random_school_index`),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

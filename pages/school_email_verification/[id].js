@@ -44,10 +44,11 @@ function VerifySchoolEmail({colleges}) {
 
 
 export async function getStaticPaths() {
-    const paths = [ {params: {id: '1'}}, {params: {id:'2'}}]
 
+    // Gets the id's for the static site 
+    const paths = [ {params: {id: 'sadgfdsfg34534df24323'}} ]
 
-
+    // return a list of paths for users that need to be authenticated
     return {
       paths,
       fallback: false
