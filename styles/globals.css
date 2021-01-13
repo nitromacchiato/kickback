@@ -137,6 +137,9 @@
 }
 
 
+.hide_error_message{
+    display: none !important;
+}
 
 
 

@@ -1,9 +1,9 @@
 import 'bulma/css/bulma.css'
-import React, { useState } from "react"
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from "react"
 import { signIn, signOut, useSession } from 'next-auth/client'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
 
 
 
@@ -29,14 +29,14 @@ export default function Navbar({ listOfSchools }){
 
 	//User Email for school selection 
 	const [schoolEmail, setSchoolEmail] = React.useState('')
+
+	//User School selection 
+	const [schoolChoice, setSchoolChoice] = React.useState('')
 	
 
 
-
-
-
-
-
+	//Router to redirect user to pages 
+	const router = useRouter()
 
 
 
@@ -165,7 +165,7 @@ export default function Navbar({ listOfSchools }){
 										getOptionLabel={(option) => option.name}
 										style={{ width: 300 }}
 										renderInput={(params) => <TextField {...params} label="" variant="outlined" />}
-										onChange={(event, value) => schoolChoice(value)}
+										onChange={(event, value) => setSchoolChoice(value)}
 										/>
 										
 										<div class="block" style={{marginTop:"4em"}}>
@@ -178,7 +178,7 @@ export default function Navbar({ listOfSchools }){
 									</section>
 
 									<footer class="modal-card-foot">
-										<button class="button is-success" onClick={() => userSchoolEmail(schoolEmail)}>Send Email</button>
+										<button class="button is-success" onClick={() => {router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', body: { email: schoolEmail, school: schoolChoice }})}}>Send Email</button>
 									</footer>
 
 								</div>
@@ -263,23 +263,24 @@ export default function Navbar({ listOfSchools }){
 
 
 
+const submitSchool = function(school,email){
 
-
-const schoolChoice = function(school){
-	if (school != null){
+	if(school != null || email != null ) {
 		console.log(school.name)
+		console.log(email)
+		
 	} else {
-		console.log('Enter a School')
+		persistForm()
 	}
+
 }
 
-const userSchoolEmail = function(email,school){
-	if(email != null){
-		console.log(email)
-	} else {
-		console.log('No Email was entered')
-	}
-}
+
+
+
+
+
+
 
 
 
