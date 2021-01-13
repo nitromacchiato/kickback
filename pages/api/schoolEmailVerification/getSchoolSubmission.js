@@ -12,7 +12,7 @@ export default function handler(req, res) {
     const email = req.query.email
     const username = req.query.username
     
-    const result = emailInformation(email,school)
+    const result = emailInformation(email,school,username)
 
     console.log(result)
 
