@@ -38,7 +38,8 @@ I'll take that information and update the database for the user table but leave 
     if theyre not null then route the user to the api to submit the data and continue with the following steps 
 - on a successful submission redirect the user to a success page saying they have just been sent an email and to check their inbox 
 
-
+- Update the user table and upload the school email to the assigned user name and leave school_email_verified blank 
+- Upload a function to the success email component that handles the user infomariton and updates the user table and makes the column email verfied true 
 
 
 

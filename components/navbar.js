@@ -50,18 +50,16 @@ export default function Navbar({ listOfSchools }){
 		if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
 
 			{
-				console.log('Real Email',email)
-				console.log('Valid School',school)
 
-
-
+				//Reroute user to api to handle submission 
 				router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', query: { email: schoolEmail, school: schoolChoice, username: session.user.name }})
 
 			} else {
 
+				//Display error message on form if email is invalid 
 				isHiddenError(!isShownError)
 
-				console.log("You have entered an invalid email address!")
+
 			}
 			
 		
