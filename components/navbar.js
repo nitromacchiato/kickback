@@ -165,7 +165,7 @@ export default function Navbar({ listOfSchools }){
 										getOptionLabel={(option) => option.name}
 										style={{ width: 300 }}
 										renderInput={(params) => <TextField {...params} label="" variant="outlined" />}
-										onChange={(event, value) => setSchoolChoice(value)}
+										onChange={(event, value) => setSchoolChoice(value.name)}
 										/>
 										
 										<div class="block" style={{marginTop:"4em"}}>
@@ -178,7 +178,7 @@ export default function Navbar({ listOfSchools }){
 									</section>
 
 									<footer class="modal-card-foot">
-										<button class="button is-success" onClick={() => {router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', body: { email: schoolEmail, school: schoolChoice }})}}>Send Email</button>
+										<button class="button is-success" onClick={() => {router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', query: { email: schoolEmail, school: schoolChoice }})}}>Send Email</button>
 									</footer>
 
 								</div>
