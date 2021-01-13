@@ -6,8 +6,17 @@ Reccomend using it for updating top tracks of the day and week
 
 
 
-#School profiles
+
+
+
+#School profiles 
 getstatic paths setpaths fallback to true 
+
+
+
+
+
+
 
 
 #School email verifcation process 
@@ -20,6 +29,9 @@ Then in NextJs I would create static paths based on the id's in the table email 
 So when a user clicks submit to submit their email and other info 
 I'll take that information and update the database for the user table but leave the coloum email_verfied null until the user visits the static path to confirm email
 
+ - Need to create a function to verify the values for school and email and make sure theyre not null. if theyre null then pop up an error message
+    if theyre not null then route the user to the api to submit the data and continue with the following steps 
+- on a successful submission redirect the user to a success page saying they have just been sent an email and to check their inbox 
 
 
 
