@@ -1,16 +1,14 @@
 import Head from 'next/head'
 import 'bulma/css/bulma.css'
-import { useSession } from 'next-auth/client'
 import VerfiedEmail from '../../components/schoolEmail/verified'
+import { getVerficationIds } from '../../lib/school_email_verification/getAllVerificationIds'
 
 
+function VerifySchoolEmail({session}) {
 
-function VerifySchoolEmail({colleges}) {
 
     
-	//Check session for user to see if they're logged in with NextAuth 
-	const [ session, loading ] = useSession(); 
-
+    
 
 
 
@@ -29,7 +27,7 @@ function VerifySchoolEmail({colleges}) {
 
             
 
-        <VerfiedEmail  email={colleges[0].email}/>
+        <VerfiedEmail  email={session}/>
       
 
       
@@ -46,7 +44,8 @@ function VerifySchoolEmail({colleges}) {
 export async function getStaticPaths() {
 
     // Gets the id's for the static site 
-    const paths = [ {params: {id: 'sadgfdsfg34534df24323'}} ]
+    const paths = await getVerficationIds()
+    console.log(paths)
 
     // return a list of paths for users that need to be authenticated
     return {
@@ -60,40 +59,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
 
-    //Make a database request to get all the schools 
-    const colleges = [
-        {
-          school_id: 1,
-          name: 'University of Maryland',
-          email: '@terpmail.umd.edu',
-          alt_email: '@umd.edu',
-          nickname: 'terps'
-        },
-        {
-          school_id: 2,
-          name: 'Towson University',
-          email: '@towson.students.edu',
-          alt_email: '@towson.edu',
-          nickname: 'tigers'
-        },
-        {
-          school_id: 3,
-          name: 'Morgan State University',
-          email: '@morgan.state.edu',
-          alt_email: null,
-          nickname: 'bears'
-        },
-        {
-          school_id: 4,
-          name: 'Arizona University',
-          email: '@arizona.edu',
-          alt_email: null,
-          nickname: 'wildcats'
-        }
-      ]
+    //Gets the current users logged in information 
+    // Returns null if no information is present 
+    const session = '';
 
     return {
-        props: {colleges}, // will be passed to the page component as props
+        props: {session}, // will be passed to the page component as props
     }
 }
 
