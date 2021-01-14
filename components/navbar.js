@@ -312,26 +312,6 @@ export default function Navbar({ listOfSchools }){
 
 
 
-const submitSchool = function(school,email){
-
-	if(school != null || email != null ) {
-		console.log(school.name)
-		console.log(email)
-		
-	} else {
-		persistForm()
-	}
-
-}
-
-
-
-
-
-
-
-
-
 
 
 
