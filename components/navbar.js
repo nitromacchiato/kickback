@@ -181,12 +181,15 @@ export default function Navbar({ listOfSchools }){
 								{/* If the user school email is verified then show a custom button with a href link to their school page */}
 
 								{isVerified && 
+									<>
+									<button class="button is-light">
+										<span class="icon">
+											<i class="fas fa-graduation-cap"></i>
+										</span>
+										<span>{session.user.school}</span>
+									</button>
 
-
-									<button class="button is-primary">
-									<strong>{session.user.school}</strong>
-									</button>								
-	
+									</>
 								}
 
 
