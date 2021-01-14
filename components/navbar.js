@@ -312,7 +312,7 @@ export default function Navbar({ listOfSchools }){
 									</section>
 
 									<footer class="modal-card-foot">
-										<p> Any playlist you add will only be uploaded to your school @ {session.user.school}</p>
+										<p> Any playlist you add will only be uploaded to your school</p>
 
 									</footer>
 

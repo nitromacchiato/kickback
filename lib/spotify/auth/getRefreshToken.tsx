@@ -1,13 +1,27 @@
-// Here is the file we want to make the Node JS Request for the user to login to.
 import * as querystring from "querystring";
-import * as dotenv from "dotenv";
+import prisma from '../../db/prisma'
 
-dotenv.config();
 
-export default function handler(req: any, res: any) {
-  const userCode = req.query.user_code;
-
+export default async function handler(req: any, res: any) {
   try {
+
+    // Request access to database and find userId
+    const result = await prisma.account.findMany({
+        where: {
+          providerAccountId: {
+            equals: 'pinex08',
+          },
+        },
+      }).catch(e => {
+        throw e
+      })
+      .finally(async () => {
+        await prisma.$disconnect()
+      })
+      
+    const refresh_token = await result[0]['refreshToken']
+
+
     const spotifyUrl = "https://accounts.spotify.com/api/token";
 
     // Generate a base64 encoded string that contains the client ID and client secret
@@ -24,9 +38,8 @@ export default function handler(req: any, res: any) {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: querystring.stringify({
-          grant_type: "authorization_code",
-          code: userCode,
-          redirect_uri: "http://localhost:3000/",
+          grant_type: "refresh_token",
+          refresh_token: refresh_token,
         }),
       });
 
@@ -37,7 +50,7 @@ export default function handler(req: any, res: any) {
 
     return getAccessToken();
   } catch (error) {
-    console.error(error);
-    return null;
+    console.error("Error Occurred Getting Top Songs:", error);
+    return res.status(400);
   }
 }

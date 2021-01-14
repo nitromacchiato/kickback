@@ -1,19 +1,14 @@
 import * as querystring from "querystring";
-import prisma from '../../../lib/db/prisma'
-
+import prisma from '../../../../lib/db/prisma'
+import { getSession } from 'next-auth/client'
 
 export default async function handler(req: any, res: any) {
+
+  
   try {
     
+    //const session = await fetch('http://localhost:3000/api/user/getUserName')
     
-
-
-
-
-
-
-
-
 
     // Request access to database and find userId
     const result = await prisma.account.findMany({
@@ -28,10 +23,16 @@ export default async function handler(req: any, res: any) {
       })
       .finally(async () => {
         await prisma.$disconnect()
-      })
+    })
       
-    const refresh_token = await result[0]['refreshToken']
 
+
+
+
+
+
+
+    const refresh_token = await result[0]['refreshToken']
 
     const spotifyUrl = "https://accounts.spotify.com/api/token";
 
