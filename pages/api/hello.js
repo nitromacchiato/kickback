@@ -1,30 +1,15 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import prisma from '../../lib/db/prisma'
+import sgMail from '../../lib/school_email_verification/sendEmail'
 
 
 
 export default async function (req, res) {
-    const paths = [ {params: {id: 'sadgfdsfg34534df24323'}} ]
 
 
-    const database_name = "schoolemailverification"
+    const send = sgMail
 
-    const result = await prisma.$queryRaw('SELECT * FROM '+database_name+';')
-    const id_numbers = await result.map(id => {
-        
-            return {
-                params:{
-                    id: id.random_school_index
-                }
-            }
-        }
-
-        )
-
-
-    console.log(id_numbers)
-    res.send(result)
+    res.send('We Trying my guy')
 
 
     
