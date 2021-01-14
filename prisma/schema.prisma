@@ -76,7 +76,7 @@ model schools {
 model schoolemailverification {
   id                  Int      @id @default(autoincrement())
   user_name           String
-  school_email        String   @unique
+  school_email        String
   random_school_index String   @unique
   created_at          DateTime @default(now())
 }

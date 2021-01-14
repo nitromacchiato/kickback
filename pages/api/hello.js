@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import sgMail from '../../lib/school_email_verification/sendEmail'
+import sgMail from '../../lib/school_email_verification/sendConfirmEmail'
 
 
 
