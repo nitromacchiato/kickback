@@ -33,7 +33,7 @@ export async function getStaticPaths() {
 
     //Get all paths by school name
     const paths = await getSchoolIds() 
-    console.log(paths)
+    
 
     return {
         paths,
@@ -46,7 +46,7 @@ export async function getStaticProps({ params }) {
 
     //Remove dashes from school url name and turn it to original format 
     const school_name = params.id.split('-').join(' ')
-    console.log(school_name)
+    
 
     // Gets the school information for the current school 
     const school = await getSchoolInfo(school_name)
