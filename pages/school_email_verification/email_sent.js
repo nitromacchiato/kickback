@@ -38,7 +38,7 @@ function Home({colleges}) {
 
             <div class="block">
               <p class="title">Email Sent</p>
-              <p class="subtitle">Please check your inbox. If you don't see an email please check your spam folder</p>
+              <p class="subtitle">If your email is valid you will recieve a confirmation link. Please check your inbox or spam folder</p>
             </div>
 
         </div>

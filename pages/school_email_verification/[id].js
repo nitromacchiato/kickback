@@ -1,14 +1,38 @@
 import Head from 'next/head'
 import 'bulma/css/bulma.css'
-import VerfiedEmail from '../../components/schoolEmail/verified'
 import { getVerficationIds } from '../../lib/school_email_verification/getAllVerificationIds'
-
+import { useRouter } from 'next/router'
 
 function VerifySchoolEmail({session}) {
 
 
-    
-    
+  	//Router to redirect user to pages 
+	const router = useRouter()
+
+  if (typeof window !== "undefined") {
+    // browser code
+    const params = new URLSearchParams(window.location.search)
+    const username = params.get('name')
+    console.log(username)
+
+    if (username != null) {
+
+      router.push({ pathname: '/api/schoolEmailVerification/confirmEmail', query: { username: username }})
+  
+    } else {
+  
+      router.push(href="/")
+  
+    }
+      
+
+
+
+  }
+
+
+
+
 
 
 
@@ -26,8 +50,7 @@ function VerifySchoolEmail({session}) {
 
 
             
-
-        <VerfiedEmail  email={session}/>
+       
       
 
       
@@ -45,7 +68,6 @@ export async function getStaticPaths() {
 
     // Gets the id's for the static site 
     const paths = await getVerficationIds()
-    console.log(paths)
 
     // return a list of paths for users that need to be authenticated
     return {

@@ -17,7 +17,7 @@ export default function VerfiedEmail({email}){
 
                     <div class="container">
 
-                        <div class="notification is-success is-light has-text-centered" style={{height:'150px',width:'300px'}}>
+                        <div class="notification is-success is-light has-text-centered" style={{height:'120px',width:'300px'}}>
                             
                             <Link href="http://localhost:3000/">
                                 <button class="delete"></button>
