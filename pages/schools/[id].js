@@ -1,11 +1,7 @@
 import getSchoolIds from '../../lib/school/getAllSchoolIds'
 import getSchoolInfo from '../../lib/school/getSchoolData'
-
-
-
-
-
-
+import Navbar from '../../components/navbar'
+import Head from 'next/head'
 
 
 export default function Schools({school}){
@@ -16,8 +12,84 @@ export default function Schools({school}){
 
         <>  
 
-            <h2>Welcome To {school.name} Page</h2>
-            <h3>{school.nickname}</h3>
+            <Head>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+                <title>Kickback - {school.name }</title>
+
+                <link rel="icon" href="/favicon.ico" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css"></link>
+            </Head>
+
+            <Navbar />
+
+            <section class="section is-vcentered" style={{marginLeft:"2.0em", marginTop:"0"}}>
+			    <div class="columns is-centered">
+
+
+                    {/* <!-- TOP playlist -->  */}
+                    <div class="column is-11">
+
+                        <div style={{marginBottom: "1.3em", marginTop: "1.2em"}} class="school_title">
+                            <p class="title is-size-2">{school.name}</p>
+                        </div>
+
+
+                        <div style={{marginBottom: "0.5em"}}>
+                            <p>Top Playlists</p>
+                        </div>
+
+                        {/* <!-- TOP PLAYLISTS --> */}
+                        <div class="columns is-mobile is-vcentered" style={{sarginTop:"10px", overflow:"auto"}} >
+
+
+                            {/* <!-- First Playlist Album --> */}
+                            <div class="column is-vcentered is-narrow">
+                                <div class="has-text-centered">
+                                    <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
+                                        <img src="https://bulma.io/images/placeholders/128x128.png" />
+                                    </figure>
+                                    <p style={{fontSize:"12pt"}}>Vamp Anthem</p>
+                                    <p style={{fontSize:"9pt"}} class="has-text-weight-light">@Pinex08</p>
+                                </div>
+                            </div>
+
+                            
+                     </div>
+
+
+
+
+                        {/* <!-- Recently Added --> */}
+                        <div style={{marginBottom:"0"}}>
+                            <p>Recently Added</p>
+                        </div>
+
+                        <div class="columns is-multiline is-vcentered is-mobile is-11" style={{marginTop:"10px", overflowY: "scroll"}}>
+
+                            
+                            <div class="column is-vcentered is-narrow">
+                                <div class="has-text-centered">
+                                    <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
+                                        <img src="https://bulma.io/images/placeholders/128x128.png" />
+                                    </figure>
+                                    <p style={{fontSize:"12pt"}}>Vamp Anthem</p>
+                                    <p style={{fontSize:"9pt"}} class="has-text-weight-light">@Pinex08</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        {/* <!-- END of Recently Added --> */}
+
+
+
+                    </div>
+			    </div>
+		    </section>	
+
+
+
 
         
         </>

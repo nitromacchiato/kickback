@@ -41,10 +41,17 @@ I'll take that information and update the database for the user table but leave 
 - Update the user table and upload the school email to the assigned user name and leave school_email_verified blank 
 - Upload a function to the success email component that handles the user infomariton and updates the user table and makes the column email verfied true 
 
-
-
- 
 once the user clicks the link in the email it will take them to the static path that was generated 
 
 it'll run a function to confirm their email and update the email_verfied to verfied instead of null in the user table 
 then i'll delete the id in the static paths to remove the link
+
+
+
+
+
+
+
+#USER PLAYLIST 
+
+- Future add on is create an easy functionality to allow the user to upload and change cover image for playlist 

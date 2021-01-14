@@ -39,6 +39,8 @@ export default function Navbar({ listOfSchools }){
 	//Check to see if user email is verified 
 	const [isVerified, setVerified] = React.useState(false)
 
+	//Show user playlists 
+	const [isShowingPlaylists, setPlaylists] = React.useState(false)
 
 
 	//Router to redirect user to pages 
@@ -71,16 +73,29 @@ export default function Navbar({ listOfSchools }){
 
 	//Check to see if user has a school 
 	useEffect(async () => {  
-		const userData = await getSession()
-		const result = userData['user']['school_verified']
-		
 
-		if (result != null && result != 'false'){		
-			setVerified(true)
+		const userData = await getSession()
+
+		if(userData != null){
+			const result = userData['user']['school_verified']
+			
+
+			if (result != null && result != 'false'){		
+				setVerified(true)
+	
+			} else {
+				setVerified(false)
+			}
+	
+			
 
 		} else {
+
 			setVerified(false)
+
 		}
+		
+		
 
 
 
@@ -172,7 +187,7 @@ export default function Navbar({ listOfSchools }){
 									<button class="button is-primary" onClick={() => {isHidingSchool(!isShowingSchool);}}>
 									<strong>Add School</strong>
 									</button>
-								
+
 								
 								}
 								
@@ -188,6 +203,20 @@ export default function Navbar({ listOfSchools }){
 										</span>
 										<span>{session.user.school}</span>
 									</button>
+
+									
+									<button class="button is-success" onClick={() => {setPlaylists(!isShowingPlaylists);}}>
+										<span class="icon">
+											<i class="fas fa-plus"></i>
+										</span>
+										<span>Add a Playlist</span>
+									</button>
+
+
+
+
+
+
 
 									</>
 								}
@@ -210,6 +239,93 @@ export default function Navbar({ listOfSchools }){
 							<a class="button is-danger">
 							<strong>Donate</strong>
 							</a>
+
+
+
+
+
+
+
+
+
+
+
+							{/* <!-- Modal popup to show user playlists --> */}
+							<div  class={`modal ${isShowingPlaylists? "is-active": " "}  `}>
+								<div class="modal-background"></div>
+								<div class="modal-card" style={{width:"350px"}}>
+
+									<header class="modal-card-head">
+										<p class="modal-card-title">My Playlists</p>
+										<button class="delete" aria-label="close" onClick={()=>{setPlaylists(!isShowingPlaylists);}}></button>
+									</header>
+
+									<section class="modal-card-body" style={{height:"auto"}}>
+
+										{/* Table to hold playlists names and an add button */}
+
+										<table class="table" style={{width:'300px'}}>
+
+
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Add</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<tr>
+													<td>stupid_hype</td>
+													<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
+												</tr>
+
+												<tr>
+													<td>stupid_hype</td>
+													<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
+												</tr>
+
+												<tr>
+													<td>stupid_hype</td>
+													<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
+												</tr>
+
+												<tr>
+													<td>stupid_hype</td>
+													<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
+												</tr>
+											</tbody>
+
+
+
+
+
+
+										</table>
+
+
+
+
+
+
+
+									</section>
+
+									<footer class="modal-card-foot">
+										<p>Any playlist you add will only be uploaded to your school @ {session.user.school}</p>
+
+									</footer>
+
+								</div>
+							</div>
+
+
+
+
+
+
+
+
 
 
 							{/* <!-- Modal popup to select school --> */}
