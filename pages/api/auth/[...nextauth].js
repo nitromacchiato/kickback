@@ -56,8 +56,7 @@ const options = {
       //Assign the school to the session 
       session.user.school = result.school
       session.user.school_verified = result.schoolEmailVerified
-      console.log(result)
-
+  
 
 
       return Promise.resolve(session)
