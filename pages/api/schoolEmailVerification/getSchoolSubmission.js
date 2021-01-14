@@ -6,7 +6,6 @@ import  emailInformation  from '../../../lib/school_email_verification/validateE
 
 
 
-
 export default function handler(req, res) {
     const school = req.query.school 
     const email = req.query.email
@@ -16,8 +15,11 @@ export default function handler(req, res) {
 
     console.log(result)
 
-    res.send('Email:' + email + ' School: ' +school + ' Username ' + username)
 
 
+
+    res.redirect('http://localhost:3000/school_email_verification/email_sent')
+
+    
 
   }

@@ -1,7 +1,8 @@
 import Head from 'next/head'
-import Navbar from '../components/navbar.js'
-import IndexLayout from '../components/home/index_layout.js'
-import { schools } from '../lib/db/getListOfSchools'
+import Navbar from '../../components/navbar.js'
+import IndexLayout from '../../components/home/index_layout.js'
+import { schools } from '../../lib/db/getListOfSchools'
+import Link from 'next/link'
 import 'bulma/css/bulma.css'
 
 
@@ -18,18 +19,37 @@ function Home({colleges}) {
 
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css"></link>
+        <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
       </Head>
 
 
       <Navbar listOfSchools={colleges}/>
-      <IndexLayout>
-          
-            <div class="box">
-                <h2>Email Sent, check your inbox</h2>
+      <IndexLayout/>
+
+      <div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-content box has-text-centered" style={{width:"20em"}}>
+            
+            <div class="block" style={{marginLeft:"auto", marginRight:"auto"}}>
+              <span class="icon">
+                <i class="fas fa-check fa-2x"></i>
+              </span>
             </div>
 
-      </IndexLayout>
-      
+            <div class="block">
+              <p class="title">Email Sent</p>
+              <p class="subtitle">Please check your inbox. If you don't see an email please check your spam folder</p>
+            </div>
+
+        </div>
+        <Link href="/">
+          <button class="modal-close is-large" aria-label="close"></button>
+        </Link>
+      </div>
+
+     
+          
+
 
       
       
