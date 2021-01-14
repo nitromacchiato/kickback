@@ -1,10 +1,10 @@
 import 'bulma/css/bulma.css'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from "react"
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { signIn, signOut, useSession, getSession } from 'next-auth/client'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
+import Login from '../components/login'
 
 
 
@@ -36,6 +36,10 @@ export default function Navbar({ listOfSchools }){
 	//Show error message for school submission
 	const [isShownError, isHiddenError] = React.useState(false);
 
+	//Check to see if user email is verified 
+	const [isVerified, setVerified] = React.useState(false)
+
+
 
 	//Router to redirect user to pages 
 	const router = useRouter()
@@ -61,23 +65,35 @@ export default function Navbar({ listOfSchools }){
 
 
 			}
-			
-		
-	
-
 	}
 
 
 
+	//Check to see if user has a school 
+	useEffect(async () => {  
+		const userData = await getSession()
+		const result = userData['user']['school_verified']
+		
+
+		if (result != null && result != 'false'){		
+			setVerified(true)
+
+		} else {
+			setVerified(false)
+		}
 
 
 
-
+		
+		
+		});
+	
 
 
 
     return(
 		<>
+
         <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
 
 
@@ -149,9 +165,33 @@ export default function Navbar({ listOfSchools }){
 							{session &&
 
 							<>
-								<button class="button is-primary" onClick={() => {isHidingSchool(!isShowingSchool);}}>
+								
+								{/* If the user school email is not verified then show the add school button */}
+								{!isVerified && 
+
+									<button class="button is-primary" onClick={() => {isHidingSchool(!isShowingSchool);}}>
 									<strong>Add School</strong>
-								</button>
+									</button>
+								
+								
+								}
+								
+
+
+								{/* If the user school email is verified then show a custom button with a href link to their school page */}
+
+								{isVerified && 
+
+
+									<button class="button is-primary">
+									<strong>{session.user.school}</strong>
+									</button>								
+	
+								}
+
+
+
+
 
 
 
@@ -205,7 +245,7 @@ export default function Navbar({ listOfSchools }){
 										
 										<div class="block" style={{marginTop:"4em"}}>
 											<p class=""> Enter your school email </p>
-											<input required minlength="8" class="input is-info block" type="email" placeholder="ex kickback@kyleroger.uni.edu" onChange={event => setSchoolEmail(event.target.value)}></input>
+											<input required class="input is-info block" type="email" placeholder="ex kickback@kyleroger.uni.edu" onChange={event => setSchoolEmail(event.target.value)}></input>
 										</div>
 
 
@@ -232,30 +272,6 @@ export default function Navbar({ listOfSchools }){
 
 								</div>
 							</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -307,6 +323,7 @@ export default function Navbar({ listOfSchools }){
 
     )
 }
+
 
 
 

@@ -1,30 +1,23 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import prisma from '../../lib/db/prisma'
+
+import { getSession } from 'next-auth/client'
 
 
+export default async (req, res) => {
+	const session = await getSession({ req })
+	if (session) {
 
 
-export default async function (req, res) {
-    const username = 'pinex08'
-    const userInfo = await prisma.$queryRaw`SELECT * FROM kickback.users 
-    WHERE name = ${username};`  
-    .catch(e => {
-         throw e
-    })
-    .finally(async () => {
-        await prisma.$disconnect()
-    })
-
-    const user_id = userInfo[0].id
-
-    console.log('successfuly found user id')
+	  // Signed in
+      //console.log('Session', JSON.stringify(session, null, 2))
+      console.log(session.user.name)
+      const user_name = session.user.name
+      
 
 
-    res.send(user_id)
-
-
-
-    
-
-}
-
+	} else {
+	  // Not Signed in
+	  res.status(401)
+	}
+	res.end()
+  }

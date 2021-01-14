@@ -44,8 +44,22 @@ const options = {
       return Promise.resolve(baseUrl)
     },
     session: async (session, user) => {
-      const token = session.accessToken;
-      
+
+
+      //Search in database for user based of their email
+      const result = await prisma.user.findUnique({
+        where: {
+          email: session.user.email,
+        },
+      })
+
+      //Assign the school to the session 
+      session.user.school = result.school
+      session.user.school_verified = result.schoolEmailVerified
+      console.log(result)
+
+
+
       return Promise.resolve(session)
     },
     jwt: async (token, user, account, profile, isNewUser) => {
