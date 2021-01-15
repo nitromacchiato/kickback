@@ -43,6 +43,12 @@ export async function getServerSideProps(context) {
   const school = await schools()
   const colleges = school.schools
   
+
+
+
+
+
+  
     if (colleges != null){
 
 

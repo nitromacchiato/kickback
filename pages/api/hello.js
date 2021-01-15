@@ -4,13 +4,12 @@
 
 
 export default async function handler(req, res) {
+  
   res.statusCode = 200
 
-  const response = await fetch('http://localhost:3000/api/user/getUserName')
-  const data = response.json()
 
-  console.log(data)
 
+  console.log('Trying again')
   res.setHeader('Content-Type', 'application/json')
-  res.send(data)
+  res.status(200).json({ name: 'andy' })
 }
