@@ -108,7 +108,7 @@ const options = {
           /// ---------------------- Setting the refresh token to update every hour for the user ---------------------------------------
 
         
-          //Get the user access token from the database 
+          //Get the user refresh token information from the database 
           const searchAccountTable = await prisma.$queryRaw`SELECT * FROM accounts 
           WHERE provider_account_id=${userName};`
           .catch(e => {
@@ -118,6 +118,8 @@ const options = {
             await prisma.$disconnect()
           })
 
+
+        
           // Prototype to add hours to current date 
           Date.prototype.addHours = function(h) {
             this.setTime(this.getTime() + (h*60*60*1000));
@@ -126,8 +128,9 @@ const options = {
 
 
 
-          // Convert to sql time format 
-          // Dates are in UTC time and usually an offset of 1 day for Eastern Time (my current timeZone)
+
+
+          // Set the expiration date for the refresh token
           const getRefreshTokenExpirationDate = await searchAccountTable[0]['refresh_token_expires'] // Expiration date for refresh token for user 
 
 
@@ -149,8 +152,6 @@ const options = {
           const currentDateMonth = currentDate[1]
           const currentDateDay = currentDate[2]
           
-
-
 
           //Expiration Date Formating 
           const expirationDateSplit = getRefreshTokenExpirationDate.split(' ')
@@ -175,30 +176,51 @@ const options = {
           // CREATING DATE FORMATS TO COMPARE
           const databaseDate = new Date(expirationDateYear,expirationDateMonth,expirationDateDay,expireHour,expireMinute,expireSeconds)
           const today = new Date(currentDateYear,currentDateMonth,currentDateDay,currentHour,currentMinute,currentSeconds)
+          
+
+          
 
 
+          // If todays date is more current than the database date then generate a new refresh token
+          // Checks to see if the refresh token expired and if it is then itll generate a new one 
           if(today > databaseDate || getRefreshTokenExpirationDate === null){
 
+            //Process Log 
+            console.log('Your token has expired, generating a new refresh token')
+
         
-
-            //Add an hour to the current date to set the new expiration date 
-            const newExpireDate = today.addHours(1)
-            console.log(newExpireDate)
-
-
+            //Get the user refresh token information from the database 
+            const searchAccountTable = await prisma.$queryRaw`SELECT * FROM accounts 
+            WHERE provider_account_id=${session.user.name};`
+            .catch(e => {
+              throw e
+              })
+            .finally(async () => {
+              await prisma.$disconnect()
+            })
 
             //Assigns the refresh token from the database and sends it to the api to recieve a new refresh token 
             const userAccessToken = await searchAccountTable[0]['refresh_token']
+
+
+            console.log('Your Refresh Token is ' ,userAccessToken)
+
             const apiLink = await process.env.NEXTAUTH_url + '/api/spotify/getRefreshToken?token=' + userAccessToken
             const response = await fetch(apiLink)
             const token = await response.json()
 
             //New Access Token returned from api 
             const NewRefreshtoken = await token['access_token']
-            console.log(NewRefreshtoken)
+            
+            //process log 
+            console.log('updating database with new refresh token',NewRefreshtoken)
+
+
+
+
 
             //Update accounts table and update the refreshToken column 
-            const updateRefreshToken = await prisma.$executeRaw`UPDATE accounts SET refresh_token = ${NewRefreshtoken}, refresh_token_expires = ${newExpireDate} WHERE provider_account_id = ${userName}`
+            const updateRefreshToken = await prisma.$executeRaw`UPDATE accounts SET refresh_token = ${NewRefreshtoken}, refresh_token_expires = ${getCurrentDate} WHERE provider_account_id = ${userName}`
             .catch(e => {
               throw e
               })
@@ -206,6 +228,8 @@ const options = {
               await prisma.$disconnect()
             })
             
+
+
             console.log('Rows Affected: ' +updateRefreshToken)
 
           } else 
@@ -244,7 +268,7 @@ const options = {
         })
 
         const UserRefreshToken = await searchAccountTable[0]['refresh_token']
-
+        
         //Setting up information for Spotify Api Wrapper 
         var spotifyApi = new SpotifyWebApi();
 

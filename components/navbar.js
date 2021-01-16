@@ -248,7 +248,9 @@ export default function Navbar({ listOfSchools }){
 											</thead>
 
 											<tbody>
+												
 
+												{/* Map the table with the users playlist data only if the user is logged in
 												{session && 
 												
 													session.playlist.map(item =>{
@@ -265,14 +267,9 @@ export default function Navbar({ listOfSchools }){
 													)
 
 												}) 
-												}
+												} */}
 
-												{!session && 
-												
-													<>
-													<p>No Playlist Found</p>
-													</>
-												}
+
 
 											</tbody>
 
