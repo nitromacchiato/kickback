@@ -15,7 +15,7 @@ function Home({colleges}) {
 		    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <title>Kickback</title>
-
+      
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css"></link>
       </Head>
@@ -43,27 +43,27 @@ export async function getServerSideProps(context) {
   const school = await schools()
   const colleges = school.schools
   
-
+  console.log(colleges)
 
 
 
 
   
-    if (colleges != null){
+  if (colleges != null){
 
 
-      return {
-        props: {colleges}, // will be passed to the page component as props
-      }
-
-
-    } else {
-
-      const colleges =  { name: 'Error Loading Schools' };
-      return{
-        props:{colleges}
-      }
+    return {
+      props: {colleges}, // will be passed to the page component as props
     }
+
+
+  } else {
+
+    const colleges =  { name: 'Error Loading Schools' };
+    return{
+      props:{colleges}
+    }
+  }
 }
 
 

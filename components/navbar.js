@@ -172,7 +172,8 @@ export default function Navbar({ listOfSchools }){
 							{/* If the user is logged in */}
 							{session &&
 
-							<>
+							<>	
+
 								
 								{/* If the user school email is not verified then show the add school button */}
 								{!isVerified && 
@@ -204,21 +205,8 @@ export default function Navbar({ listOfSchools }){
 										</span>
 										<span>Add a Playlist</span>
 									</button>
-
-
-
-
-
-
-
 									</>
 								}
-
-
-
-
-
-
 
 
 								<button class="button is-warning" onClick={signOut}>
@@ -232,14 +220,6 @@ export default function Navbar({ listOfSchools }){
 							<a class="button is-danger">
 							<strong>Donate</strong>
 							</a>
-
-
-
-
-
-
-
-
 
 
 
@@ -268,39 +248,23 @@ export default function Navbar({ listOfSchools }){
 											</thead>
 
 											<tbody>
-												<tr>
-													<td>stupid_hype</td>
-													<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
-												</tr>
 
-												<tr>
-													<td>stupid_hype</td>
-													<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
-												</tr>
+												{session.playlist.map(item =>{
 
-												<tr>
-													<td>stupid_hype</td>
-													<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
-												</tr>
 
-												<tr>
-													<td>stupid_hype</td>
-													<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
-												</tr>
+												    return(
+														<>
+														<tr>
+															<td>{item.name}</td>
+															<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
+														</tr>	
+														</>
+													)
+												})}
+
 											</tbody>
 
-
-
-
-
-
 										</table>
-
-
-
-
-
-
 
 									</section>
 
@@ -311,14 +275,6 @@ export default function Navbar({ listOfSchools }){
 
 								</div>
 							</div>
-
-
-
-
-
-
-
-
 
 
 							{/* <!-- Modal popup to select school --> */}
@@ -384,10 +340,6 @@ export default function Navbar({ listOfSchools }){
 
 								</div>
 							</div>
-
-
-
-
 
 
 							{/* Modal Popup to connect to music provider. Only pops up when the user clicks the connect button */}
