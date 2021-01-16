@@ -255,6 +255,7 @@ const options = {
         .then(function(data) {
           
           return data.body.items
+          
 
         },function(err) {
           console.log('Something went wrong getting the user spotify playlist!', err);
@@ -266,11 +267,11 @@ const options = {
 
 
 
-
   
 
       }catch(error){
         console.log('error adding user playlist to user session')
+        
       }
 
 

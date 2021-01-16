@@ -249,7 +249,9 @@ export default function Navbar({ listOfSchools }){
 
 											<tbody>
 
-												{session.playlist.map(item =>{
+												{session && 
+												
+													session.playlist.map(item =>{
 
 
 												    return(
@@ -259,8 +261,18 @@ export default function Navbar({ listOfSchools }){
 															<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
 														</tr>	
 														</>
+
 													)
-												})}
+
+												}) 
+												}
+
+												{!session && 
+												
+													<>
+													<p>No Playlist Found</p>
+													</>
+												}
 
 											</tbody>
 
