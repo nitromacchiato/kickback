@@ -105,34 +105,109 @@ const options = {
         await prisma.$disconnect()
       })
 
+      // Prototype to add hours to current date 
+      Date.prototype.addHours = function(h) {
+        this.setTime(this.getTime() + (h*60*60*1000));
+        return this;
+      }
 
-      //Assigns the refresh token from the database and sends it to the api to recieve a new refresh token 
-      const userAccessToken = await searchAccountTable[0]['refresh_token']
-      const apiLink = await process.env.NEXTAUTH_url + '/api/spotify/getRefreshToken?token=' + userAccessToken
-      const response = await fetch(apiLink)
-      const token = await response.json()
+      // Convert to sql time format 
+      // Dates are in UTC time and usually an offset of 1 day for Eastern Time (my current timeZone)
+      const getRefreshTokenExpirationDate = await searchAccountTable[0]['refresh_token_expires'] // Expiration date for refresh token for user 
 
-      //New Access Token returned from api 
-      const NewRefreshtoken = await token['access_token']
+
+
+      // split the current date into a differnt format 
+      const getCurrentDate = new Date().toISOString().slice(0, 19).replace('T', ' ')
+      const dateSplit = getCurrentDate.split(' ')
+
+      //Current Day Time format 
+      const time = dateSplit[1]
+      const splitTime = time.split(':')
+      const currentHour = splitTime[0]
+      const currentMinute = splitTime[1]
+      const currentSeconds = splitTime[2]
+
+      // Curent Day Date 
+      const currentDate = dateSplit[0].split('-')
+      const currentDateYear = currentDate[0]
+      const currentDateMonth = currentDate[1]
+      const currentDateDay = currentDate[2]
       
 
-      // Update accounts table and update the refreshToken column 
-      // const updateRefreshToken = await prisma.$executeRaw`UPDATE accounts SET refresh_token = ${NewRefreshtoken} WHERE provider_account_id = ${userName}`
-      // .catch(e => {
-      //   throw e
-      //   })
-      // .finally(async () => {
-      //   await prisma.$disconnect()
-      // })
 
 
-      // console.log('Rows Affected: ' +updateRefreshToken)
+      //Expiration Date Formating 
+      const expirationDateSplit = getRefreshTokenExpirationDate.split(' ')
 
-      console.log(token)
+      //Expiration Day Time format 
+      const ExpireTime = expirationDateSplit[1]
+      const splitExpireTime = ExpireTime.split(':')
+      const expireHour = splitExpireTime[0]
+      const expireMinute = splitExpireTime[1]
+      const expireSeconds = splitExpireTime[2]
+
+
+      // Expiration Day Date 
+      const expirationDate = expirationDateSplit[0].split('-')
+      const expirationDateYear = expirationDate[0]
+      const expirationDateMonth = expirationDate[1]
+      const expirationDateDay = expirationDate[2]
+      
+
+
+
+      // CREATING DATE FORMATS TO COMPARE
+      const databaseDate = new Date(expirationDateYear,expirationDateMonth,expirationDateDay,expireHour,expireMinute,expireSeconds)
+      const today = new Date(currentDateYear,currentDateMonth,currentDateDay,currentHour,currentMinute,currentSeconds)
+
+
+      if(today > databaseDate || getRefreshTokenExpirationDate === null){
+
+        //Add an hour to the current date to set the new expiration date 
+        const newExpireDate = today.addHours(1)
+        console.log(newExpireDate)
+
+
+
+        //Assigns the refresh token from the database and sends it to the api to recieve a new refresh token 
+        const userAccessToken = await searchAccountTable[0]['refresh_token']
+        const apiLink = await process.env.NEXTAUTH_url + '/api/spotify/getRefreshToken?token=' + userAccessToken
+        const response = await fetch(apiLink)
+        const token = await response.json()
+
+        //New Access Token returned from api 
+        const NewRefreshtoken = await token['access_token']
+        
+
+        //Update accounts table and update the refreshToken column 
+        const updateRefreshToken = await prisma.$executeRaw`UPDATE accounts SET refresh_token = ${NewRefreshtoken}, refresh_token_expires = ${newExpireDate} WHERE provider_account_id = ${userName}`
+        .catch(e => {
+          throw e
+          })
+        .finally(async () => {
+          await prisma.$disconnect()
+        })
+        
+        console.log('Rows Affected: ' +updateRefreshToken)
+
+      } else 
+      {
+        console.log('Refresh Token already up to date in Database')
+      }
+
+
+      /* ------------------------  END OF SPOTIFY ----------------------------*/ 
 
 
 
 
+
+
+
+
+
+      
 
 
 
