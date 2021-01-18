@@ -41,7 +41,7 @@ export async function getServerSideProps(context) {
 
   //Make a database request to get all the schools 
   const school = await schools()
-  const colleges = school.schools
+  const colleges = await school.schools
   
   
   if (colleges != null){

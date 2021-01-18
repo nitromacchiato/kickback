@@ -2,9 +2,13 @@ import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 import Adapters from 'next-auth/adapters'
 import { PrismaClient } from '@prisma/client'
+import GenerateNewRefreshToken from '../../../lib/spotify/updateRefreshToken'
+import GetUserPlaylits from '../../../lib/spotify/getUserPlaylists'
 
 
-var SpotifyWebApi = require('spotify-web-api-node');
+
+
+
 const prisma = new PrismaClient()
 
 
@@ -99,161 +103,19 @@ const options = {
             UPDATE THE SPOTIFY REFRESH TOKEN EVERY HOUR IF EXPIRED   
             -----------------------------------------------------------
         */
+        const generateToken = await GenerateNewRefreshToken(userName)
 
 
-        try{
-
-          /// ---------------------- Setting the refresh token to update every hour for the user ---------------------------------------
-
+        // Get Current User Playlists 
         
-          //Get the user access token from the database 
-          const searchAccountTable = await prisma.$queryRaw`SELECT * FROM accounts 
-          WHERE provider_account_id=${userName};`
-          .catch(e => {
-            throw e
-            })
-          .finally(async () => {
-            await prisma.$disconnect()
-          })
+       session.playlist = await GetUserPlaylits(userName)
 
 
-          //Assigns the refresh token from the database and sends it to the api to recieve a new refresh token 
-          const getRefreshTokenExpireDate = await searchAccountTable[0]['refresh_token_expires']
-          const getRefreshTokenUpdateTime = await searchAccountTable[0]['refresh_token_updated']
+       /* ------------------------  END OF SPOTIFY ----------------------------*/ 
 
-          const RefreshTokenExpireDate = await new Date(getRefreshTokenExpireDate) || null
-          const lastUpdate = await new Date(getRefreshTokenUpdateTime) || null 
-
-          
-
-          if (lastUpdate > RefreshTokenExpireDate || lastUpdate === null || RefreshTokenExpireDate === null){
-
-            //Process Log 
-            console.log('Your refresh token has expired. Generating a new one')
-
-            //Get the refresh token from the database 
-            const userAccessToken = await searchAccountTable[0]['refresh_token'] 
-
-            //Make an api request to the getRefreshToken api 
-            const apiLink = await process.env.NEXTAUTH_url + '/api/spotify/getRefreshToken?token=' + userAccessToken
-            const response = await fetch(apiLink)
-            const token = await response.json()
-  
-            //New Access Token returned from api 
-            const NewRefreshtoken = await token['access_token']
-
-            //Proccess Log 
-            console.log('Successfully generated a new refresh token: ',NewRefreshtoken)
-  
-            //Update accounts table and update the refreshToken column and refresh_token_expire column by getting the current date and adding an hour to it 
-            const updateRefreshToken = await prisma.$executeRaw`UPDATE accounts SET refresh_token = ${NewRefreshtoken}, refresh_token_expires = DATE_ADD(NOW(), INTERVAL 1 HOUR), refresh_token_updated = NOW()  WHERE provider_account_id = ${userName}`
-            .catch(e => {
-              throw e
-              })
-            .finally(async () => {
-              await prisma.$disconnect()
-            })
-            
-
-
-            //Process Log 
-            console.log('Rows Affected: ' +updateRefreshToken)
-            console.log('We are in the future')
-
-          } else {
-
-            //Update the time for refresh_token_updated to current time 
-            const updateRefreshToken = await prisma.$executeRaw`UPDATE accounts SET refresh_token_updated = NOW()  WHERE provider_account_id = ${userName}`
-            .catch(e => {
-              throw e
-              })
-            .finally(async () => {
-              await prisma.$disconnect()
-            })
-
-
-           
-          }
-
-
-
-
-
-
-
-
-
-        /// ---------------------- END OF SETTING REFRESH TOKEN EACH HOUR ---------------------------------------
-        } catch (error){
-          console.log('Trouble updating refresh token')
-        }
-
-
-
-
-
-
-
-      /// ---------------------- START OF GETTING CURRENT USERS PLAYLIST ---------------------------------------
-        
-      try{
-
-        //Get the user access token from the database 
-        const searchAccountTable = await prisma.$queryRaw`SELECT * FROM accounts 
-        WHERE provider_account_id=${userName};`
-        .catch(e => {
-          throw e
-          })
-        .finally(async () => {
-          await prisma.$disconnect()
-        })
-
-        const UserRefreshToken = await searchAccountTable[0]['refresh_token']
-
-        //Setting up information for Spotify Api Wrapper 
-        var spotifyApi = new SpotifyWebApi();
-
-
-        spotifyApi.setAccessToken(UserRefreshToken);
-
-        const userPlaylist = await spotifyApi.getUserPlaylists(userName)
-        .then(function(data) {
-          
-          return data.body.items
-
-        },function(err) {
-          console.log('Something went wrong getting the user spotify playlist!', err);
-        });
-
-
-        // Assigns user playlist data to session
-        session.playlist = await userPlaylist
-
-
-
-
-  
-
-      }catch(error){
-        console.log('error adding user playlist to user session')
+      } else {
+        console.log('user is offline')
       }
-
-
-
-      /* ------------------------  END OF SPOTIFY ----------------------------*/ 
-
-
-
-    } else {
-      console.log('user is offline')
-    }
-
-
-
-
-
-
-
 
 
       return Promise.resolve(session)
