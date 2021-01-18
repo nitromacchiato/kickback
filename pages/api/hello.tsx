@@ -1,10 +1,13 @@
+// Here is the file we want to make the Node JS Request for the user to login to.
 import * as querystring from "querystring";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 export default function handler(req: any, res: any) {
-  try {
-    const refresh_token = req.query['token'];
-    console.log(req.query)
+  const userCode = 'BQBmCm5WUKny1nUgUgQRjBb8UgMSGxtJiVi5miN4H2aDSnj2MT8_XOCuD_46kT4GnnoQaYgslZGGbU---tf3WTWQQbE9ZMErlxjxaZb1tVCYNQxsc8VU096-Iv616OTMoOhz0vMbSyA0lZU1tY5PXb08P1_b2FqFubV3WiWVRqXuzlVTXE5fL0Wp9n4qREoECXatDsODfq-fCYBODiG1EEsbUGDS4BvVJUVePTKORG9fyg';
 
+  try {
     const spotifyUrl = "https://accounts.spotify.com/api/token";
 
     // Generate a base64 encoded string that contains the client ID and client secret
@@ -21,8 +24,9 @@ export default function handler(req: any, res: any) {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: querystring.stringify({
-          grant_type: "refresh_token",
-          refresh_token: refresh_token,
+          grant_type: "authorization_code",
+          code: userCode,
+          redirect_uri: "http://localhost:3000/api/auth/callback/spotify",
         }),
       });
 
@@ -33,7 +37,7 @@ export default function handler(req: any, res: any) {
 
     return getAccessToken();
   } catch (error) {
-    console.error("Error Occurred Getting Top Songs:", error);
-    return res.status(400);
+    console.error(error);
+    return null;
   }
 }

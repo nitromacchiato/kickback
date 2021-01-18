@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import { signIn, signOut, useSession, getSession } from 'next-auth/client'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import Login from '../components/login'
+
 
 
 
@@ -248,20 +248,22 @@ export default function Navbar({ listOfSchools }){
 											</thead>
 
 											<tbody>
+												
+												{session && 
+													session.playlist.map(item =>{
 
-												{session.playlist.map(item =>{
 
-
-												    return(
-														<>
-														<tr>
-															<td>{item.name}</td>
-															<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
-														</tr>	
-														</>
-													)
-												})}
-
+														return(
+															<>
+															<tr>
+																<td>{item.name}</td>
+																<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
+															</tr>	
+															</>
+														)
+													})	
+												}
+						
 											</tbody>
 
 										</table>
