@@ -39,8 +39,13 @@ export default function Navbar({ listOfSchools }){
 	//Check to see if user email is verified 
 	const [isVerified, setVerified] = React.useState(false)
 
+	// Checks to see if the user has playlists to display 
+	const [hasPlaylists, setPlaylistStatus] = React.useState(false)
+
+
 	//Show user playlists 
 	const [isShowingPlaylists, setPlaylists] = React.useState(false)
+
 
 
 	//Router to redirect user to pages 
@@ -96,6 +101,15 @@ export default function Navbar({ listOfSchools }){
 		}	
 	});
 	
+
+
+
+
+
+
+
+
+
 
 
 
@@ -235,8 +249,8 @@ export default function Navbar({ listOfSchools }){
 
 									<section class="modal-card-body" style={{height:"auto"}}>
 
-										{/* Table to hold playlists names and an add button */}
-
+										{/* If the user has a playlist then render a table to hold playlists names and an add button */}
+										
 										<table class="table" style={{width:'300px'}}>
 
 
@@ -248,7 +262,7 @@ export default function Navbar({ listOfSchools }){
 											</thead>
 
 											<tbody>
-												
+
 												{session && 
 													session.playlist.map(item =>{
 
@@ -263,10 +277,12 @@ export default function Navbar({ listOfSchools }){
 														)
 													})	
 												}
-						
+
+
 											</tbody>
 
 										</table>
+										
 
 									</section>
 
