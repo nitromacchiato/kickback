@@ -4,7 +4,7 @@ import Navbar from '../../components/navbar'
 import Head from 'next/head'
 
 
-export default function Schools({school}){
+export default function Schools({school,playlist}){
 
 
 
@@ -68,16 +68,22 @@ export default function Schools({school}){
 
                         <div class="columns is-multiline is-vcentered is-mobile is-11" style={{marginTop:"10px", overflowY: "scroll"}}>
 
-                            
-                            <div class="column is-vcentered is-narrow">
-                                <div class="has-text-centered">
-                                    <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
-                                        <img src="https://bulma.io/images/placeholders/128x128.png" />
-                                    </figure>
-                                    <p style={{fontSize:"12pt"}}>Vamp Anthem</p>
-                                    <p style={{fontSize:"9pt"}} class="has-text-weight-light">@Pinex08</p>
+
+                            {playlist.map((item) => (
+
+                                <div class="column is-vcentered is-narrow">
+                                    <div class="has-text-centered">
+                                        <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
+                                            <img src={item.cover_image} />
+                                        </figure>
+                                        <p style={{fontSize:"12pt"}}>{item.name}</p>
+                                        <p style={{fontSize:"9pt"}} class="has-text-weight-light">{item.owner}</p>
+                                    </div>
                                 </div>
-                            </div>
+
+                            ))}
+                            
+
 
                         </div>
                         {/* <!-- END of Recently Added --> */}
@@ -118,14 +124,22 @@ export async function getStaticProps({ params }) {
 
     //Remove dashes from school url name and turn it to original format 
     const school_name = params.id.split('-').join(' ')
-    
-
     // Gets the school information for the current school 
     const school = await getSchoolInfo(school_name)
-    
+
+
+    //Get recently added tracks 
+    const getPlaylists = await fetch('http://localhost:3000/api/schools/getRecentlyAdded',{
+        method: 'POST',
+        body:JSON.stringify({name:school_name}
+        )})
+        
+    const playlist = await getPlaylists.json()
+
 
     return {
-        props: {school}, // will be passed to the page component as props
+        props: {school, playlist}, // will be passed to the page component as props
+        revalidate: 1,
     }
 }
 
