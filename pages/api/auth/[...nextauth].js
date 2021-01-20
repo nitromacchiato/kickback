@@ -82,10 +82,24 @@ const options = {
             await prisma.$disconnect()
           })
 
+
+
           //Assign the school to the session 
           session.user.school = result.school
           session.user.school_verified = result.schoolEmailVerified
-      
+
+          // Replace blank spaces with a '-' to create the external link for the school 
+          const search = ' '
+          const replaceWith = '-'
+
+
+          const SchoolName = result.school
+          const urlName = SchoolName.split(search).join(replaceWith)
+
+          const link = process.env.NEXTAUTH_URL + '/schools/' + urlName
+
+          session.user.schoolLink = link
+
 
         
         } catch (error) {

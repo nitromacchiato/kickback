@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import { signIn, signOut, useSession, getSession } from 'next-auth/client'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
+import Link from 'next/link'
 
 
 
@@ -46,6 +46,40 @@ export default function Navbar({ listOfSchools }){
 
 	//Router to redirect user to pages 
 	const router = useRouter()
+
+
+
+
+	//Handle Playlist Submission 
+	function handlePlaylistSubmission(PlaylistName,PlaylistOwner,PlaylistSpotifyID,PlaylistHref,UserSchool,PlaylistImage){
+
+
+		// Calls the api with a post request and submits the parameters in a body 
+		fetch('http://localhost:3000/api/user/playlistSubmission',{
+			method:'POST',
+			body: JSON.stringify({
+				name: PlaylistName,
+				owner: PlaylistOwner,
+				spotifyID: PlaylistSpotifyID,
+				href: PlaylistHref,
+				image: PlaylistImage,
+				school: UserSchool, 
+			}),
+			headers:{
+				'Content-type': 'application/json; charset=UTF-8'
+			}
+		}).catch(function (error){
+			console.warn('Something went wrong adding the playlist.', error)
+		})
+
+
+	}
+
+
+
+
+
+
 
 
 
@@ -202,13 +236,14 @@ export default function Navbar({ listOfSchools }){
 
 								{isVerified && 
 									<>
-									<button class="button is-light">
-										<span class="icon">
-											<i class="fas fa-graduation-cap"></i>
-										</span>
-										<span>{session.user.school}</span>
-									</button>
-
+									<Link href='http://localhost:3000/schools/University-of-Maryland'>
+										<button class="button is-light">
+											<span class="icon">
+												<i class="fas fa-graduation-cap"></i>
+											</span>
+											<span>{session.user.school}</span>
+										</button>
+									</Link>
 									
 									<button class="button is-success" onClick={() => {setPlaylists(!isShowingPlaylists);}}>
 										<span class="icon">
@@ -268,7 +303,9 @@ export default function Navbar({ listOfSchools }){
 															<>
 															<tr>
 																<td>{item.name}</td>
-																<td><span><button class='button is-small is-light'><i class="fas fa-plus"></i></button></span></td>
+
+																<td><span><button class='button is-small is-light' onClick={e => {e.preventDefault();  handlePlaylistSubmission(item.name, item.owner.display_name,  item.uri, item.external_urls.spotify, session.user.school, item.images[0]['url'] )}}><i class="fas fa-plus"></i></button></span></td>
+																
 															</tr>	
 															</>
 														)

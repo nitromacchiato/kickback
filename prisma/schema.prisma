@@ -84,9 +84,12 @@ model schoolemailverification {
 }
 
 model playlists {
-  id          Int    @id @default(autoincrement())
-  name        String
-  owner       String
-  playlist_id String
-  school      String
+  id            Int       @id @default(autoincrement())
+  name          String
+  owner         String
+  school        String
+  playlist_id   String
+  external_href String?
+  cover_image   String?
+  uploadDate    DateTime? @default(now())
 }
