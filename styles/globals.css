@@ -163,3 +163,37 @@
         width: 400px;
     }
 }
+
+
+
+
+
+
+/* 
+    PLAYLIST PAGES
+
+*/ 
+
+@media screen and (max-width:768px){
+	.hide_mobile{
+		display: none;
+	}
+
+	.change_player_size_mobile{
+		width: 350px;
+	}
+
+	.padding_mobile_button{
+		margin-top:3em;
+	}
+
+	.detail_top_margin{
+		margin-top: 1em !important;
+	}
+
+	.margin_section{
+		margin-left:1em;
+	}
+}
+
+

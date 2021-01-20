@@ -24,18 +24,117 @@ export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID
 
             <Navbar />
 
-            <section class="section is-vcentered" style={{marginLeft:"2.0em", marginTop:"0"}}>
-			    <div class="columns is-centered">
+            <section class="section is-vcentered" style={{marginTop: "2em"}}> 
+
+                {/* <!-- CONTAINER FOR TOP OF PLAYLIST -->  */}
+                <div class="container">
+
+                    <div class="columns box">
+
+                        {/* <!-- IMAGE --> */}
+                        <div class="column">	
+
+                            <figure class="image is-square">
+                                <img src={coverImage} />
+                            </figure>
+
+                        </div>
 
 
-                    <p>My Playlist </p>
-                    <p>{playlistName}</p>
-                    <p>{playlistOwner}</p>
-                    <p>{externalHref}</p>
-                    
-                    
-			    </div>
-		    </section>	
+                        {/* <!-- INFO --> */}
+                        <div class="column is-centered detail_top_margin" style={{margin: "0em 2em 0em 2em"}}>
+
+                            <div style={{height: "300px", width:"auto"}}>
+
+                                <div class="block">
+                                    <p class="title">{playlistName}</p>
+                                </div>
+                                <div class="block">
+                                    <p class="subtitle">This playlist is about having fun and listening to good music</p>						
+                                </div>
+
+                            </div>
+
+                            <div style={{marginTop: "auto"}}>
+
+                                <span>
+                                    <button class="button padding_mobile_button is-success is-rounded" style={{marginTop:"auto"}}>
+                                        <span class="icon">
+                                            <i class="fab fa-spotify"></i>
+                                        </span>
+                                        <span>
+                                            Follow
+                                        </span> 
+                                    </button>
+                                    <button class="button padding_mobile_button is-primary is-rounded" style={{marginTop:"auto", marginRight: "4em"}}>Add Playlist</button>
+                                </span>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    {/* <!-- TRACKS FOR PLAYLIST --> */}
+                    <div class="columns box is-mobile" style={{marginTop: "1em"}}>
+
+
+
+                        <table class="table is-fullwidth is-hoverable is-striped is-narrow">
+
+                            {/* <!-- TABLE HEADER --> */}
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Track</th>
+                                    <th>Artist</th>
+                                    <th>Time</th>
+                                    <th>Album</th>
+                                </tr>
+                            </thead>
+
+
+                            {/* <!--TRACKS--> */}
+                            <tbody>
+
+                                <tr>
+                                    <th>1</th>
+                                    <td>Neo</td>
+                                    <td>Blizzy Banks</td>
+                                    <td>2:31</td>
+                                    <td>G.M.T.O</td>
+                                </tr>
+
+                                <tr>
+                                    <th>2</th>
+                                    <td>Neo</td>
+                                    <td>Blizzy Banks</td>
+                                    <td>2:31</td>
+                                    <td>G.M.T.O</td>
+                                </tr>
+
+                                <tr>
+                                    <th>3</th>
+                                    <td>Neo</td>
+                                    <td>Blizzy Banks</td>
+                                    <td>2:31</td>
+                                    <td>G.M.T.O</td>
+                                </tr>
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+
+
+                </div>
+                </section>
+
 
 
 
