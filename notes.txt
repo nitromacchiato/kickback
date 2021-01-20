@@ -25,26 +25,24 @@ getstatic paths setpaths fallback to true
 
 
 #School email verifcation process 
-First i would create a table in my database for email verfication process
+    First i would create a table in my database for email verfication process
 
-Then in NextJs I would create static paths based on the id's in the table email verifciation process
+    Then in NextJs I would create static paths based on the id's in the table email verifciation process
 
+    So when a user clicks submit to submit their email and other info 
+    I'll take that information and update the database for the user table but leave the coloum email_verfied null until the user visits the static path to confirm email
 
+    - Need to create a function to verify the values for school and email and make sure theyre not null. if theyre null then pop up an error message
+        if theyre not null then route the user to the api to submit the data and continue with the following steps 
+    - on a successful submission redirect the user to a success page saying they have just been sent an email and to check their inbox 
 
-So when a user clicks submit to submit their email and other info 
-I'll take that information and update the database for the user table but leave the coloum email_verfied null until the user visits the static path to confirm email
+    - Update the user table and upload the school email to the assigned user name and leave school_email_verified blank 
+    - Upload a function to the success email component that handles the user infomariton and updates the user table and makes the column email verfied true 
 
- - Need to create a function to verify the values for school and email and make sure theyre not null. if theyre null then pop up an error message
-    if theyre not null then route the user to the api to submit the data and continue with the following steps 
-- on a successful submission redirect the user to a success page saying they have just been sent an email and to check their inbox 
+    once the user clicks the link in the email it will take them to the static path that was generated 
 
-- Update the user table and upload the school email to the assigned user name and leave school_email_verified blank 
-- Upload a function to the success email component that handles the user infomariton and updates the user table and makes the column email verfied true 
-
-once the user clicks the link in the email it will take them to the static path that was generated 
-
-it'll run a function to confirm their email and update the email_verfied to verfied instead of null in the user table 
-then i'll delete the id in the static paths to remove the link
+    it'll run a function to confirm their email and update the email_verfied to verfied instead of null in the user table 
+    then i'll delete the id in the static paths to remove the link
 
 
 
@@ -54,4 +52,12 @@ then i'll delete the id in the static paths to remove the link
 
 #USER PLAYLIST 
 
-- Future add on is create an easy functionality to allow the user to upload and change cover image for playlist 
+ - Future add on is create an easy functionality to allow the user to upload and change cover image for playlist 
+
+
+
+
+
+#Recently Added Per School 
+    - Need to add a function to the database to only generate the playlists added within 60 days
+    - Also consider cuztomizing the apperance of the playlist based off some ideas and pictures i came accross 

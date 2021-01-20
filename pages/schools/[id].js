@@ -2,6 +2,11 @@ import getSchoolIds from '../../lib/school/getAllSchoolIds'
 import getSchoolInfo from '../../lib/school/getSchoolData'
 import Navbar from '../../components/navbar'
 import Head from 'next/head'
+import 'bulma/css/bulma.css'
+
+
+
+
 
 
 export default function Schools({school,playlist}){
@@ -128,11 +133,11 @@ export async function getStaticProps({ params }) {
     const school = await getSchoolInfo(school_name)
 
 
-    //Get recently added tracks 
-    const getPlaylists = await fetch('http://localhost:3000/api/schools/getRecentlyAdded',{
+    //Get recently added playlists by the school name
+    // Send the name as a query in the url
+    const getPlaylists = await fetch('http://localhost:3000/api/schools/getRecentlyAdded?name='+school_name,{
         method: 'POST',
-        body:JSON.stringify({name:school_name}
-        )})
+    })
         
     const playlist = await getPlaylists.json()
 

@@ -3,16 +3,17 @@ import GetRecentPlaylist from '../../../lib/school/getRecentPlaylistPerSchool'
 
 
 
-
-
+// Takes a school name and then searches the database for all the playlists added by that school name 
 
 export default async function handler(req, res) {
 
 
     if (req.method === 'POST') {
-        const schoolName = req.body.name
-        const Playlists = await GetRecentPlaylist('University of Maryland')
-
+    
+        const schoolName = req.query['name']
+        console.log(schoolName)
+        const Playlists = await GetRecentPlaylist(schoolName)
+        
 
         console.log(Playlists)
 
@@ -22,7 +23,8 @@ export default async function handler(req, res) {
 
         
     } else {
-        console.log('Error with method')
+        res.status(405);
+        res.end();
     }
 
   }
