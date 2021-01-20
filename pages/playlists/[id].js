@@ -7,6 +7,22 @@ import 'bulma/css/bulma.css'
 export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks}){
 
 
+    function millisToMinutesAndSeconds(millis) {
+
+        var minutes = Math.floor(millis / 60000);
+        var seconds = ((millis % 60000) / 1000).toFixed(0);
+        return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
+    }
+
+
+
+
+
+
+
+
+
+
 
     return(
 
@@ -104,20 +120,12 @@ export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID
                                         <th>1</th>
                                         <td>{item.track.name}</td>
                                         <td>{item.track.artists[0]['name']}</td>
-                                        <td>2:31</td>
+                                        <td>{millisToMinutesAndSeconds(item.track.duration_ms)}</td>
                                         <td>{item.track.album.name}</td>
                                     </tr>
 
                                 ))}
 
-
-                                <tr>
-                                    <th>3</th>
-                                    <td>Neo</td>
-                                    <td>Blizzy Banks</td>
-                                    <td>2:31</td>
-                                    <td>G.M.T.O</td>
-                                </tr>
 
                             </tbody>
 

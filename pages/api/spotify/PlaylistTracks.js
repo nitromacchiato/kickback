@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     
           //Get playlist tracks
           spotifyApi.getPlaylistTracks(playlist_id, {
-            offset: 1,
+            offset: 0,
             limit: 100,
             fields: 'items'
           })
