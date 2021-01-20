@@ -115,9 +115,9 @@ export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID
                             {/* <!--TRACKS--> */}
                             <tbody>
 
-                                {tracks.map(item => (
+                                {tracks.map((item,i)=> (
                                     <tr>
-                                        <th>1</th>
+                                        <th>{i + 1}</th>
                                         <td>{item.track.name}</td>
                                         <td>{item.track.artists[0]['name']}</td>
                                         <td>{millisToMinutesAndSeconds(item.track.duration_ms)}</td>
