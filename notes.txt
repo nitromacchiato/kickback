@@ -19,7 +19,8 @@ getstatic paths setpaths fallback to true
 
 
 
-
+# session.playlist 
+    - Add a function to only display it if the playlist is not null
 
 
 

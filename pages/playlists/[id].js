@@ -4,7 +4,7 @@ import Navbar from '../../components/navbar'
 import Head from 'next/head'
 import 'bulma/css/bulma.css'
 
-export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage}){
+export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks}){
 
 
 
@@ -99,21 +99,17 @@ export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID
                             {/* <!--TRACKS--> */}
                             <tbody>
 
-                                <tr>
-                                    <th>1</th>
-                                    <td>Neo</td>
-                                    <td>Blizzy Banks</td>
-                                    <td>2:31</td>
-                                    <td>G.M.T.O</td>
-                                </tr>
+                                {tracks.map(item => (
+                                    <tr>
+                                        <th>1</th>
+                                        <td>{item.track.name}</td>
+                                        <td>{item.track.artists[0]['name']}</td>
+                                        <td>2:31</td>
+                                        <td>{item.track.album.name}</td>
+                                    </tr>
 
-                                <tr>
-                                    <th>2</th>
-                                    <td>Neo</td>
-                                    <td>Blizzy Banks</td>
-                                    <td>2:31</td>
-                                    <td>G.M.T.O</td>
-                                </tr>
+                                ))}
+
 
                                 <tr>
                                     <th>3</th>
@@ -181,11 +177,17 @@ export async function getStaticProps({ params }) {
     const coverImage = await getplaylist[0]['cover_image']
 
     
-  
+    // Get playlist tracks 
+    const getId = await playlistSpotifyID.split(':')
+    const idSolo = await getId[2]
+    const getPlaylistTracks = await fetch('http://localhost:3000/api/spotify/PlaylistTracks?playlistID='+idSolo)
+    const getTracks = await getPlaylistTracks.json()
+    const tracks = getTracks['items']
+
 
 
     return {
-        props: {id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage}, // will be passed to the page component as props
+        props: {id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks}, // will be passed to the page component as props
         revalidate: 1,
     }
 }
