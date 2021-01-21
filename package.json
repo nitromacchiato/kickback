@@ -25,7 +25,7 @@
     "superagent": "^6.1.0"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.14.0",
+    "@prisma/cli": "^2.15.0",
     "@types/node": "^14.14.20",
     "@types/react": "^17.0.0",
     "eslint-plugin-react-hooks": "^4.2.0",

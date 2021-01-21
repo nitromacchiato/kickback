@@ -1,6 +1,7 @@
 import getPlaylistIds from '../../lib/playlists/getPlaylistsId'
 import getPlaylistInfo from '../../lib/playlists/getPlaylistInfo'
 import followPlaylist from '../../lib/playlists/followPlaylist'
+import followUser from '../../lib/playlists/followUser'
 import Navbar from '../../components/navbar'
 import Head from 'next/head'
 import 'bulma/css/bulma.css'
@@ -38,6 +39,14 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
     }
 
+
+    function FollowOwner(){
+
+        console.log(playlistOwner)
+        const follow = followUser(playlistOwner)
+        console.log('Followed the owner')
+
+    }
 
 
 
@@ -94,7 +103,7 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
                             <div style={{marginTop: "auto"}}>
                                 <span>
-                                    <button class="button padding_mobile_button is-success is-rounded" style={{marginTop:"auto"}}>
+                                    <button class="button padding_mobile_button is-success is-rounded" style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  FollowOwner() }}>
                                         <span class="icon">
                                             <i class="fab fa-spotify"></i>
                                         </span>
