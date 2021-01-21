@@ -62,3 +62,9 @@ getstatic paths setpaths fallback to true
 #Recently Added Per School 
     - Need to add a function to the database to only generate the playlists added within 60 days
     - Also consider cuztomizing the apperance of the playlist based off some ideas and pictures i came accross 
+
+
+
+
+# PLAYLIST 
+    - Edit the size ratios for mobile and desktop and create a template chart for them 

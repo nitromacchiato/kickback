@@ -2,6 +2,7 @@ import getSchoolIds from '../../lib/school/getAllSchoolIds'
 import getSchoolInfo from '../../lib/school/getSchoolData'
 import Navbar from '../../components/navbar'
 import Head from 'next/head'
+import Link from 'next/link'
 import 'bulma/css/bulma.css'
 
 
@@ -25,6 +26,7 @@ export default function Schools({school,playlist}){
 
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css"></link>
+                <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
             </Head>
 
             <Navbar />
@@ -76,16 +78,17 @@ export default function Schools({school,playlist}){
 
                             {playlist.map((item) => (
 
-                                <div class="column is-vcentered is-narrow">
-                                    <div class="has-text-centered">
-                                        <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
-                                            <img src={item.cover_image} />
-                                        </figure>
-                                        <p style={{fontSize:"12pt"}}>{item.name}</p>
-                                        <p style={{fontSize:"9pt"}} class="has-text-weight-light">{item.owner}</p>
+                                <Link href={`/playlists/${item.playlist_id}`}>               
+                                    <div class="column is-vcentered is-narrow">
+                                        <div class="has-text-centered">
+                                            <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
+                                                <img src={item.cover_image} />
+                                            </figure>
+                                            <p style={{fontSize:"12pt"}}>{item.name}</p>
+                                            <p style={{fontSize:"9pt"}} class="has-text-weight-light">{item.owner}</p>
+                                        </div>
                                     </div>
-                                </div>
-
+                                </Link>
                             ))}
                             
 
@@ -141,6 +144,7 @@ export async function getStaticProps({ params }) {
         
     const playlist = await getPlaylists.json()
 
+    
 
     return {
         props: {school, playlist}, // will be passed to the page component as props

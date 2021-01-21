@@ -126,7 +126,40 @@ const options = {
        session.playlist = await GetUserPlaylits(userName)
 
 
+
+        /* SET ACCESS TOKEN TO USER SESSION */
+        //Search in database for user based of their email
+        
+        const getAccountInfo = await prisma.$queryRaw`SELECT * FROM accounts WHERE provider_account_id = ${userName}`
+        .catch(e => {
+          throw e
+          })
+        .finally(async () => {
+          await prisma.$disconnect()
+        })
+
+
+        const accessToken = getAccountInfo[0]['refresh_token']
+        session.user.refreshToken = accessToken
+        
+
+
+
        /* ------------------------  END OF SPOTIFY ----------------------------*/ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       } else {
         console.log('user is offline')

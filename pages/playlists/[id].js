@@ -1,10 +1,20 @@
 import getPlaylistIds from '../../lib/playlists/getPlaylistsId'
 import getPlaylistInfo from '../../lib/playlists/getPlaylistInfo'
+import followPlaylist from '../../lib/playlists/followPlaylist'
 import Navbar from '../../components/navbar'
 import Head from 'next/head'
 import 'bulma/css/bulma.css'
 
-export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks}){
+
+
+
+
+
+
+
+
+export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks}){
+
 
 
     function millisToMinutesAndSeconds(millis) {
@@ -16,7 +26,17 @@ export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID
 
 
 
+    function FollowPlaylist(){
 
+        //Get the current id for the spotify playlist 
+        const split = playlistSpotifyID.split(':')
+        const id = split[2]
+
+    
+        const follow = followPlaylist(id)
+        console.log('Followed the playlist')
+
+    }
 
 
 
@@ -36,6 +56,7 @@ export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID
 
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css"></link>
+                <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
             </Head>
 
             <Navbar />
@@ -60,7 +81,7 @@ export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID
                         {/* <!-- INFO --> */}
                         <div class="column is-centered detail_top_margin" style={{margin: "0em 2em 0em 2em"}}>
 
-                            <div style={{height: "300px", width:"auto"}}>
+                            <div style={{height: "35em", width:"auto"}}>
 
                                 <div class="block">
                                     <p class="title">{playlistName}</p>
@@ -72,7 +93,6 @@ export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID
                             </div>
 
                             <div style={{marginTop: "auto"}}>
-
                                 <span>
                                     <button class="button padding_mobile_button is-success is-rounded" style={{marginTop:"auto"}}>
                                         <span class="icon">
@@ -82,7 +102,7 @@ export default function Schools({id,playlistName,playlistOwner,playlistSpotifyID
                                             Follow
                                         </span> 
                                     </button>
-                                    <button class="button padding_mobile_button is-primary is-rounded" style={{marginTop:"auto", marginRight: "4em"}}>Add Playlist</button>
+                                    <button class="button padding_mobile_button is-primary is-rounded" style={{marginTop:"auto", marginRight: "4em"}} onClick={e => {e.preventDefault();  FollowPlaylist() }}>Add Playlist</button>
                                 </span>
                             </div>
 
