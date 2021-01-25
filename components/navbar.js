@@ -7,7 +7,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Link from 'next/link'
 
 
-
+  
 
 
 
@@ -51,7 +51,7 @@ export default function Navbar({ listOfSchools }){
 
 
 	//Handle Playlist Submission 
-	function handlePlaylistSubmission(PlaylistName,PlaylistOwner,PlaylistSpotifyID,PlaylistHref,UserSchool,PlaylistImage){
+	function handlePlaylistSubmission(PlaylistName,PlaylistOwner,PlaylistSpotifyID,PlaylistHref,UserSchool,PlaylistImage, Description){
 
 
 		// Calls the api with a post request and submits the parameters in a body 
@@ -64,6 +64,7 @@ export default function Navbar({ listOfSchools }){
 				href: PlaylistHref,
 				image: PlaylistImage,
 				school: UserSchool, 
+				description: Description,
 			}),
 			headers:{
 				'Content-type': 'application/json; charset=UTF-8'
@@ -129,7 +130,7 @@ export default function Navbar({ listOfSchools }){
 			setVerified(false)
 
 		}	
-	});
+	},[]);
 	
 
 
@@ -304,7 +305,7 @@ export default function Navbar({ listOfSchools }){
 															<tr>
 																<td>{item.name}</td>
 
-																<td><span><button class='button is-small is-light' onClick={e => {e.preventDefault();  handlePlaylistSubmission(item.name, item.owner.display_name,  item.uri, item.external_urls.spotify, session.user.school, item.images[0]['url'] )}}><i class="fas fa-plus"></i></button></span></td>
+																<td><span><button class='button is-small is-light' onClick={e => {e.preventDefault();  handlePlaylistSubmission(item.name, item.owner.display_name,  item.uri, item.external_urls.spotify, session.user.school, item.images[0]['url'], item.description )}}><i class="fas fa-plus"></i></button></span></td>
 																
 															</tr>	
 															</>

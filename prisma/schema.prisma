@@ -92,4 +92,5 @@ model playlists {
   external_href String?
   cover_image   String?
   uploadDate    DateTime? @default(now())
+  description   String?
 }

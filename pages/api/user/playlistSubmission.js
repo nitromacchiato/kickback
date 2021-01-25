@@ -16,10 +16,11 @@ export default function handler(req, res) {
         const href = req.body['href']
         const school = req.body['school']
         const playlistImage = req.body['image']
+        const description = req.body['description']
 
 
         // Handle Submission to Database 
-        SubmitPlaylist(name,owner,spotifyId,href,school,playlistImage)
+        SubmitPlaylist(name,owner,spotifyId,href,school,playlistImage,description)
 
         
 

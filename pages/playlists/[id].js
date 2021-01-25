@@ -1,14 +1,18 @@
 import getPlaylistIds from '../../lib/playlists/getPlaylistsId'
 import getPlaylistInfo from '../../lib/playlists/getPlaylistInfo'
+
 import followPlaylist from '../../lib/playlists/followPlaylist'
 import unfollowPlaylist from '../../lib/playlists/unfollowPlaylist'
 import isFollowingPlaylists from '../../lib/playlists/isFollowingPlaylist'
+
 import followUser from '../../lib/playlists/followUser'
 import unfollowUser from '../../lib/playlists/unfollowUser'
 import isFollowingUser from '../../lib/playlists/isFollowingUser'
+
 import Navbar from '../../components/navbar'
 import Head from 'next/head'
-import React, { useEffect, useState } from "react"
+
+import React, { useEffect } from "react"
 import 'bulma/css/bulma.css'
 
 
@@ -19,8 +23,7 @@ import 'bulma/css/bulma.css'
 
 
 
-export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks}){
-
+export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks, description}){
 
 
 
@@ -33,9 +36,6 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
         var seconds = ((millis % 60000) / 1000).toFixed(0);
         return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
     }
-
-
-
 
 
 
@@ -225,7 +225,7 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                                     <p class="title">{playlistName}</p>
                                 </div>
                                 <div class="block">
-                                    <p class="subtitle">This playlist is about having fun and listening to good music</p>						
+                                    <p class="subtitle">{description}</p>						
                                 </div>
 
                             </div>
@@ -370,6 +370,8 @@ export async function getStaticProps({ params }) {
     const playlistSpotifyID = await getplaylist[0]['playlist_id']
     const externalHref = await getplaylist[0]['external_href']
     const coverImage = await getplaylist[0]['cover_image']
+    const description = await getplaylist[0]['description']
+
 
     
     // Get playlist tracks 
@@ -381,9 +383,13 @@ export async function getStaticProps({ params }) {
 
 
 
+    //Checks to see if there is anything in the description
+
     return {
-        props: {id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks}, // will be passed to the page component as props
+        props: {id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks,description},// will be passed to the page component as props
         revalidate: 1,
     }
+
+ 
 }
 
