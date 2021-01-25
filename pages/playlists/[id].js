@@ -1,7 +1,9 @@
 import getPlaylistIds from '../../lib/playlists/getPlaylistsId'
 import getPlaylistInfo from '../../lib/playlists/getPlaylistInfo'
 import followPlaylist from '../../lib/playlists/followPlaylist'
+import unfollowPlaylist from '../../lib/playlists/unfollowPlaylist'
 import followUser from '../../lib/playlists/followUser'
+import unfollowUser from '../../lib/playlists/unfollowUser'
 import isFollowingUser from '../../lib/playlists/isFollowingUser'
 import Navbar from '../../components/navbar'
 import Head from 'next/head'
@@ -20,14 +22,6 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
 
 
-    // Record a state change 
-    const [isChanged, setChangeCount] = React.useState(0)
-    
-    //Does the user follow the playlist
-	const [isFollowingPlaylist, setisFollowingPlaylist] = React.useState(false);
-
-
-
 
 
 
@@ -40,7 +34,16 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
     }
 
 
-    //Follow a user playlist
+
+
+
+
+
+    //Does the user follow the playlist
+	const [isFollowingPlaylist, setisFollowingPlaylist] = React.useState(false);
+
+
+    //Follow the owner playlist
     function FollowPlaylist(){
 
         //Get the current id for the spotify playlist 
@@ -49,18 +52,26 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
     
         const follow = followPlaylist(id)
+        setisFollowingPlaylist(true)
         console.log('Followed the playlist')
 
     }
 
-    //Follow the owner of the playlist
-    function FollowOwner(){
+    //Unfollow the owner playlist
+    function UnfollowPlaylist(){
 
-        console.log(playlistOwner)
-        const follow = followUser(playlistOwner)
-        console.log('Followed the owner')
+        //Get the current id for the spotify playlist 
+        const split = playlistSpotifyID.split(':')
+        const id = split[2]
+
+    
+        const unfollow = unfollowPlaylist(id)
+        setisFollowingPlaylist(false)
+        console.log('Unfollowed the playlist')
 
     }
+
+
 
 
 
@@ -71,6 +82,29 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
     //Does the current user follow the playlist owner 
     const [isFollowingOwner, setisFollowingOwner] = React.useState(false);
+
+
+    //Follow the owner of the playlist
+    function FollowOwner(){
+
+        console.log(playlistOwner)
+        const follow = followUser(playlistOwner)
+        setisFollowingOwner(true)
+        console.log('Followed the owner')
+
+    }
+
+
+    //Unfollow the owner of the playlist 
+    function UnfollowOwner(){
+
+        console.log(playlistOwner)
+        const follow = unfollowUser(playlistOwner)
+        setisFollowingOwner(false)
+        console.log('Unfollowed the owner')
+
+    }
+
 
     //Checks to see if they are already following user 
     useEffect(async () =>{
@@ -84,16 +118,33 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
         console.log(value)
         //Set the state depending on the value 
+        //if true then is following , if false then not following
         if(value  == true){
             setisFollowingOwner(true)
-            setChangeCount(+1)
+            
         } else {
             setisFollowingOwner(false)
-            setChangeCount(+1)
+            
         }
 
     })
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -149,11 +200,11 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                             <div style={{marginTop: "auto"}}>
                                 <span>
 
-                                    {/* Set the buttons depending on whether the user follows the playlist or the owner */}
-                                    {/* IF THE USER IS FOLLOWING THE USER */}
+                                    {/*--------- BUTTONS FOR FOLLOW/UNFOLLOWING PLAYLIST OWNER---------- */}
+                                        {/* IF THE USER IS FOLLOWING THE USER */}
                                     
                                         
-                                        <button  className={`button padding_mobile_button is-danger is-rounded ${isFollowingOwner ? "is-active" : "is-hidden"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  FollowOwner() }}>
+                                        <button  className={`button padding_mobile_button is-danger is-rounded ${isFollowingOwner ? "is-active" : "is-hidden"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  UnfollowOwner() }}>
                                                 <span class="icon">
                                                     <i class="fab fa-spotify"></i>
                                                 </span>
@@ -163,7 +214,7 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                                         </button>
 
                                     
-                                    {/* IF THE USER IS NOT FOLLOWING THE USER */}
+                                        {/* IF THE USER IS NOT FOLLOWING THE USER */}
                                    
                                         
                                         <button className={`button padding_mobile_button is-success is-rounded ${isFollowingOwner ? "is-hidden" : "is-active"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  FollowOwner() }}>
@@ -175,16 +226,17 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                                             </span> 
                                         </button>      
                                     
+                                    
+                                    {/* ------------------------------------------------------------- */}
 
+
+
+                                    {/*-------------- BUTTONS FOR ADDING/REMOVING PLAYLIST-----------------*/}
                                    
+                                         <button className={`button padding_mobile_button is-primary is-rounded ${isFollowingPlaylist ? 'is-hidden': 'is-active'}`} style={{marginTop:"auto", marginRight: "4em"}} onClick={e => {e.preventDefault();  FollowPlaylist() }}>Add Playlist</button>
+                                         <button className={`button padding_mobile_button is-danger is-rounded ${isFollowingPlaylist ? 'is-active': 'is-hidden'}`} style={{marginTop:"auto", marginRight: "4em"}} onClick={e => {e.preventDefault();  UnfollowPlaylist() }}>Remove Playlist</button>
 
-
-
-
-
-
-
-                                    <button class="button padding_mobile_button is-primary is-rounded" style={{marginTop:"auto", marginRight: "4em"}} onClick={e => {e.preventDefault();  FollowPlaylist() }}>Add Playlist</button>
+                                    {/* ----------------------------------------------------------- */}
                                 </span>
                             </div>
 

@@ -148,19 +148,6 @@ const options = {
        /* ------------------------  END OF SPOTIFY ----------------------------*/ 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
       } else {
         console.log('user is offline')
       }
