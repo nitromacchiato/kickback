@@ -68,3 +68,4 @@ getstatic paths setpaths fallback to true
 
 # PLAYLIST 
     - Edit the size ratios for mobile and desktop and create a template chart for them 
+    - work on avoding the error of data[user][token] is undefined when the user is not logged in 

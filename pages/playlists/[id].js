@@ -2,6 +2,7 @@ import getPlaylistIds from '../../lib/playlists/getPlaylistsId'
 import getPlaylistInfo from '../../lib/playlists/getPlaylistInfo'
 import followPlaylist from '../../lib/playlists/followPlaylist'
 import unfollowPlaylist from '../../lib/playlists/unfollowPlaylist'
+import isFollowingPlaylists from '../../lib/playlists/isFollowingPlaylist'
 import followUser from '../../lib/playlists/followUser'
 import unfollowUser from '../../lib/playlists/unfollowUser'
 import isFollowingUser from '../../lib/playlists/isFollowingUser'
@@ -72,6 +73,38 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
     }
 
 
+    //Checks to see if the user is already following the playlist 
+    useEffect(async () =>{
+
+
+        // Assign playlist id 
+        const split = playlistSpotifyID.split(':')
+        const id = split[2]
+
+
+
+        //Get the state which is either true or false 
+        const status = await isFollowingPlaylists(id)
+        
+        //Assign result 
+        const value = await status[0]
+        
+
+        console.log(value)
+        //Set the state depending on the value 
+        //if true then is following , if false then not following
+        if(value  == true){
+            setisFollowingPlaylist(true)
+            
+        } else {
+            setisFollowingPlaylist(false)
+            
+        }
+
+    },[])
+    
+
+
 
 
 
@@ -127,7 +160,7 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
             
         }
 
-    })
+    },[])
     
 
 
