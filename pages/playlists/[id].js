@@ -11,6 +11,7 @@ import isFollowingUser from '../../lib/playlists/isFollowingUser'
 
 import Navbar from '../../components/navbar'
 import Head from 'next/head'
+import Link from 'next/link'
 
 import React, { useEffect } from "react"
 import 'bulma/css/bulma.css'
@@ -209,9 +210,11 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                         {/* <!-- IMAGE --> */}
                         <div class="column">	
 
-                            <figure class="image is-square">
-                                <img src={coverImage} />
-                            </figure>
+                            <a href={externalHref} target="_blank">
+                                <figure class="image is-square">
+                                    <img src={coverImage} />
+                                </figure>
+                            </a>
 
                         </div>
 
