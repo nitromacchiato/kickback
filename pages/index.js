@@ -2,12 +2,13 @@ import Head from 'next/head'
 import Navbar from '../components/navbar.js'
 import IndexLayout from '../components/home/index_layout.js'
 import { schools } from '../lib/db/getListOfSchools'
+import { TopTen } from '../lib/playlists/getTopTen'
 import 'bulma/css/bulma.css'
 
 
 
 
-function Home({colleges}) {
+function Home({colleges, NorthEastTop, WestTop, SouthEastTop, SouthWestTop, MidWestTop }) {
   return (
     <>
       <Head>
@@ -22,7 +23,7 @@ function Home({colleges}) {
 
 
       <Navbar listOfSchools={colleges}/>
-      <IndexLayout />
+      <IndexLayout  NorthEastTop={NorthEastTop} WestTop={WestTop} SouthEastTop={SouthEastTop} SouthWestTop={SouthWestTop} MidWestTop={MidWestTop} />
       
 
       
@@ -37,18 +38,41 @@ function Home({colleges}) {
 
 
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
 
   //Make a database request to get all the schools 
   const school = await schools()
   const colleges = await school.schools
   
+
+  // TOP 10 PER REGIONS PER 7 days 
+  const days = 7
+
+  //  North East 
+  const NorthEastTop = await TopTen('NE',days)
+
+  // West 
+  const WestTop = await TopTen('W',days)
+
+  // South East 
+  const SouthEastTop = await TopTen('SE',days)
+
+  // South West 
+  const SouthWestTop = await TopTen('SW',days)
+
+  // Mid West 
+  const MidWestTop = await TopTen('MW',days)
+
+
+  
+
+
   
   if (colleges != null){
 
 
     return {
-      props: {colleges}, // will be passed to the page component as props
+      props: {colleges, NorthEastTop, WestTop, SouthEastTop, SouthWestTop, MidWestTop }, // will be passed to the page component as props
     }
 
 

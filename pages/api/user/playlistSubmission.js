@@ -1,6 +1,9 @@
 import SubmitPlaylist from '../../../lib/db/handlePlaylistSubmission'
+import GetPlaylistFollowers from '../../../lib/playlists/getPlaylistFollowers'
 
-export default function handler(req, res) {
+
+
+export default async function handler(req, res) {
     res.setHeader('Content-Type', 'application/json; charset=UTF-8')
     res.statusCode = 200
 
@@ -18,9 +21,14 @@ export default function handler(req, res) {
         const playlistImage = req.body['image']
         const description = req.body['description']
 
+        //Get the follower count for the playlist 
+        const playlist_id = spotifyId.split(':')[2]
+        const followers = await GetPlaylistFollowers(playlist_id)
+
+
 
         // Handle Submission to Database 
-        SubmitPlaylist(name,owner,spotifyId,href,school,playlistImage,description)
+        SubmitPlaylist(name,owner,spotifyId,href,school,playlistImage,description,followers)
 
         
 

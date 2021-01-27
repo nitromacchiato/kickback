@@ -73,6 +73,7 @@ model schools {
   email     String  @unique
   alt_email String?
   nickname  String?
+  region    String?
 }
 
 model schoolemailverification {
@@ -84,13 +85,17 @@ model schoolemailverification {
 }
 
 model playlists {
-  id            Int       @id @default(autoincrement())
-  name          String
-  owner         String
-  school        String
-  playlist_id   String
-  external_href String?
-  cover_image   String?
-  uploadDate    DateTime? @default(now())
-  description   String?
+  id              Int       @id @default(autoincrement())
+  name            String
+  owner           String
+  school          String
+  region          String
+  playlist_id     String
+  external_href   String?
+  cover_image     String?
+  followers       Int?      @default(0)
+  follower_change Int?      @default(0)
+  uploadDate      DateTime? @default(now())
+  updateDate      DateTime?
+  description     String?
 }
