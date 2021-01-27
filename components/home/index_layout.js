@@ -37,7 +37,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                                                     </figure>
                                                 </a>
                                                 <p class="playlist_name">{item['name']}</p>
-                                                <p class="playlist_subtitles"> {item['school']}</p>
+                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p class="playlist_subtitles"> {item['school']}</p></a>
                                                 <p class="has-text-weight-light playlist_subtitles">{item['owner']}</p>
                                             </div>
                                         </div>        
@@ -70,7 +70,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                                                     </figure>
                                                 </a>
                                                 <p class="playlist_name">{item['name']}</p>
-                                                <p class="playlist_subtitles"> {item['school']}</p>
+                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p class="playlist_subtitles"> {item['school']}</p></a>
                                                 <p class="has-text-weight-light playlist_subtitles">{item['owner']}</p>
                                             </div>
                                         </div>        
@@ -103,7 +103,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                                                     </figure>
                                                 </a>
                                                 <p class="playlist_name">{item['name']}</p>
-                                                <p class="playlist_subtitles"> {item['school']}</p>
+                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p class="playlist_subtitles"> {item['school']}</p></a>
                                                 <p class="has-text-weight-light playlist_subtitles">{item['owner']}</p>
                                             </div>
                                         </div>        
@@ -137,7 +137,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                                                     </figure>
                                                 </a>
                                                 <p class="playlist_name">{item['name']}</p>
-                                                <p class="playlist_subtitles"> {item['school']}</p>
+                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p class="playlist_subtitles"> {item['school']}</p></a>
                                                 <p class="has-text-weight-light playlist_subtitles">{item['owner']}</p>
                                             </div>
                                         </div>        
@@ -171,7 +171,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                                                     </figure>
                                                 </a>
                                                 <p class="playlist_name">{item['name']}</p>
-                                                <p class="playlist_subtitles"> {item['school']}</p>
+                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p class="playlist_subtitles"> {item['school']}</p></a>
                                                 <p class="has-text-weight-light playlist_subtitles">{item['owner']}</p>
                                             </div>
                                         </div>        
@@ -183,38 +183,6 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                         }
       
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
                 <Ads/>
 

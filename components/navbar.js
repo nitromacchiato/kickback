@@ -262,11 +262,7 @@ export default function Navbar({ listOfSchools }){
 							</>
 							}
 
-							
-							{/* Donate Button */}
-							<a class="button is-danger">
-							<strong>Donate</strong>
-							</a>
+
 
 
 
