@@ -184,7 +184,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
       
                     </div>
                 </div>
-                <Ads/>
+                {/* <Ads/> */}
 
 
                 
