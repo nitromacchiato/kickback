@@ -45,7 +45,7 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 	const [isFollowingPlaylist, setisFollowingPlaylist] = React.useState(false);
 
 
-    //Follow the owner playlist
+    //Add the playlist to your library 
     function FollowPlaylist(){
 
         //Get the current id for the spotify playlist 
@@ -57,9 +57,24 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
         setisFollowingPlaylist(true)
         console.log('Followed the playlist')
 
+        // Calls the api and adds one to the follower count for kickback users 
+		fetch('http://localhost:3000/api/user/addFollowCount',{
+        method:'POST',
+        body: JSON.stringify({
+            spotifyID: playlistSpotifyID,
+        }),
+        headers:{
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+		}).catch(function (error){
+			console.warn('Something went wrong adding count', error)
+		})       
+
+
+
     }
 
-    //Unfollow the owner playlist
+    //Remove the playlist from your library 
     function UnfollowPlaylist(){
 
         //Get the current id for the spotify playlist 
@@ -70,6 +85,20 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
         const unfollow = unfollowPlaylist(id)
         setisFollowingPlaylist(false)
         console.log('Unfollowed the playlist')
+
+        // Calls the api and subtracts one to the follower count for kickback users 
+		fetch('http://localhost:3000/api/user/subtractFollowCount',{
+        method:'POST',
+        body: JSON.stringify({
+            spotifyID: playlistSpotifyID,
+        }),
+        headers:{
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+		}).catch(function (error){
+			console.warn('Something went wrong adding count', error)
+		})       
+
 
     }
 

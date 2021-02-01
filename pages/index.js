@@ -25,11 +25,6 @@ function Home({colleges, NorthEastTop, WestTop, SouthEastTop, SouthWestTop, MidW
       <Navbar listOfSchools={colleges}/>
       <IndexLayout  NorthEastTop={NorthEastTop} WestTop={WestTop} SouthEastTop={SouthEastTop} SouthWestTop={SouthWestTop} MidWestTop={MidWestTop} />
       
-
-      
-      
-
-
     </>
   )
 }
