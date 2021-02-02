@@ -26,7 +26,7 @@ function VerifySchoolEmail({session}) {
         </Head>
 
 
-            
+              
 
         <VerfiedEmail  />
       

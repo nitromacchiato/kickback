@@ -13,7 +13,8 @@ import Navbar from '../../components/navbar'
 import Head from 'next/head'
 import Link from 'next/link'
 
-import React, { useEffect } from "react"
+import React, { useEffect, useState  } from "react"
+import { useSession } from 'next-auth/client'
 import 'bulma/css/bulma.css'
 
 
@@ -25,6 +26,15 @@ import 'bulma/css/bulma.css'
 
 
 export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks, description}){
+
+    //Check session for user to see if they're logged in with NextAuth 
+	const [ session, loading ] = useSession(); 
+
+
+
+
+
+
 
 
 
@@ -264,44 +274,69 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
                             <div style={{marginTop: "auto"}}>
                                 <span>
+                                    {/* If the user is logged in change buttons depending on their following status per playlist */}
+                                    {session && 
+                                    <>
+                                        {/*--------- BUTTONS FOR FOLLOW/UNFOLLOWING PLAYLIST OWNER---------- */}
+                                                {/* IF THE USER IS FOLLOWING THE USER */}
+                                            
+                                                
+                                                <button  className={`button padding_mobile_button is-danger is-rounded ${isFollowingOwner ? "is-active" : "is-hidden"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  UnfollowOwner() }}>
+                                                        <span class="icon">
+                                                            <i class="fab fa-spotify"></i>
+                                                        </span>
+                                                        <span>
+                                                            Unfollow
+                                                        </span> 
+                                                </button>
 
-                                    {/*--------- BUTTONS FOR FOLLOW/UNFOLLOWING PLAYLIST OWNER---------- */}
-                                        {/* IF THE USER IS FOLLOWING THE USER */}
-                                    
+                                            
+                                                {/* IF THE USER IS NOT FOLLOWING THE USER */}
                                         
-                                        <button  className={`button padding_mobile_button is-danger is-rounded ${isFollowingOwner ? "is-active" : "is-hidden"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  UnfollowOwner() }}>
-                                                <span class="icon">
-                                                    <i class="fab fa-spotify"></i>
-                                                </span>
-                                                <span>
-                                                    Unfollow
-                                                </span> 
-                                        </button>
+                                                
+                                                <button className={`button padding_mobile_button is-success is-rounded ${isFollowingOwner ? "is-hidden" : "is-active"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  FollowOwner() }}>
+                                                    <span class="icon">
+                                                        <i class="fab fa-spotify"></i>
+                                                    </span>
+                                                    <span>
+                                                        Follow
+                                                    </span> 
+                                                </button>      
+                                            
+                                            
+                                            {/* ------------------------------------------------------------- */}
 
-                                    
-                                        {/* IF THE USER IS NOT FOLLOWING THE USER */}
-                                   
+
+
+                                            {/*-------------- BUTTONS FOR ADDING/REMOVING PLAYLIST-----------------*/}
                                         
-                                        <button className={`button padding_mobile_button is-success is-rounded ${isFollowingOwner ? "is-hidden" : "is-active"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  FollowOwner() }}>
-                                            <span class="icon">
-                                                <i class="fab fa-spotify"></i>
-                                            </span>
-                                            <span>
-                                                Follow
-                                            </span> 
-                                        </button>      
+                                                <button className={`button padding_mobile_button is-primary is-rounded ${isFollowingPlaylist ? 'is-hidden': 'is-active'}`} style={{marginTop:"auto", marginRight: "4em"}} onClick={e => {e.preventDefault();  FollowPlaylist() }}>Add Playlist</button>
+                                                <button className={`button padding_mobile_button is-danger is-rounded ${isFollowingPlaylist ? 'is-active': 'is-hidden'}`} style={{marginTop:"auto", marginRight: "4em"}} onClick={e => {e.preventDefault();  UnfollowPlaylist() }}>Remove Playlist</button>
+
+                                            {/* ----------------------------------------------------------- */}                                    
+                                            
+                                    </>                                             
+                                    }
                                     
-                                    
-                                    {/* ------------------------------------------------------------- */}
+                                    {/* If the user is not logged in redirect them to the spotify page to add the playlist manually */}
+                                    {!session &&
+                                        <>  
+                                            <a href={"https://open.spotify.com/user/"+playlistOwner} target="_blank">
+                                                <button class  ="button padding_mobile_button is-success is-rounded" style={{marginTop:"auto"}}>
+                                                    <span class="icon">
+                                                        <i class="fab fa-spotify"></i>
+                                                    </span>
+                                                    <span>
+                                                        Follow
+                                                    </span> 
+                                                </button>
+                                            </a>
 
-
-
-                                    {/*-------------- BUTTONS FOR ADDING/REMOVING PLAYLIST-----------------*/}
-                                   
-                                         <button className={`button padding_mobile_button is-primary is-rounded ${isFollowingPlaylist ? 'is-hidden': 'is-active'}`} style={{marginTop:"auto", marginRight: "4em"}} onClick={e => {e.preventDefault();  FollowPlaylist() }}>Add Playlist</button>
-                                         <button className={`button padding_mobile_button is-danger is-rounded ${isFollowingPlaylist ? 'is-active': 'is-hidden'}`} style={{marginTop:"auto", marginRight: "4em"}} onClick={e => {e.preventDefault();  UnfollowPlaylist() }}>Remove Playlist</button>
-
-                                    {/* ----------------------------------------------------------- */}
+                                            <a href={externalHref} target="_blank">    
+                                                <button class= "button padding_mobile_button is-primary is-rounded" style={{marginTop:"auto", marginRight: "4em"}} >Add Playlist</button>
+                                            </a>
+                                        </>
+                                    }
                                 </span>
                             </div>
 
