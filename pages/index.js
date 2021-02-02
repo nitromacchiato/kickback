@@ -37,7 +37,7 @@ export async function getStaticProps(context) {
 
   //Make a database request to get all the schools 
   const school = await schools()
-  const colleges = await school.schools
+  const colleges = school.schools
   
 
   // TOP 10 PER REGIONS PER 7 days 

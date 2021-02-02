@@ -160,9 +160,11 @@ export default function Navbar({ listOfSchools }){
 				
 
 				{/* Navbar Logo */}
+				<Link href="/">
 				<a class="navbar-item" href="">
 					<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
 				</a>
+				</Link>
 
 
 

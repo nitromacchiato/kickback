@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import Ads from "./ad_section.js"
-import PlaylistTile from "../../components/tile.js"
 import 'bulma/css/bulma.css'
 
 
