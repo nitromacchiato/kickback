@@ -52,14 +52,15 @@ export default function Schools({school,playlist,topSchoolPlaylists}){
                         {/* <!-- TOP PLAYLISTS --> */}
                         <div class="columns is-mobile is-vcentered" style={{sarginTop:"10px", overflow:"auto"}} >
 
-
-                            {/* <!-- First Playlist Album --> */}
+                            
                             {topSchoolPlaylists.map((item) =>
                                 <div class="column is-vcentered is-narrow">
                                     <div class="has-text-centered">
-                                        <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
-                                            <img src={item.cover_image} />
-                                        </figure>
+                                        <a href={'http://localhost:3000/playlists/'+ item.playlist_id}>
+                                            <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
+                                                <img src={item.cover_image} />
+                                            </figure>
+                                        </a>
                                         <p style={{fontSize:"12pt"}}>{item.name}</p>
                                         <p style={{fontSize:"9pt"}} class="has-text-weight-light">{item.owner}</p>
                                     </div>
@@ -86,9 +87,11 @@ export default function Schools({school,playlist,topSchoolPlaylists}){
                                 <Link href={`/playlists/${item.playlist_id}`}>               
                                     <div class="column is-vcentered is-narrow">
                                         <div class="has-text-centered">
-                                            <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
-                                                <img src={item.cover_image} />
-                                            </figure>
+                                            <a href={'http://localhost:3000/playlists/'+ item.playlist_id}>
+                                                <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
+                                                    <img src={item.cover_image} />
+                                                </figure>
+                                            </a>
                                             <p style={{fontSize:"12pt"}}>{item.name}</p>
                                             <p style={{fontSize:"9pt"}} class="has-text-weight-light">{item.owner}</p>
                                         </div>
