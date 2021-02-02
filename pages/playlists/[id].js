@@ -11,7 +11,6 @@ import isFollowingUser from '../../lib/playlists/isFollowingUser'
 
 import Navbar from '../../components/navbar'
 import Head from 'next/head'
-import Link from 'next/link'
 
 import React, { useEffect, useState  } from "react"
 import { useSession } from 'next-auth/client'

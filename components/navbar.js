@@ -25,7 +25,7 @@ export default function Navbar({ listOfSchools }){
 	const [isShowingSchool, isHidingSchool ] = React.useState(false);
 
 	//Check session for user to see if they're logged in with NextAuth 
-	const [ session, loading ] = useSession(); 
+	const [ session, loading ] = useSession();  
 
 	//User Email for school selection 
 	const [schoolEmail, setSchoolEmail] = React.useState('')
@@ -293,7 +293,7 @@ export default function Navbar({ listOfSchools }){
 											</thead>
 
 											<tbody>
-												
+												{/* If the user is logged in loop through their playlists */}
 												{session && 
 													session.playlist.map(item =>{
 

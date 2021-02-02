@@ -1,5 +1,7 @@
 import getSchoolIds from '../../lib/school/getAllSchoolIds'
 import getSchoolInfo from '../../lib/school/getSchoolData'
+import TopTenPerSchool from '../../lib/school/getTopPlaylists'
+
 import Navbar from '../../components/navbar'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -10,7 +12,7 @@ import 'bulma/css/bulma.css'
 
 
 
-export default function Schools({school,playlist}){
+export default function Schools({school,playlist,topSchoolPlaylists}){
 
 
 
@@ -52,15 +54,18 @@ export default function Schools({school,playlist}){
 
 
                             {/* <!-- First Playlist Album --> */}
-                            <div class="column is-vcentered is-narrow">
-                                <div class="has-text-centered">
-                                    <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
-                                        <img src="https://bulma.io/images/placeholders/128x128.png" />
-                                    </figure>
-                                    <p style={{fontSize:"12pt"}}>Vamp Anthem</p>
-                                    <p style={{fontSize:"9pt"}} class="has-text-weight-light">@Pinex08</p>
-                                </div>
-                            </div>
+                            {topSchoolPlaylists.map((item) =>
+                                <div class="column is-vcentered is-narrow">
+                                    <div class="has-text-centered">
+                                        <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
+                                            <img src={item.cover_image} />
+                                        </figure>
+                                        <p style={{fontSize:"12pt"}}>{item.name}</p>
+                                        <p style={{fontSize:"9pt"}} class="has-text-weight-light">{item.owner}</p>
+                                    </div>
+                                </div>                            
+                            )}
+
 
                             
                      </div>
@@ -136,6 +141,10 @@ export async function getStaticProps({ params }) {
     const school = await getSchoolInfo(school_name)
 
 
+    //Get the top playlist for the school for the past day 
+    const topSchoolPlaylists = await TopTenPerSchool(school_name,7)
+    
+
     //Get recently added playlists by the school name
     // Send the name as a query in the url
     const getPlaylists = await fetch('http://localhost:3000/api/schools/getRecentlyAdded?name='+school_name,{
@@ -147,7 +156,7 @@ export async function getStaticProps({ params }) {
     
 
     return {
-        props: {school, playlist}, // will be passed to the page component as props
+        props: {school, playlist, topSchoolPlaylists}, // will be passed to the page component as props
         revalidate: 1,
     }
 }
