@@ -187,12 +187,7 @@ export default function Navbar({ listOfSchools }){
 				{/* Searchbar for Navbar */}
 				<div class="navbar-start">
 					<div class="navbar-item">
-						<div class="control has-icons-left has-icons-right my-2">
-							<Link href="/search"><input class="input is-normal" type="email" placeholder="Search" /></Link>
-							<span class="icon is-small is-left">
-							<i class="fas fa-search fa-lg"></i>
-							</span>
-						</div>
+						<Link href="/search"><input class="input is-normal" type="email" placeholder="Search" /></Link>
 					</div>
 				</div>
 
@@ -249,10 +244,7 @@ export default function Navbar({ listOfSchools }){
 									</Link>
 									
 									<button class="button is-success" onClick={() => {setPlaylists(!isShowingPlaylists);}}>
-										<span class="icon">
-											<i class="fas fa-plus"></i>
-										</span>
-										<span>Add a Playlist</span>
+										<p>Add a Playlist</p>
 									</button>
 									</>
 								}

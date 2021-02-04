@@ -113,3 +113,5 @@ getstatic paths setpaths fallback to true
 - School options could be passed down from the _app.js page to any component instead of having to call get static props from every navbar 
 - Redux could be used to import and pass the data to components 
 - Instead of post in the search I should implement a GET request to be safer and it just makes sense
+- With the search limit results to unique by users
+- Make the section clear for the search column when backspaced and starting over 

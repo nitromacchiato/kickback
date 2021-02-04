@@ -18,7 +18,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                     {/* --------------------------------- TOP TEN RESULTS PER REGION ----------------------------- */}
 
                     {/* NORTH EAST COAST */}
-                    <div>
+                    <div class="region-title-padding">
                         <p class="title title_adjustment">North East</p>
                     </div>
                     <div class="columns is-mobile is-vcentered region_column_adjustment box" >
@@ -51,7 +51,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
 
 
                     {/* WEST COAST */}
-                    <div>
+                    <div class="region-title-padding">
                         <p class="title title_adjustment">West</p>
                     </div>
                     <div class="columns is-mobile is-vcentered region_column_adjustment box">
@@ -84,7 +84,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
 
 
                     {/*  SOUTH EAST COAST */}
-                    <div>
+                    <div class="region-title-padding">
                         <p class="title title_adjustment">South East</p>
                     </div>
                     <div class="columns is-mobile is-vcentered region_column_adjustment box">
@@ -118,7 +118,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
 
 
                     {/* SOUTH WEST */}
-                    <div>
+                    <div class="region-title-padding">
                         <p class="title title_adjustment">South West</p>
                     </div>
                     <div class="columns is-mobile is-vcentered region_column_adjustment box">
@@ -152,7 +152,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
 
 
                     {/* WEST COAST */}
-                    <div>
+                    <div class="region-title-padding">
                         <p class="title title_adjustment">Mid West</p>
                     </div>
                     <div class="columns is-mobile is-vcentered region_column_adjustment box">
