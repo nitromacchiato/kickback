@@ -55,7 +55,7 @@ export default function Schools({school,playlist,topSchoolPlaylists}){
                             
                             {topSchoolPlaylists.map((item) =>
                                 <div class="column is-vcentered is-narrow">
-                                    <div class="has-text-centered">
+                                    <div class="has-text-centered box">
                                         <a href={'http://localhost:3000/playlists/'+ item.playlist_id}>
                                             <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
                                                 <img src={item.cover_image} />
@@ -86,7 +86,7 @@ export default function Schools({school,playlist,topSchoolPlaylists}){
 
                                 <Link href={`/playlists/${item.playlist_id}`}>               
                                     <div class="column is-vcentered is-narrow">
-                                        <div class="has-text-centered">
+                                        <div class="has-text-centered box">
                                             <a href={'http://localhost:3000/playlists/'+ item.playlist_id}>
                                                 <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
                                                     <img src={item.cover_image} />
