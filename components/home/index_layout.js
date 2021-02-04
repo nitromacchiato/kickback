@@ -21,14 +21,14 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                     <div>
                         <p class="title title_adjustment">North East</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment">
+                    <div class="columns is-mobile is-vcentered region_column_adjustment box" >
 
                         {isOn && 
                             NorthEastTop.map(item => {
                                 
                                 return(
                                     <>
-                                        <div class="column is-vcentered is-narrow">
+                                        <div class="column is-vcentered is-narrow box" style={{marginLeft:'1em'}}>
                                             <div class="has-text-centered">
                                                 <a href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
                                                     <figure class="image is-128x128 image_placement">
@@ -54,14 +54,14 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                     <div>
                         <p class="title title_adjustment">West</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment">
+                    <div class="columns is-mobile is-vcentered region_column_adjustment box">
 
                         {isOn && 
                             WestTop.map(item => {
                                 
                                 return(
                                     <>
-                                        <div class="column is-vcentered is-narrow">
+                                        <div class="column is-vcentered is-narrow box" style={{marginLeft:'1em'}}>
                                             <div class="has-text-centered">
                                                 <a href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
                                                     <figure class="image is-128x128 image_placement">
@@ -87,14 +87,14 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                     <div>
                         <p class="title title_adjustment">South East</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment">
+                    <div class="columns is-mobile is-vcentered region_column_adjustment box">
 
                         {isOn && 
                             SouthEastTop.map(item => {
                                 
                                 return(
                                     <>
-                                        <div class="column is-vcentered is-narrow">
+                                        <div class="column is-vcentered is-narrow box" style={{marginLeft:'1em'}}>
                                             <div class="has-text-centered">
                                                 <a href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
                                                     <figure class="image is-128x128 image_placement">
@@ -121,14 +121,14 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                     <div>
                         <p class="title title_adjustment">South West</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment">
+                    <div class="columns is-mobile is-vcentered region_column_adjustment box">
 
                         {isOn && 
                             SouthWestTop.map(item => {
                                 
                                 return(
                                     <>
-                                        <div class="column is-vcentered is-narrow">
+                                        <div class="column is-vcentered is-narrow box" style={{marginLeft:'1em'}}>
                                             <div class="has-text-centered">
                                                 <a href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
                                                     <figure class="image is-128x128 image_placement">
@@ -155,14 +155,14 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                     <div>
                         <p class="title title_adjustment">Mid West</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment">
+                    <div class="columns is-mobile is-vcentered region_column_adjustment box">
 
                         {isOn && 
                             MidWestTop.map(item => {
                                 
                                 return(
                                     <>
-                                        <div class="column is-vcentered is-narrow">
+                                        <div class="column is-vcentered is-narrow box" style={{marginLeft:'1em'}}>
                                             <div class="has-text-centered">
                                                 <a href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
                                                     <figure class="image is-128x128 image_placement">
