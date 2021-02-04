@@ -33,6 +33,7 @@ function Home({colleges, NorthEastTop, WestTop, SouthEastTop, SouthWestTop, MidW
 
 
 
+
 export async function getStaticProps(context) {
 
   //Make a database request to get all the schools 
@@ -41,7 +42,7 @@ export async function getStaticProps(context) {
   
 
   // TOP 10 PER REGIONS PER 7 days 
-  const days = 7
+  const days = 10
 
   //  North East 
   const NorthEastTop = await TopTen('NE',days)

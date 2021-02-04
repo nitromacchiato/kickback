@@ -200,3 +200,29 @@
 }
 
 
+
+
+
+
+
+
+/* 
+    Created AddOns 
+
+*/ 
+
+
+/* Solid border divider */
+hr.solid {
+    border-top: 1px solid #bbb;
+    margin-top: 0em;
+  }
+
+
+
+/* Hide overflow text for search playlists */
+.hideOverFlowText{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

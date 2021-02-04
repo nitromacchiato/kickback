@@ -13,10 +13,10 @@ import Link from 'next/link'
 
 
 
-export default function Navbar({ listOfSchools }){
+export default function NavbarForSearch({ listOfSchools, search}){
 
 	//Drop down burger menu 
-	const [isActive, setisActive] = React.useState(false);
+	const [isActive, setisActive] = React.useState(true);
 
 	//Show modal card to connect to provider 
 	const [isShown, isHidden] = React.useState(false);
@@ -135,7 +135,40 @@ export default function Navbar({ listOfSchools }){
 
  
 
+	//Get the current value and pass it to the parent component (Search) to take the value and search for hits 
+	function PassInput(){
+		
 
+		// Quick fix to use the document 
+		useEffect(()=> {
+
+			// Selects the input field from the search bar 
+			let SearchInput = document.querySelector('input');
+			
+			//Gets the live time input 
+			SearchInput.oninput = handleInput;
+			
+			//Runs this function with each input 
+			function handleInput(e) {
+				
+				//Get The current value
+				const value = e.target.value
+				console.log('Input is',value.length)
+				//Do a search for current input if the value is not empty
+				if(value.length > 0){
+					const results = search(value)
+				}
+					
+				
+			}
+
+
+
+		})
+
+
+		
+	}
 
 
 
@@ -147,6 +180,7 @@ export default function Navbar({ listOfSchools }){
 
     return(
 		<>
+
 
         <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
 
@@ -161,9 +195,9 @@ export default function Navbar({ listOfSchools }){
 
 				{/* Navbar Logo */}
 				<Link href="/">
-				<a class="navbar-item" href="">
-					<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
-				</a>
+					<a class="navbar-item" href="">
+						<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
+					</a>
 				</Link>
 
 
@@ -184,11 +218,12 @@ export default function Navbar({ listOfSchools }){
 			{/* Navbar Menu  */}
 			<div className={`navbar-menu ${isActive ? "is-active" : ""}`}>
 
+
 				{/* Searchbar for Navbar */}
 				<div class="navbar-start">
 					<div class="navbar-item">
 						<div class="control has-icons-left has-icons-right my-2">
-							<Link href="/search"><input class="input is-normal" type="email" placeholder="Search" /></Link>
+							<input id="SearchInput"  class="input is-normal" type="email" placeholder="Search" autoFocus onInput={PassInput()}/>
 							<span class="icon is-small is-left">
 							<i class="fas fa-search fa-lg"></i>
 							</span>
