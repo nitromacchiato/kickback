@@ -124,7 +124,9 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
         //Get the state which is either true or false 
         const status = await isFollowingPlaylists(id)
-        
+        //Error test status 
+        console.log('Is Status Empty - Playlist?', status)
+       
         //Assign result 
         const value = await status[0]
         
@@ -181,14 +183,33 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
     //Checks to see if they are already following user 
     useEffect(async () =>{
 
+
+        // Check playlist Owner 
+        console.log(playlistOwner)
+
+
         //Get the state which is either true or false 
         const status = await isFollowingUser(playlistOwner)
         
-        //Assign result 
-        const value = await status[0]
-        
 
-        console.log(value)
+        //Check if status is undefined 
+        if (status === undefined){
+
+            const value = false
+
+        } else {
+
+            //Assign result 
+            const value = await status[0]   
+
+        }
+
+
+
+
+        console.log('User Value is',value)
+
+        
         //Set the state depending on the value 
         //if true then is following , if false then not following
         if(value  == true){

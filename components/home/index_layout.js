@@ -21,7 +21,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                     <div class="region-title-padding">
                         <p class="title title_adjustment">North East</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment box" >
+                    <div class="columns is-mobile is-vcentered region_column_adjustment" >
 
                         {isOn && 
                             NorthEastTop.map(item => {
@@ -54,7 +54,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                     <div class="region-title-padding">
                         <p class="title title_adjustment">West</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment box">
+                    <div class="columns is-mobile is-vcentered region_column_adjustment">
 
                         {isOn && 
                             WestTop.map(item => {
@@ -87,7 +87,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                     <div class="region-title-padding">
                         <p class="title title_adjustment">South East</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment box">
+                    <div class="columns is-mobile is-vcentered region_column_adjustment">
 
                         {isOn && 
                             SouthEastTop.map(item => {
@@ -121,7 +121,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                     <div class="region-title-padding">
                         <p class="title title_adjustment">South West</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment box">
+                    <div class="columns is-mobile is-vcentered region_column_adjustment">
 
                         {isOn && 
                             SouthWestTop.map(item => {
@@ -155,7 +155,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                     <div class="region-title-padding">
                         <p class="title title_adjustment">Mid West</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment box">
+                    <div class="columns is-mobile is-vcentered region_column_adjustment">
 
                         {isOn && 
                             MidWestTop.map(item => {

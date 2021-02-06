@@ -42,7 +42,7 @@ export async function getStaticProps(context) {
   
 
   // TOP 10 PER REGIONS PER 7 days 
-  const days = 10
+  const days = 15
 
   //  North East 
   const NorthEastTop = await TopTen('NE',days)
