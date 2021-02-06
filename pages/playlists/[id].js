@@ -197,28 +197,36 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
             const value = false
 
+            //Set the state depending on the value 
+            //if true then is following , if false then not following
+            if(value  == true){
+                setisFollowingOwner(true)
+                
+            } else {
+                setisFollowingOwner(false)
+                
+            }
+
+
         } else {
 
+
+            
             //Assign result 
             const value = await status[0]   
 
+            //Set the state depending on the value 
+            //if true then is following , if false then not following
+            if(value  == true){
+                setisFollowingOwner(true)
+                
+            } else {
+                setisFollowingOwner(false)
+                
+            }
         }
 
 
-
-
-        console.log('User Value is',value)
-
-        
-        //Set the state depending on the value 
-        //if true then is following , if false then not following
-        if(value  == true){
-            setisFollowingOwner(true)
-            
-        } else {
-            setisFollowingOwner(false)
-            
-        }
 
     },[])
     
