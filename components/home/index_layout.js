@@ -11,17 +11,17 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
 
     return(
         <>
-        <section class="section is-vcentered margin_section">
-            <div class="columns is-centered">
-                <div class="column is-9">
+        <section className="section is-vcentered margin_section">
+            <div className="columns is-centered">
+                <div className="column is-9">
 
                     {/* --------------------------------- TOP TEN RESULTS PER REGION ----------------------------- */}
 
                     {/* NORTH EAST COAST */}
-                    <div class="region-title-padding">
-                        <p class="title title_adjustment">North East</p>
+                    <div className="region-title-padding">
+                        <p className="title title_adjustment">North East</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment" key="NorthEast">
+                    <div className="columns is-mobile is-vcentered region_column_adjustment" key="NorthEast">
 
                         {isOn && 
                             NorthEastTop.map(item => {
@@ -29,16 +29,16 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                                 return(
                                     <>
                                         {/* Turns the playlist uri "spotify:playlist:0vvXsWCC9xrXsKd4FyS8kM" just to "0vvXsWCC9xrXsKd4FyS8kM" */}
-                                        <div class="column is-vcentered is-narrow box" style={{marginLeft:'1em'}} key={item['playlist_id'].split(':')[2]} >
-                                            <div class="has-text-centered">
+                                        <div className="column is-vcentered is-narrow box" style={{marginLeft:'1em'}} key={item['playlist_id'].split(':')[2]} >
+                                            <div className="has-text-centered">
                                                 <a href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
-                                                    <figure class="image is-128x128 image_placement">
+                                                    <figure className="image is-128x128 image_placement">
                                                         <img src={item['cover_image']} />
                                                     </figure>
                                                 </a>
-                                                <p class="playlist_name">{item['name']}</p>
-                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p class="playlist_subtitles"> {item['school']}</p></a>
-                                                <p class="has-text-weight-light playlist_subtitles">{item['owner']}</p>
+                                                <p className="playlist_name">{item['name']}</p>
+                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p className="playlist_subtitles"> {item['school']}</p></a>
+                                                <p className="has-text-weight-light playlist_subtitles">{item['owner']}</p>
                                             </div>
                                         </div>        
                                     </>
@@ -52,26 +52,26 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
 
 
                     {/* WEST COAST */}
-                    <div class="region-title-padding">
-                        <p class="title title_adjustment">West</p>
+                    <div className="region-title-padding">
+                        <p className="title title_adjustment">West</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment" key="West">
+                    <div className="columns is-mobile is-vcentered region_column_adjustment" key="West">
 
                         {isOn && 
                             WestTop.map(item => {
                                 
                                 return(
                                     <>
-                                        <div class="column is-vcentered is-narrow box" style={{marginLeft:'1em'}} key={item['playlist_id'].split(':')[2]}>
-                                            <div class="has-text-centered">
+                                        <div className="column is-vcentered is-narrow box" style={{marginLeft:'1em'}} key={item['playlist_id'].split(':')[2]}>
+                                            <div className="has-text-centered">
                                                 <a href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
-                                                    <figure class="image is-128x128 image_placement">
+                                                    <figure className="image is-128x128 image_placement">
                                                         <img src={item['cover_image']} />
                                                     </figure>
                                                 </a>
-                                                <p class="playlist_name">{item['name']}</p>
-                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p class="playlist_subtitles"> {item['school']}</p></a>
-                                                <p class="has-text-weight-light playlist_subtitles">{item['owner']}</p>
+                                                <p className="playlist_name">{item['name']}</p>
+                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p className="playlist_subtitles"> {item['school']}</p></a>
+                                                <p className="has-text-weight-light playlist_subtitles">{item['owner']}</p>
                                             </div>
                                         </div>        
                                     </>
@@ -85,26 +85,26 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
 
 
                     {/*  SOUTH EAST COAST */}
-                    <div class="region-title-padding">
-                        <p class="title title_adjustment">South East</p>
+                    <div className="region-title-padding">
+                        <p className="title title_adjustment">South East</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment" key="SouthEast">
+                    <div className="columns is-mobile is-vcentered region_column_adjustment" key="SouthEast">
 
                         {isOn && 
                             SouthEastTop.map(item => {
                                 
                                 return(
                                     <>
-                                        <div class="column is-vcentered is-narrow box" style={{marginLeft:'1em'}} key={item['playlist_id'].split(':')[2]}>
-                                            <div class="has-text-centered">
+                                        <div className="column is-vcentered is-narrow box" style={{marginLeft:'1em'}} key={item['playlist_id'].split(':')[2]}>
+                                            <div className="has-text-centered">
                                                 <a href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
-                                                    <figure class="image is-128x128 image_placement">
+                                                    <figure className="image is-128x128 image_placement">
                                                         <img src={item['cover_image']} />
                                                     </figure>
                                                 </a>
-                                                <p class="playlist_name">{item['name']}</p>
-                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p class="playlist_subtitles"> {item['school']}</p></a>
-                                                <p class="has-text-weight-light playlist_subtitles">{item['owner']}</p>
+                                                <p className="playlist_name">{item['name']}</p>
+                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p className="playlist_subtitles"> {item['school']}</p></a>
+                                                <p className="has-text-weight-light playlist_subtitles">{item['owner']}</p>
                                             </div>
                                         </div>        
                                     </>
@@ -119,26 +119,26 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
 
 
                     {/* SOUTH WEST */}
-                    <div class="region-title-padding">
-                        <p class="title title_adjustment">South West</p>
+                    <div className="region-title-padding">
+                        <p className="title title_adjustment">South West</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment"  key="SouthWest"> 
+                    <div className="columns is-mobile is-vcentered region_column_adjustment"  key="SouthWest"> 
 
                         {isOn && 
                             SouthWestTop.map(item => {
                                 
                                 return(
                                     <>
-                                        <div class="column is-vcentered is-narrow box" style={{marginLeft:'1em'}} key={item['playlist_id'].split(':')[2]}>
-                                            <div class="has-text-centered">
+                                        <div className="column is-vcentered is-narrow box" style={{marginLeft:'1em'}} key={item['playlist_id'].split(':')[2]}>
+                                            <div className="has-text-centered">
                                                 <a href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
-                                                    <figure class="image is-128x128 image_placement">
+                                                    <figure className="image is-128x128 image_placement">
                                                         <img src={item['cover_image']} />
                                                     </figure>
                                                 </a>
-                                                <p class="playlist_name">{item['name']}</p>
-                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p class="playlist_subtitles"> {item['school']}</p></a>
-                                                <p class="has-text-weight-light playlist_subtitles">{item['owner']}</p>
+                                                <p className="playlist_name">{item['name']}</p>
+                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p className="playlist_subtitles"> {item['school']}</p></a>
+                                                <p className="has-text-weight-light playlist_subtitles">{item['owner']}</p>
                                             </div>
                                         </div>        
                                     </>
@@ -153,26 +153,26 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
 
 
                     {/* WEST COAST */}
-                    <div class="region-title-padding">
-                        <p class="title title_adjustment">Mid West</p>
+                    <div className="region-title-padding">
+                        <p className="title title_adjustment">Mid West</p>
                     </div>
-                    <div class="columns is-mobile is-vcentered region_column_adjustment" key="MidWest">
+                    <div className="columns is-mobile is-vcentered region_column_adjustment" key="MidWest">
 
                         {isOn && 
                             MidWestTop.map(item => {
                                 
                                 return(
                                     <>
-                                        <div class="column is-vcentered is-narrow box" style={{marginLeft:'1em'}} key={item['playlist_id'].split(':')[2]}>
-                                            <div class="has-text-centered">
+                                        <div className="column is-vcentered is-narrow box" style={{marginLeft:'1em'}} key={item['playlist_id'].split(':')[2]}>
+                                            <div className="has-text-centered">
                                                 <a href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
-                                                    <figure class="image is-128x128 image_placement">
+                                                    <figure className="image is-128x128 image_placement">
                                                         <img src={item['cover_image']} />
                                                     </figure>
                                                 </a>
-                                                <p class="playlist_name">{item['name']}</p>
-                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p class="playlist_subtitles"> {item['school']}</p></a>
-                                                <p class="has-text-weight-light playlist_subtitles">{item['owner']}</p>
+                                                <p className="playlist_name">{item['name']}</p>
+                                                <a href={'http://localhost:3000/schools/' + item['school'].split(' ').join('-')} ><p className="playlist_subtitles"> {item['school']}</p></a>
+                                                <p className="has-text-weight-light playlist_subtitles">{item['owner']}</p>
                                             </div>
                                         </div>        
                                     </>

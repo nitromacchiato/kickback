@@ -33,15 +33,15 @@ export default function Schools({school,playlist,topSchoolPlaylists}){
 
             <Navbar />
 
-            <section class="section is-vcentered" style={{marginLeft:"2.0em", marginTop:"0"}}>
-			    <div class="columns is-centered">
+            <section className="section is-vcentered" style={{marginLeft:"2.0em", marginTop:"0"}}>
+			    <div className="columns is-centered">
 
 
                     {/* <!-- TOP playlist -->  */}
-                    <div class="column is-11">
+                    <div className="column is-11">
 
-                        <div style={{marginBottom: "1.3em", marginTop: "1.2em"}} class="school_title">
-                            <p class="title is-size-2">{school.name}</p>
+                        <div style={{marginBottom: "1.3em", marginTop: "1.2em"}} className="school_title">
+                            <p className="title is-size-2">{school.name}</p>
                         </div>
 
 
@@ -50,19 +50,19 @@ export default function Schools({school,playlist,topSchoolPlaylists}){
                         </div>
 
                         {/* <!-- TOP PLAYLISTS --> */}
-                        <div class="columns is-mobile is-vcentered" style={{sarginTop:"10px", overflow:"auto"}} >
+                        <div className="columns is-mobile is-vcentered" style={{sarginTop:"10px", overflow:"auto"}} >
 
                             
                             {topSchoolPlaylists.map((item) =>
-                                <div class="column is-vcentered is-narrow">
-                                    <div class="has-text-centered box">
+                                <div className="column is-vcentered is-narrow">
+                                    <div className="has-text-centered box">
                                         <a href={'http://localhost:3000/playlists/'+ item.playlist_id}>
-                                            <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
+                                            <figure className="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
                                                 <img src={item.cover_image} />
                                             </figure>
                                         </a>
                                         <p style={{fontSize:"12pt"}}>{item.name}</p>
-                                        <p style={{fontSize:"9pt"}} class="has-text-weight-light">{item.owner}</p>
+                                        <p style={{fontSize:"9pt"}} className="has-text-weight-light">{item.owner}</p>
                                     </div>
                                 </div>                            
                             )}
@@ -79,21 +79,21 @@ export default function Schools({school,playlist,topSchoolPlaylists}){
                             <p>Recently Added</p>
                         </div>
 
-                        <div class="columns is-multiline is-vcentered is-mobile is-11" style={{marginTop:"10px", overflowY: "scroll"}}>
+                        <div className="columns is-multiline is-vcentered is-mobile is-11" style={{marginTop:"10px", overflowY: "scroll"}}>
 
 
                             {playlist.map((item) => (
 
                                 <Link href={`/playlists/${item.playlist_id}`}>               
-                                    <div class="column is-vcentered is-narrow">
-                                        <div class="has-text-centered box">
+                                    <div className="column is-vcentered is-narrow">
+                                        <div className="has-text-centered box">
                                             <a href={'http://localhost:3000/playlists/'+ item.playlist_id}>
-                                                <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
+                                                <figure className="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
                                                     <img src={item.cover_image} />
                                                 </figure>
                                             </a>
                                             <p style={{fontSize:"12pt"}}>{item.name}</p>
-                                            <p style={{fontSize:"9pt"}} class="has-text-weight-light">{item.owner}</p>
+                                            <p style={{fontSize:"9pt"}} className="has-text-weight-light">{item.owner}</p>
                                         </div>
                                     </div>
                                 </Link>
