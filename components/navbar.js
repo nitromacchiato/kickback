@@ -234,18 +234,18 @@ export default function Navbar({ listOfSchools }){
 
 								{isVerified && 
 									<>
-									<Link href='http://localhost:3000/schools/University-of-Maryland'>
-										<button class="button is-light">
-											<span class="icon">
-												<i class="fas fa-graduation-cap"></i>
-											</span>
-											<span>{session.user.school}</span>
+										<Link href='http://localhost:3000/schools/University-of-Maryland'>
+											<button class="button is-light">
+												<span class="icon">
+													<i class="fas fa-graduation-cap"></i>
+												</span>
+												<span>{session.user.school}</span>
+											</button>
+										</Link>
+										
+										<button class="button is-success" onClick={() => {setPlaylists(!isShowingPlaylists);}}>
+											<p>Add a Playlist</p>
 										</button>
-									</Link>
-									
-									<button class="button is-success" onClick={() => {setPlaylists(!isShowingPlaylists);}}>
-										<p>Add a Playlist</p>
-									</button>
 									</>
 								}
 
@@ -285,22 +285,24 @@ export default function Navbar({ listOfSchools }){
 											</thead>
 
 											<tbody>
-												{/* If the user is logged in loop through their playlists */}
+												{/* If the user is logged in and the session.playlist data greater than 0 then loop through their playlists data */}
 												{session && 
-													session.playlist.map(item =>{
+													session.playlist > 0 && 
+														session.playlist.map(item =>{
 
 
-														return(
-															<>
-															<tr>
-																<td>{item.name}</td>
+															return(
+																<>
+																{/* Turns the playlist uri "spotify:playlist:0vvXsWCC9xrXsKd4FyS8kM" just to "0vvXsWCC9xrXsKd4FyS8kM" */}
+																<tr rowKey={item.uri.split(':')[2]}>
+																	<td>{item.name}</td>
 
-																<td><span><button class='button is-small is-light' onClick={e => {e.preventDefault();  handlePlaylistSubmission(item.name, item.owner.display_name,  item.uri, item.external_urls.spotify, session.user.school, item.images[0]['url'], item.description )}}><i class="fas fa-plus"></i></button></span></td>
-																
-															</tr>	
-															</>
-														)
-													})	
+																	<td><span><button class='button is-small is-light' onClick={e => {e.preventDefault();  handlePlaylistSubmission(item.name, item.owner.display_name,  item.uri, item.external_urls.spotify, session.user.school, item.images[0]['url'], item.description )}}><i class="fas fa-plus"></i></button></span></td>
+																	
+																</tr>	
+																</>
+															)
+														})	
 												}
 
 

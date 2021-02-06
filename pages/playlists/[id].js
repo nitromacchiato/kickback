@@ -50,189 +50,194 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
 
 
-    //Does the user follow the playlist
-	const [isFollowingPlaylist, setisFollowingPlaylist] = React.useState(false);
-
-
-    //Add the playlist to your library 
-    function FollowPlaylist(){
-
-        //Get the current id for the spotify playlist 
-        const split = playlistSpotifyID.split(':')
-        const id = split[2]
-
     
-        const follow = followPlaylist(id)
-        setisFollowingPlaylist(true)
-        console.log('Followed the playlist')
+    //  Only check the status if the user is logged in by seeing if the session is true 
 
-        // Calls the api and adds one to the follower count for kickback users 
-		fetch('http://localhost:3000/api/user/addFollowCount',{
-        method:'POST',
-        body: JSON.stringify({
-            spotifyID: playlistSpotifyID,
-        }),
-        headers:{
-            'Content-type': 'application/json; charset=UTF-8'
-        }
-		}).catch(function (error){
-			console.warn('Something went wrong adding count', error)
-		})       
+    if (session) {
 
 
-
-    }
-
-    //Remove the playlist from your library 
-    function UnfollowPlaylist(){
-
-        //Get the current id for the spotify playlist 
-        const split = playlistSpotifyID.split(':')
-        const id = split[2]
-
-    
-        const unfollow = unfollowPlaylist(id)
-        setisFollowingPlaylist(false)
-        console.log('Unfollowed the playlist')
-
-        // Calls the api and subtracts one to the follower count for kickback users 
-		fetch('http://localhost:3000/api/user/subtractFollowCount',{
-        method:'POST',
-        body: JSON.stringify({
-            spotifyID: playlistSpotifyID,
-        }),
-        headers:{
-            'Content-type': 'application/json; charset=UTF-8'
-        }
-		}).catch(function (error){
-			console.warn('Something went wrong adding count', error)
-		})       
+        //Does the user follow the playlist
+        const [isFollowingPlaylist, setisFollowingPlaylist] = React.useState(false);
 
 
-    }
+        //Add the playlist to your library 
+        function FollowPlaylist(){
 
+            //Get the current id for the spotify playlist 
+            const split = playlistSpotifyID.split(':')
+            const id = split[2]
 
-    //Checks to see if the user is already following the playlist 
-    useEffect(async () =>{
-
-
-        // Assign playlist id 
-        const split = playlistSpotifyID.split(':')
-        const id = split[2]
-
-
-
-        //Get the state which is either true or false 
-        const status = await isFollowingPlaylists(id)
-        //Error test status 
-        console.log('Is Status Empty - Playlist?', status)
-       
-        //Assign result 
-        const value = await status[0]
         
-
-        console.log(value)
-        //Set the state depending on the value 
-        //if true then is following , if false then not following
-        if(value  == true){
+            const follow = followPlaylist(id)
             setisFollowingPlaylist(true)
-            
-        } else {
-            setisFollowingPlaylist(false)
-            
+            console.log('Followed the playlist')
+
+            // Calls the api and adds one to the follower count for kickback users 
+            fetch('http://localhost:3000/api/user/addFollowCount',{
+            method:'POST',
+            body: JSON.stringify({
+                spotifyID: playlistSpotifyID,
+            }),
+            headers:{
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+            }).catch(function (error){
+                console.warn('Something went wrong adding count', error)
+            })       
+
+
+
         }
 
-    },[])
-    
+        //Remove the playlist from your library 
+        function UnfollowPlaylist(){
+
+            //Get the current id for the spotify playlist 
+            const split = playlistSpotifyID.split(':')
+            const id = split[2]
+
+        
+            const unfollow = unfollowPlaylist(id)
+            setisFollowingPlaylist(false)
+            console.log('Unfollowed the playlist')
+
+            // Calls the api and subtracts one to the follower count for kickback users 
+            fetch('http://localhost:3000/api/user/subtractFollowCount',{
+            method:'POST',
+            body: JSON.stringify({
+                spotifyID: playlistSpotifyID,
+            }),
+            headers:{
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+            }).catch(function (error){
+                console.warn('Something went wrong adding count', error)
+            })       
+
+
+        }
+
+
+        //Checks to see if the user is already following the playlist 
+        useEffect(async () =>{
+
+
+            // Assign playlist id 
+            const split = playlistSpotifyID.split(':')
+            const id = split[2]
 
 
 
+            //Get the state which is either true or false 
+            const status = await isFollowingPlaylists(id)
+            //Error test status 
+            console.log('Is Status Empty - Playlist?', status)
+        
+            //Assign result 
+            const value = await status[0]
+            
 
+            console.log(value)
+            //Set the state depending on the value 
+            //if true then is following , if false then not following
+            if(value  == true){
+                setisFollowingPlaylist(true)
+                
+            } else {
+                setisFollowingPlaylist(false)
+                
+            }
 
-
-
-
-
-
-    //Does the current user follow the playlist owner 
-    const [isFollowingOwner, setisFollowingOwner] = React.useState(false);
-
-
-    //Follow the owner of the playlist
-    function FollowOwner(){
-
-        console.log(playlistOwner)
-        const follow = followUser(playlistOwner)
-        setisFollowingOwner(true)
-        console.log('Followed the owner')
-
-    }
-
-
-    //Unfollow the owner of the playlist 
-    function UnfollowOwner(){
-
-        console.log(playlistOwner)
-        const follow = unfollowUser(playlistOwner)
-        setisFollowingOwner(false)
-        console.log('Unfollowed the owner')
-
-    }
-
-
-    //Checks to see if they are already following user 
-    useEffect(async () =>{
-
-
-        // Check playlist Owner 
-        console.log(playlistOwner)
-
-
-        //Get the state which is either true or false 
-        const status = await isFollowingUser(playlistOwner)
+        },[])
         
 
-        //Check if status is undefined 
-        if (status === undefined){
-
-            const value = false
-
-            //Set the state depending on the value 
-            //if true then is following , if false then not following
-            if(value  == true){
-                setisFollowingOwner(true)
-                
-            } else {
-                setisFollowingOwner(false)
-                
-            }
 
 
-        } else {
 
 
-            
-            //Assign result 
-            const value = await status[0]   
 
-            //Set the state depending on the value 
-            //if true then is following , if false then not following
-            if(value  == true){
-                setisFollowingOwner(true)
-                
-            } else {
-                setisFollowingOwner(false)
-                
-            }
+        //Does the current user follow the playlist owner 
+        const [isFollowingOwner, setisFollowingOwner] = React.useState(false);
+
+
+        //Follow the owner of the playlist
+        function FollowOwner(){
+
+            console.log(playlistOwner)
+            const follow = followUser(playlistOwner)
+            setisFollowingOwner(true)
+            console.log('Followed the owner')
+
+        }
+
+
+        //Unfollow the owner of the playlist 
+        function UnfollowOwner(){
+
+            console.log(playlistOwner)
+            const follow = unfollowUser(playlistOwner)
+            setisFollowingOwner(false)
+            console.log('Unfollowed the owner')
+
         }
 
 
 
-    },[])
-    
+        
+        //Checks to see if they are already following user 
+        useEffect(async () =>{
+
+
+            // Check playlist Owner 
+            console.log(playlistOwner)
+
+
+            //Get the state which is either true or false 
+            const status = await isFollowingUser(playlistOwner)
+            
+
+            //Check if status is undefined 
+            if (status === undefined){
+
+                const value = false
+
+                //Set the state depending on the value 
+                //if true then is following , if false then not following
+                if(value  == true){
+                    setisFollowingOwner(true)
+                    
+                } else {
+                    setisFollowingOwner(false)
+                    
+                }
+
+
+            } else {
+
+
+                
+                //Assign result 
+                const value = await status[0]   
+
+                //Set the state depending on the value 
+                //if true then is following , if false then not following
+                if(value  == true){
+                    setisFollowingOwner(true)
+                    
+                } else {
+                    setisFollowingOwner(false)
+                    
+                }
+            }
 
 
 
+        },[])
+        
+
+
+
+    }
 
 
 
