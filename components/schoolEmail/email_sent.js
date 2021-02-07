@@ -10,17 +10,17 @@ export default function SentEmail({email}){
 
 
         <>
-            <section class="hero is-link is-fullheight ">
+            <section className="hero is-link is-fullheight ">
 
 
-                <div class="hero-body" style={{margin:'0 auto 0 auto'}}>
+                <div className="hero-body" style={{margin:'0 auto 0 auto'}}>
 
-                    <div class="container">
+                    <div className="container">
 
-                        <div class="notification  is-light has-text-centered" style={{height:'120px',width:'300px'}}>
+                        <div className="notification  is-light has-text-centered" style={{height:'120px',width:'300px'}}>
                             
                             <Link href="http://localhost:3000/">
-                                <button class="delete"></button>
+                                <button className="delete"></button>
                             </Link>
 
                             <p>

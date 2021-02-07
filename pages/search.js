@@ -108,28 +108,28 @@ export default function Search({colleges}){
 
 
 
-        <section class="section is-fullheight">
-            <div class="container">
+        <section className="section is-fullheight">
+            <div className="container">
                 
       
 
                 {/* SECTION FOR SCHOOL RESULTS  */}
-                <div class="notification">
+                <div className="notification">
 
                     {/* Title For Section */}
                     <div>
                         <div style={{marginLeft:'1.7em'}}>
-                            <span class="icon">
-                                <i class="fas fa-graduation-cap"></i>
+                            <span className="icon">
+                                <i className="fas fa-graduation-cap"></i>
                                 <p style={{marginLeft:'5px'}}>Schools</p>
                             </span>
                         </div>
-                        <hr class="solid" />
+                        <hr className="solid" />
                     </div>
                     
 
                     {/* ----------------- Results ----------------- */}
-                    <div class="columns">
+                    <div className="columns" key="school_results">
 
                         {/* If there are school results display them */}
                         {areThereSchoolResults && 
@@ -139,8 +139,8 @@ export default function Search({colleges}){
                                     <>
                                         
                                     
-                                        <div class="column is-one-fifth box has-text-centered" style={{height:'50px', width:'15em', marginLeft:'1em'}}>
-                                            <p class="subtitle">{item.name} </p>
+                                        <div className="column is-one-fifth box has-text-centered" style={{height:'50px', width:'15em', marginLeft:'1em'}} key={item.name}>
+                                            <p className="subtitle">{item.name} </p>
                                         </div>
                                 
                                         
@@ -176,20 +176,20 @@ export default function Search({colleges}){
 
 
                 {/* SECTION FOR PLAYLIST RESULTS  */}
-                <div class="notification">
+                <div className="notification">
                     {/* Title For Section */}
                     <div>
                         <div style={{marginLeft:'1.7em'}}>
-                            <span class="icon">
-                                <i class="fas fa-compact-disc"></i>
+                            <span className="icon">
+                                <i className="fas fa-compact-disc"></i>
                                 <p style={{marginLeft:'5px'}}>Playlists</p>
                             </span>
                         </div>
-                        <hr class="solid" />
+                        <hr className="solid" />
                     </div>
 
 
-                    <div class="columns">
+                    <div className="columns" key="playlist_column">
                         {/* If there are school results display them */}
                         {areTherePlaylistResults && 
 
@@ -197,15 +197,15 @@ export default function Search({colleges}){
                                 return(
                                     <>
                                         
-                                        <div class="column is-one-fifth box has-text-centered " style={{width:'154px',height:'222px', marginLeft:'1em'}}>
+                                        <div className="column is-one-fifth box has-text-centered " style={{width:'154px',height:'222px', marginLeft:'1em'}} key={item.playlist_id}>
                                             <a href={"http://localhost:3000/playlists/"+item.playlist_id}>
-                                                <figure class="image is-128x128">
+                                                <figure className="image is-128x128">
                                                     <img src={item.cover_image}/>
                                                 </figure>       
                                             </a>    
-                                            <p class="hideOverFlowText">{item.name}</p>
-                                            <p class="hideOverFlowText">{item.owner}</p>
-                                            <p class="hideOverFlowText">{item.school}</p>                 
+                                            <p className="hideOverFlowText">{item.name}</p>
+                                            <p className="hideOverFlowText">{item.owner}</p>
+                                            <p className="hideOverFlowText">{item.school}</p>                 
                                         </div>
                                     
                                     </>

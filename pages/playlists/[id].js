@@ -31,6 +31,8 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
 
 
+    //Check the status of a song playing
+    const [isPlaying, setIsPlaying] = React.useState(false)
 
 
 
@@ -50,194 +52,215 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
 
 
-    
     //  Only check the status if the user is logged in by seeing if the session is true 
 
-    if (session) {
-
-
-        //Does the user follow the playlist
-        const [isFollowingPlaylist, setisFollowingPlaylist] = React.useState(false);
-
-
-        //Add the playlist to your library 
-        function FollowPlaylist(){
-
-            //Get the current id for the spotify playlist 
-            const split = playlistSpotifyID.split(':')
-            const id = split[2]
-
-        
-            const follow = followPlaylist(id)
-            setisFollowingPlaylist(true)
-            console.log('Followed the playlist')
-
-            // Calls the api and adds one to the follower count for kickback users 
-            fetch('http://localhost:3000/api/user/addFollowCount',{
-            method:'POST',
-            body: JSON.stringify({
-                spotifyID: playlistSpotifyID,
-            }),
-            headers:{
-                'Content-type': 'application/json; charset=UTF-8'
-            }
-            }).catch(function (error){
-                console.warn('Something went wrong adding count', error)
-            })       
 
 
 
+    //Takes a current song uid and plays it on the users spotify player 
+    function SendSongToPlay(songID){
+
+        //Set the uid scope required to play the track by the spotify api 
+        const song = songID.track.uri
+
+        // Calls the api sends the song id to be played on your spotify playback 
+        fetch('http://localhost:3000/api/spotify/playSong',{
+        method:'POST',
+        body: JSON.stringify({
+            songID: song,
+        }),
+        headers:{
+            'Content-type': 'application/json; charset=UTF-8'
         }
-
-        //Remove the playlist from your library 
-        function UnfollowPlaylist(){
-
-            //Get the current id for the spotify playlist 
-            const split = playlistSpotifyID.split(':')
-            const id = split[2]
-
-        
-            const unfollow = unfollowPlaylist(id)
-            setisFollowingPlaylist(false)
-            console.log('Unfollowed the playlist')
-
-            // Calls the api and subtracts one to the follower count for kickback users 
-            fetch('http://localhost:3000/api/user/subtractFollowCount',{
-            method:'POST',
-            body: JSON.stringify({
-                spotifyID: playlistSpotifyID,
-            }),
-            headers:{
-                'Content-type': 'application/json; charset=UTF-8'
-            }
-            }).catch(function (error){
-                console.warn('Something went wrong adding count', error)
-            })       
-
-
-        }
-
-
-        //Checks to see if the user is already following the playlist 
-        useEffect(async () =>{
-
-
-            // Assign playlist id 
-            const split = playlistSpotifyID.split(':')
-            const id = split[2]
-
-
-
-            //Get the state which is either true or false 
-            const status = await isFollowingPlaylists(id)
-            //Error test status 
-            console.log('Is Status Empty - Playlist?', status)
-        
-            //Assign result 
-            const value = await status[0]
-            
-
-            console.log(value)
-            //Set the state depending on the value 
-            //if true then is following , if false then not following
-            if(value  == true){
-                setisFollowingPlaylist(true)
-                
-            } else {
-                setisFollowingPlaylist(false)
-                
-            }
-
-        },[])
-        
-
-
-
-
-
-
-        //Does the current user follow the playlist owner 
-        const [isFollowingOwner, setisFollowingOwner] = React.useState(false);
-
-
-        //Follow the owner of the playlist
-        function FollowOwner(){
-
-            console.log(playlistOwner)
-            const follow = followUser(playlistOwner)
-            setisFollowingOwner(true)
-            console.log('Followed the owner')
-
-        }
-
-
-        //Unfollow the owner of the playlist 
-        function UnfollowOwner(){
-
-            console.log(playlistOwner)
-            const follow = unfollowUser(playlistOwner)
-            setisFollowingOwner(false)
-            console.log('Unfollowed the owner')
-
-        }
-
-
-
-        
-        //Checks to see if they are already following user 
-        useEffect(async () =>{
-
-
-            // Check playlist Owner 
-            console.log(playlistOwner)
-
-
-            //Get the state which is either true or false 
-            const status = await isFollowingUser(playlistOwner)
-            
-
-            //Check if status is undefined 
-            if (status === undefined){
-
-                const value = false
-
-                //Set the state depending on the value 
-                //if true then is following , if false then not following
-                if(value  == true){
-                    setisFollowingOwner(true)
-                    
-                } else {
-                    setisFollowingOwner(false)
-                    
-                }
-
-
-            } else {
-
-
-                
-                //Assign result 
-                const value = await status[0]   
-
-                //Set the state depending on the value 
-                //if true then is following , if false then not following
-                if(value  == true){
-                    setisFollowingOwner(true)
-                    
-                } else {
-                    setisFollowingOwner(false)
-                    
-                }
-            }
-
-
-
-        },[])
-        
+        }).catch(function (error){
+            console.warn('Something went wrong playing song')
+        })   
 
 
 
     }
+
+    //Does the user follow the playlist
+    const [isFollowingPlaylist, setisFollowingPlaylist] = React.useState(false);
+
+
+    //Add the playlist to your library 
+    function FollowPlaylist(){
+
+        //Get the current id for the spotify playlist 
+        const split = playlistSpotifyID.split(':')
+        const id = split[2]
+
+
+        const follow = followPlaylist(id)
+        setisFollowingPlaylist(true)
+        console.log('Followed the playlist')
+
+        // Calls the api and adds one to the follower count for kickback users 
+        fetch('http://localhost:3000/api/user/addFollowCount',{
+        method:'POST',
+        body: JSON.stringify({
+            spotifyID: playlistSpotifyID,
+        }),
+        headers:{
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+        }).catch(function (error){
+            console.warn('Something went wrong adding count', error)
+        })       
+
+
+
+    }
+
+    //Remove the playlist from your library 
+    function UnfollowPlaylist(){
+
+        //Get the current id for the spotify playlist 
+        const split = playlistSpotifyID.split(':')
+        const id = split[2]
+
+
+        const unfollow = unfollowPlaylist(id)
+        setisFollowingPlaylist(false)
+        console.log('Unfollowed the playlist')
+
+        // Calls the api and subtracts one to the follower count for kickback users 
+        fetch('http://localhost:3000/api/user/subtractFollowCount',{
+        method:'POST',
+        body: JSON.stringify({
+            spotifyID: playlistSpotifyID,
+        }),
+        headers:{
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+        }).catch(function (error){
+            console.warn('Something went wrong adding count', error)
+        })       
+
+
+    }
+
+
+
+    //Checks to see if the user is already following the playlist 
+    useEffect(async () =>{
+
+
+        // Assign playlist id 
+        const split = playlistSpotifyID.split(':')
+        const id = split[2]
+
+
+
+        //Get the state which is either true or false 
+        const status = await isFollowingPlaylists(id)
+        //Error test status 
+        console.log('Is Status Empty - Playlist?', status)
+
+        //Assign result 
+        const value = await status[0]
+        
+
+        console.log(value)
+        //Set the state depending on the value 
+        //if true then is following , if false then not following
+        if(value  == true){
+            setisFollowingPlaylist(true)
+            
+        } else {
+            setisFollowingPlaylist(false)
+            
+        }
+
+    },[])
+
+
+
+
+
+
+
+    //Does the current user follow the playlist owner 
+    const [isFollowingOwner, setisFollowingOwner] = React.useState(false);
+
+
+    //Follow the owner of the playlist
+    function FollowOwner(){
+
+        console.log(playlistOwner)
+        const follow = followUser(playlistOwner)
+        setisFollowingOwner(true)
+        console.log('Followed the owner')
+
+    }
+
+
+    //Unfollow the owner of the playlist 
+    function UnfollowOwner(){
+
+        console.log(playlistOwner)
+        const follow = unfollowUser(playlistOwner)
+        setisFollowingOwner(false)
+        console.log('Unfollowed the owner')
+
+    }
+
+
+
+
+    //Checks to see if they are already following user 
+    useEffect(async () =>{
+
+
+        // Check playlist Owner 
+        console.log(playlistOwner)
+
+
+        //Get the state which is either true or false 
+        const status = await isFollowingUser(playlistOwner)
+        
+
+        //Check if status is undefined 
+        if (status === undefined){
+
+            const value = false
+
+            //Set the state depending on the value 
+            //if true then is following , if false then not following
+            if(value  == true){
+                setisFollowingOwner(true)
+                
+            } else {
+                setisFollowingOwner(false)
+                
+            }
+
+
+        } else {
+
+
+            
+            //Assign result 
+            const value = await status[0]   
+
+            //Set the state depending on the value 
+            //if true then is following , if false then not following
+            if(value  == true){
+                setisFollowingOwner(true)
+                
+            } else {
+                setisFollowingOwner(false)
+                
+            }
+        }
+
+
+
+    },[])
+
+
+
 
 
 
@@ -272,18 +295,18 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
             <Navbar />
 
-            <section class="section is-vcentered" style={{marginTop: "2em"}}> 
+            <section className="section is-vcentered" style={{marginTop: "2em"}}> 
 
                 {/* <!-- CONTAINER FOR TOP OF PLAYLIST -->  */}
-                <div class="container">
+                <div className="container">
 
-                    <div class="columns box">
+                    <div className="columns box">
 
                         {/* <!-- IMAGE --> */}
-                        <div class="column">	
+                        <div className="column">	
 
                             <a href={externalHref} target="_blank">
-                                <figure class="image is-square">
+                                <figure className="image is-square">
                                     <img src={coverImage} />
                                 </figure>
                             </a>
@@ -292,15 +315,15 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
 
                         {/* <!-- INFO --> */}
-                        <div class="column is-centered detail_top_margin" style={{margin: "0em 2em 0em 2em"}}>
+                        <div className="column is-centered detail_top_margin" style={{margin: "0em 2em 0em 2em"}}>
 
                             <div style={{height: "35em", width:"auto"}}>
 
-                                <div class="block">
-                                    <p class="title">{playlistName}</p>
+                                <div className="block">
+                                    <p className="title">{playlistName}</p>
                                 </div>
-                                <div class="block">
-                                    <p class="subtitle">{description}</p>						
+                                <div className="block">
+                                    <p className="subtitle">{description}</p>						
                                 </div>
 
                             </div>
@@ -315,8 +338,8 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                                             
                                                 
                                                 <button  className={`button padding_mobile_button is-danger is-rounded ${isFollowingOwner ? "is-active" : "is-hidden"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  UnfollowOwner() }}>
-                                                        <span class="icon">
-                                                            <i class="fab fa-spotify"></i>
+                                                        <span className="icon">
+                                                            <i className="fab fa-spotify"></i>
                                                         </span>
                                                         <span>
                                                             Unfollow
@@ -328,8 +351,8 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                                         
                                                 
                                                 <button className={`button padding_mobile_button is-success is-rounded ${isFollowingOwner ? "is-hidden" : "is-active"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  FollowOwner() }}>
-                                                    <span class="icon">
-                                                        <i class="fab fa-spotify"></i>
+                                                    <span className="icon">
+                                                        <i className="fab fa-spotify"></i>
                                                     </span>
                                                     <span>
                                                         Follow
@@ -355,9 +378,9 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                                     {!session &&
                                         <>  
                                             <a href={"https://open.spotify.com/user/"+playlistOwner} target="_blank">
-                                                <button class  ="button padding_mobile_button is-success is-rounded" style={{marginTop:"auto"}}>
-                                                    <span class="icon">
-                                                        <i class="fab fa-spotify"></i>
+                                                <button className  ="button padding_mobile_button is-success is-rounded" style={{marginTop:"auto"}}>
+                                                    <span className="icon">
+                                                        <i className="fab fa-spotify"></i>
                                                     </span>
                                                     <span>
                                                         Follow
@@ -366,7 +389,7 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                                             </a>
 
                                             <a href={externalHref} target="_blank">    
-                                                <button class= "button padding_mobile_button is-primary is-rounded" style={{marginTop:"auto", marginRight: "4em"}} >Add Playlist</button>
+                                                <button className= "button padding_mobile_button is-primary is-rounded" style={{marginTop:"auto", marginRight: "4em"}} >Add Playlist</button>
                                             </a>
                                         </>
                                     }
@@ -381,11 +404,11 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
 
                     {/* <!-- TRACKS FOR PLAYLIST --> */}
-                    <div class="columns box is-mobile" style={{marginTop: "1em"}}>
+                    <div className="columns box is-mobile" style={{marginTop: "1em"}}>
 
 
 
-                        <table class="table is-fullwidth is-hoverable is-striped is-narrow">
+                        <table className="table is-fullwidth is-hoverable is-striped is-narrow">
 
                             {/* <!-- TABLE HEADER --> */}
                             <thead>
@@ -395,24 +418,50 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                                     <th>Artist</th>
                                     <th>Time</th>
                                     <th>Album</th>
+                                    <th></th>
                                 </tr>
                             </thead>
 
 
                             {/* <!--TRACKS--> */}
                             <tbody>
+                                
+                                {/* If the user is not logged in show a general table  */}
+                                {session && 
+                                    tracks.map((item,i)=> (
 
-                                {tracks.map((item,i)=> (
-                                    <tr>
-                                        <th>{i + 1}</th>
-                                        <td>{item.track.name}</td>
-                                        <td>{item.track.artists[0]['name']}</td>
-                                        <td>{millisToMinutesAndSeconds(item.track.duration_ms)}</td>
-                                        <td>{item.track.album.name}</td>
-                                    </tr>
+                                        <tr>
+                                            <th>{i + 1}</th>
+                                            <td>{item.track.name}</td>
+                                            <td>{item.track.artists[0]['name']}</td>
+                                            <td>{millisToMinutesAndSeconds(item.track.duration_ms)}</td>
+                                            <td>{item.track.album.name}</td>
+                                            <td>
+                                                <button className="button is-success is-outlined" onClick={ e => {e.preventDefault(); SendSongToPlay(item)}}>
+                                                    <span className="icon is-small">
+                                                    <i className="fas fa-play"></i>
+                                                    </span>
+                                                </button>
+                                            </td>
+                                        </tr>
+
 
                                 ))}
 
+                                {/* If the user is logged in show the play button to allow the user to control their playback from the webapp */}
+                                {!session && 
+                                    tracks.map((item,i)=> (
+                                        <tr>
+                                            <th>{i + 1}</th>
+                                            <td>{item.track.name}</td>
+                                            <td>{item.track.artists[0]['name']}</td>
+                                            <td>{millisToMinutesAndSeconds(item.track.duration_ms)}</td>
+                                            <td>{item.track.album.name}</td>
+                                        </tr>
+
+                                ))}
+
+                                    
 
                             </tbody>
 

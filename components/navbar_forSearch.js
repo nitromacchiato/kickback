@@ -186,16 +186,16 @@ export default function NavbarForSearch({ listOfSchools, search}){
 
 
 		{/* Start of Navbar  */}
-        <nav class="navbar" role="navigation" aria-label="main navigation">
+        <nav className="navbar" role="navigation" aria-label="main navigation">
 
 
 			{/* Start of left Navbar */}
-			<div class="navbar-brand">
+			<div className="navbar-brand">
 				
 
 				{/* Navbar Logo */}
 				<Link href="/">
-					<a class="navbar-item" href="">
+					<a className="navbar-item" href="">
 						<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
 					</a>
 				</Link>
@@ -220,22 +220,19 @@ export default function NavbarForSearch({ listOfSchools, search}){
 
 
 				{/* Searchbar for Navbar */}
-				<div class="navbar-start">
-					<div class="navbar-item">
-						<div class="control has-icons-left has-icons-right my-2">
-							<input id="SearchInput"  class="input is-normal" type="email" placeholder="Search" autoFocus onInput={PassInput()}/>
-							<span class="icon is-small is-left">
-							<i class="fas fa-search fa-lg"></i>
-							</span>
+				<div className="navbar-start">
+					<div className="navbar-item">
+						<div className="control my-2">
+							<input id="SearchInput"  className="input is-normal" type="email" placeholder="Search" autoFocus onInput={PassInput()}/>
 						</div>
 					</div>
 				</div>
 
 
 				{/* Right Side of Navbar  */}
-				<div class="navbar-end">
-					<div class="navbar-item">
-						<div class="buttons">
+				<div className="navbar-end">
+					<div className="navbar-item">
+						<div className="buttons">
 
 
 
@@ -243,7 +240,7 @@ export default function NavbarForSearch({ listOfSchools, search}){
 							{/* If the user is not Logged in  */}
 							{!session && 
 							
-								<button class="button is-primary" onClick={() => {isHidden(!isShown);}}>
+								<button className="button is-primary" onClick={() => {isHidden(!isShown);}}>
 									<strong>Connect</strong>
 								</button>
 
@@ -261,7 +258,7 @@ export default function NavbarForSearch({ listOfSchools, search}){
 								{/* If the user school email is not verified then show the add school button */}
 								{!isVerified && 
 
-									<button class="button is-primary" onClick={() => {isHidingSchool(!isShowingSchool);}}>
+									<button className="button is-primary" onClick={() => {isHidingSchool(!isShowingSchool);}}>
 									<strong>Add School</strong>
 									</button>
 
@@ -275,17 +272,17 @@ export default function NavbarForSearch({ listOfSchools, search}){
 								{isVerified && 
 									<>
 									<Link href='http://localhost:3000/schools/University-of-Maryland'>
-										<button class="button is-light">
-											<span class="icon">
-												<i class="fas fa-graduation-cap"></i>
+										<button className="button is-light">
+											<span className="icon">
+												<i className="fas fa-graduation-cap"></i>
 											</span>
 											<span>{session.user.school}</span>
 										</button>
 									</Link>
 									
-									<button class="button is-success" onClick={() => {setPlaylists(!isShowingPlaylists);}}>
-										<span class="icon">
-											<i class="fas fa-plus"></i>
+									<button className="button is-success" onClick={() => {setPlaylists(!isShowingPlaylists);}}>
+										<span className="icon">
+											<i className="fas fa-plus"></i>
 										</span>
 										<span>Add a Playlist</span>
 									</button>
@@ -293,7 +290,7 @@ export default function NavbarForSearch({ listOfSchools, search}){
 								}
 
 
-								<button class="button is-warning" onClick={signOut}>
+								<button className="button is-warning" onClick={signOut}>
 									<strong>Sign Out</strong>
 								</button>
 							</>
@@ -304,20 +301,20 @@ export default function NavbarForSearch({ listOfSchools, search}){
 
 
 							{/* <!-- Modal popup to show user playlists --> */}
-							<div  class={`modal ${isShowingPlaylists? "is-active": " "}  `}>
-								<div class="modal-background"></div>
-								<div class="modal-card" style={{width:"350px"}}>
+							<div  className={`modal ${isShowingPlaylists? "is-active": " "}  `}>
+								<div className="modal-background"></div>
+								<div className="modal-card" style={{width:"350px"}}>
 
-									<header class="modal-card-head">
-										<p class="modal-card-title">My Playlists</p>
-										<button class="delete" aria-label="close" onClick={()=>{setPlaylists(!isShowingPlaylists);}}></button>
+									<header className="modal-card-head">
+										<p className="modal-card-title">My Playlists</p>
+										<button className="delete" aria-label="close" onClick={()=>{setPlaylists(!isShowingPlaylists);}}></button>
 									</header>
 
-									<section class="modal-card-body" style={{height:"auto"}}>
+									<section className="modal-card-body" style={{height:"auto"}}>
 
 										{/* Table to hold playlists names and an add button */}
 
-										<table class="table" style={{width:'300px'}}>
+										<table className="table" style={{width:'300px'}}>
 
 
 											<thead>
@@ -338,7 +335,7 @@ export default function NavbarForSearch({ listOfSchools, search}){
 															<tr>
 																<td>{item.name}</td>
 
-																<td><span><button class='button is-small is-light' onClick={e => {e.preventDefault();  handlePlaylistSubmission(item.name, item.owner.display_name,  item.uri, item.external_urls.spotify, session.user.school, item.images[0]['url'], item.description )}}><i class="fas fa-plus"></i></button></span></td>
+																<td><span><button className='button is-small is-light' onClick={e => {e.preventDefault();  handlePlaylistSubmission(item.name, item.owner.display_name,  item.uri, item.external_urls.spotify, session.user.school, item.images[0]['url'], item.description )}}><i className="fas fa-plus"></i></button></span></td>
 																
 															</tr>	
 															</>
@@ -354,7 +351,7 @@ export default function NavbarForSearch({ listOfSchools, search}){
 
 									</section>
 
-									<footer class="modal-card-foot">
+									<footer className="modal-card-foot">
 										<p> Any playlist you add will only be uploaded to your school </p>
 
 									</footer>
@@ -364,16 +361,16 @@ export default function NavbarForSearch({ listOfSchools, search}){
 
 
 							{/* <!-- Modal popup to select school --> */}
-							<div  class={`modal ${isShowingSchool? "is-active": " "}  `}>
-								<div class="modal-background"></div>
-								<div class="modal-card" style={{width:"350px"}}>
+							<div  className={`modal ${isShowingSchool? "is-active": " "}  `}>
+								<div className="modal-background"></div>
+								<div className="modal-card" style={{width:"350px"}}>
 
-									<header class="modal-card-head">
-										<p class="modal-card-title">Select School</p>
-										<button class="delete" aria-label="close" onClick={()=>{isHidingSchool(!isShowingSchool);}}></button>
+									<header className="modal-card-head">
+										<p className="modal-card-title">Select School</p>
+										<button className="delete" aria-label="close" onClick={()=>{isHidingSchool(!isShowingSchool);}}></button>
 									</header>
 
-									<section class="modal-card-body" style={{height:"auto"}}>
+									<section className="modal-card-body" style={{height:"auto"}}>
 										{/* <!-- Content ... --> */}
 
 
@@ -382,8 +379,8 @@ export default function NavbarForSearch({ listOfSchools, search}){
 
 
 										{/* Search Bar for School */}
-										<div class='block'>
-											<p class={`error_message_font_color ${isShownError ? " ": "hide_error_message"}`}>Pick a school and enter a valid email</p>
+										<div className='block'>
+											<p className={`error_message_font_color ${isShownError ? " ": "hide_error_message"}`}>Pick a school and enter a valid email</p>
 										</div>
 
 
@@ -397,22 +394,22 @@ export default function NavbarForSearch({ listOfSchools, search}){
 										onChange={(event, value) => setSchoolChoice(value.name)}
 										/>
 										
-										<div class="block" style={{marginTop:"4em"}}>
-											<p class=""> Enter your school email </p>
-											<input required class="input is-info block" type="email" placeholder="ex kickback@kyleroger.uni.edu" onChange={event => setSchoolEmail(event.target.value)}></input>
+										<div className="block" style={{marginTop:"4em"}}>
+											<p className=""> Enter your school email </p>
+											<input required className="input is-info block" type="email" placeholder="ex kickback@kyleroger.uni.edu" onChange={event => setSchoolEmail(event.target.value)}></input>
 										</div>
 
 
 
 									</section>
 
-									<footer class="modal-card-foot">
+									<footer className="modal-card-foot">
 
 										{/* Checks to see whether the user has entered a schoolemail and school choice */}
 										{schoolEmail && schoolChoice &&
 											<>
-											{/* <button class="button is-success" onClick={() => {router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', query: { email: schoolEmail, school: schoolChoice }})}}>Send Email</button> */}
-											<button class="button is-success" onClick={e => { e.preventDefault(); handleSchoolSubmission(schoolChoice,schoolEmail)}}>Submit</button>
+											{/* <button className="button is-success" onClick={() => {router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', query: { email: schoolEmail, school: schoolChoice }})}}>Send Email</button> */}
+											<button className="button is-success" onClick={e => { e.preventDefault(); handleSchoolSubmission(schoolChoice,schoolEmail)}}>Submit</button>
 											
 											
 											</>
@@ -429,29 +426,29 @@ export default function NavbarForSearch({ listOfSchools, search}){
 
 
 							{/* Modal Popup to connect to music provider. Only pops up when the user clicks the connect button */}
-							<div class={`modal ${isShown ? "is-active" : ""}`}>
-								<div class="modal-background"></div>
-								<div class="modal-content">
-									<div class="box is-primary has-text-centered">
+							<div className={`modal ${isShown ? "is-active" : ""}`}>
+								<div className="modal-background"></div>
+								<div className="modal-content">
+									<div className="box is-primary has-text-centered">
 
-										<div class="is-right small_height">
-											<button class="button is-white exit_icon" onClick={() => {isHidden(!isShown);}}>
-												<span class="icon is-small">
-													<i class="fas fa-times"></i>
+										<div className="is-right small_height">
+											<button className="button is-white exit_icon" onClick={() => {isHidden(!isShown);}}>
+												<span className="icon is-small">
+													<i className="fas fa-times"></i>
 												</span>
 											</button>
 										</div>
 										
-										<div class="block">
-											<p class="title">Connect Account</p>
-											<p class="subtitle">To follow, add and sync playlist you must connect with your music provider</p>
+										<div className="block">
+											<p className="title">Connect Account</p>
+											<p className="subtitle">To follow, add and sync playlist you must connect with your music provider</p>
 										</div> 
 
 
-										<div class="block">		
-											<button class="button is-success is-rounded" onClick={e => { e.preventDefault(); signIn('spotify') }}>
-												<span class="icon">
-													<i class="fab fa-spotify"></i>
+										<div className="block">		
+											<button className="button is-success is-rounded" onClick={e => { e.preventDefault(); signIn('spotify') }}>
+												<span className="icon">
+													<i className="fab fa-spotify"></i>
 												</span>
 												<span>
 													Spotify
