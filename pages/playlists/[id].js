@@ -437,9 +437,9 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                                             <td>{millisToMinutesAndSeconds(item.track.duration_ms)}</td>
                                             <td>{item.track.album.name}</td>
                                             <td>
-                                                <button className="button is-success is-outlined" onClick={ e => {e.preventDefault(); SendSongToPlay(item)}}>
-                                                    <span className="icon is-small">
-                                                    <i className="fas fa-play"></i>
+                                                <button className="button is-success is-outlined is-small" onClick={ e => {e.preventDefault(); SendSongToPlay(item)}}>
+                                                    <span className="icon">
+                                                    <i className="fas fa-play fa-xs"></i>
                                                     </span>
                                                 </button>
                                             </td>
