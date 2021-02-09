@@ -34,80 +34,91 @@ export default function Schools({school,playlist,topSchoolPlaylists}){
             <Navbar />
 
             <section className="section is-vcentered" style={{marginLeft:"2.0em", marginTop:"0"}}>
-			    <div className="columns is-centered">
+
+                <div style={{marginBottom: "1.3em", marginTop: "1.2em"}} className="school_title">
+                    <p className="title is-size-2">{school.name}</p>
+                </div>
 
 
-                    {/* <!-- TOP playlist -->  */}
-                    <div className="column is-11">
+                    <div style={{marginBottom: "0.5em"}}>
+                        <p>Top Playlists</p>
+                    </div>
 
-                        <div style={{marginBottom: "1.3em", marginTop: "1.2em"}} className="school_title">
-                            <p className="title is-size-2">{school.name}</p>
-                        </div>
+                    {/* <!-- TOP PLAYLISTS --> */}
+                    <div className="columns is-mobile is-vcentered" style={{marginTop:'.5em',overflowX:"scroll"}} >
 
+                        
+                        {topSchoolPlaylists.map((item) =>
+                            <Link href={'http://localhost:3000/playlists/'+ item.playlist_id}>
 
-                        <div style={{marginBottom: "0.5em"}}>
-                            <p>Top Playlists</p>
-                        </div>
+                                        <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
+                                            <div className="has-text-centered ">
 
-                        {/* <!-- TOP PLAYLISTS --> */}
-                        <div className="columns is-mobile is-vcentered" style={{sarginTop:"10px", overflow:"auto"}} >
+                                                <div>
+                                                    <figure className="image is-128x128 image_placement">
+                                                        <img src={item.cover_image} />
+                                                    </figure>
+                                                </div>
+                                                
+                                                <div>
+                                                    <p className="playlist_name" style={{overflow:'hidden'}}>{item.name}</p>
+                                                    <p className="has-text-weight-light playlist_subtitles">{item.owner}</p>
+                                                </div>
 
-                            
-                            {topSchoolPlaylists.map((item) =>
-                                <div className="column is-vcentered is-narrow">
-                                    <div className="has-text-centered box">
-                                        <a href={'http://localhost:3000/playlists/'+ item.playlist_id}>
-                                            <figure className="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
-                                                <img src={item.cover_image} />
-                                            </figure>
-                                        </a>
-                                        <p style={{fontSize:"12pt"}}>{item.name}</p>
-                                        <p style={{fontSize:"9pt"}} className="has-text-weight-light">{item.owner}</p>
-                                    </div>
-                                </div>                            
-                            )}
-
-
-                            
-                     </div>
+                                            </div>
+                                        </div>    
 
 
 
 
-                        {/* <!-- Recently Added --> */}
-                        <div style={{marginBottom:"0"}}>
-                            <p>Recently Added</p>
-                        </div>
+                            </Link>                            
+                        )}
 
-                        <div className="columns is-multiline is-vcentered is-mobile is-11" style={{marginTop:"10px", overflowY: "scroll"}}>
+                    </div>
 
 
-                            {playlist.map((item) => (
-
-                                <Link href={`/playlists/${item.playlist_id}`}>               
-                                    <div className="column is-vcentered is-narrow">
-                                        <div className="has-text-centered box">
-                                            <a href={'http://localhost:3000/playlists/'+ item.playlist_id}>
-                                                <figure className="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
-                                                    <img src={item.cover_image} />
-                                                </figure>
-                                            </a>
-                                            <p style={{fontSize:"12pt"}}>{item.name}</p>
-                                            <p style={{fontSize:"9pt"}} className="has-text-weight-light">{item.owner}</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
-                            
 
 
-                        </div>
-                        {/* <!-- END of Recently Added --> */}
 
+                    {/* <!-- Recently Added --> */}
+                    <div style={{marginBottom:"0"}}>
+                        <p>Recently Added</p>
+                    </div>
+
+                    <div className="columns is-multiline is-vcentered is-mobile is-11" style={{marginTop:"10px", overflowY: "scroll"}}>
+
+
+                        {playlist.map((item) => (
+
+                            <Link href={`/playlists/${item.playlist_id}`}>               
+                                        <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'.5em',marginTop:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
+                                            <div className="has-text-centered ">
+
+                                                <div>
+                                                    <figure className="image is-128x128 image_placement">
+                                                        <img src={item.cover_image} />
+                                                    </figure>
+                                                </div>
+                                                
+                                                <div>
+                                                    <p className="playlist_name" style={{overflow:'hidden'}}>{item.name}</p>
+                                                    <p className="has-text-weight-light playlist_subtitles">{item.owner}</p>
+                                                </div>
+
+                                            </div>
+                                        </div>    
+                            </Link>
+                        ))}
+                        
 
 
                     </div>
-			    </div>
+                    {/* <!-- END of Recently Added --> */}
+
+
+
+
+
 		    </section>	
 
 

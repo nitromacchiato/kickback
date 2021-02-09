@@ -432,9 +432,9 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
                                         {/*--------- BUTTONS FOR FOLLOW/UNFOLLOWING PLAYLIST OWNER---------- */}
                                             {/* IF THE USER IS FOLLOWING THE USER */}
                                       
-                                        <div class="buttons" style={{width:'auto'}}>
+                                        <div class="buttons iphone-button-width smaller-screen-mobile button-tablet-spacing" style={{marginTop:'2em'}}>
 
-                                                    <button  className={`button padding_mobile_button is-danger is-rounded ${isFollowingOwner ? "is-active" : "is-hidden"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  UnfollowOwner() }}>
+                                                    <button  className={`button padding_mobile_button is-danger is-rounded  ${isFollowingOwner ? "is-active" : "is-hidden"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  UnfollowOwner() }}>
                                                             <span className="icon">
                                                                 <i className="fab fa-spotify"></i>
                                                             </span>

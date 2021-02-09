@@ -1,3 +1,16 @@
+/* 
+
+    BODY 
+    - GLOBAL 
+
+
+*/
+
+
+
+
+
+
 
 /* 
     REGION STYLES 
@@ -200,13 +213,19 @@
     width:"auto";
 }
 
+
+.sub_div { 
+    position: absolute; 
+    bottom: 0px; 
+} 
+
 /* Large Screen Phones  */
 @media screen and (max-width:768px){
 
     /* adjust screen sizes to iphone sizes  */
     .iphone-button-width{
         margin-top: 2em;
-        width:400px;
+        width: 400px;
     }
 
 
@@ -251,7 +270,7 @@
 /* Smaller Screen Phones  */
 @media screen and (max-width:568px){
     .smaller-screen-mobile{
-        width: 300px;
+        width: 300px !important;
     }
 
 
@@ -264,13 +283,29 @@
 @media screen and (max-width:1280px){
     
     .button-tablet-spacing{
-        margin-top: 3em;
+        margin-top: auto;
     }
 
 }
 
 
 
+/* Large Desktop Screens */
+@media screen and (max-width:2042px){
+    
+    .button-large-desktop-screen-spacing{
+        margin-top: 32em;
+    }
+
+}
+
+@media screen and (max-width:1280px){
+    
+    .button-large-desktop-screen-spacing{
+        margin-top: 25em;
+    }
+
+}
 
 
 

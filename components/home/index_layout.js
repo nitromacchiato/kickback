@@ -21,7 +21,9 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                 <div className="region-title-padding">
                     <p className="title title_adjustment">North East</p>
                 </div>
-                <div className="columns is-mobile is-vcentered region_column_adjustment" key="NorthEast" style={{ overflow:'scroll'}}>
+
+                
+                <div className="columns is-mobile is-vcentered region_column_adjustment" key="NorthEast">
 
                     {isOn && 
                         NorthEastTop.length > 0 &&
@@ -31,8 +33,8 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                                     <>
                                         {/* Turns the playlist uri "spotify:playlist:0vvXsWCC9xrXsKd4FyS8kM" just to "0vvXsWCC9xrXsKd4FyS8kM" */}
                                         <Link href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
-                                            <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'1em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
-                                                    <div className="has-text-centered ">
+                                            <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
+                                                    <div className="has-text-centered hideOverFlowText ">
 
                                                         <div>
                                                             <figure className="image is-128x128 image_placement">
@@ -59,6 +61,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                 </div>
 
 
+
                 {/* WEST COAST */}
                 <div className="region-title-padding">
                     <p className="title title_adjustment">West</p>
@@ -72,7 +75,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                                 return(
                                     <>
                                         <Link href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
-                                            <div className="column is-one-fifth box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'1em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
+                                            <div className="column is-one-fifth box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
                                                     <div className="has-text-centered">
 
                                                         <div>
@@ -113,7 +116,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                                 return(
                                     <>
                                         <Link href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
-                                            <div className="column is-one-fifth box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'1em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
+                                            <div className="column is-one-fifth box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
                                                     <div className="has-text-centered">
 
                                                         <div>
@@ -155,7 +158,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                                 return(
                                     <>
                                         <Link href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
-                                            <div className="column is-one-fifth box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'1em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
+                                            <div className="column is-one-fifth box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
                                                     <div className="has-text-centered">
 
                                                         <div>
@@ -198,7 +201,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
                                 return(
                                     <>
                                         <Link href={'http://localhost:3000/playlists/'+ item['playlist_id']}>
-                                            <div className="column is-one-fifth box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'1em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
+                                            <div className="column is-one-fifth box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
                                                     <div className="has-text-centered ">
 
                                                     
