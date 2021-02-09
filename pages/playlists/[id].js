@@ -15,6 +15,7 @@ import Head from 'next/head'
 import React, { useEffect, useState  } from "react"
 import { useSession } from 'next-auth/client'
 import 'bulma/css/bulma.css'
+import { compileFunction } from 'vm'
 
 
 
@@ -76,9 +77,73 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
             console.warn('Something went wrong playing song')
         })   
 
+        
+        // Hide the play button for track 
+        const playButtonID = song + "play"
+        const playButton = document.getElementById(playButtonID)
+        playButton.style.display="none"
+        
 
+        //Display the pause button for track 
+        const pauseButtonID = song + "pause"
+        const pauseButton = document.getElementById(pauseButtonID)
+        pauseButton.style.display="block"
 
     }
+
+
+
+    //Takes a current song uid and pauses it on the users spotify player 
+    function SendSongToPause(songID){
+
+        //Set the uid scope required to play the track by the spotify api 
+        const song = songID.track.uri
+
+        // Calls the api sends the song id to be played on your spotify playback 
+        fetch('http://localhost:3000/api/spotify/pauseSong',{
+        method:'POST',
+        body: JSON.stringify({
+            songID: song,
+        }),
+        headers:{
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+        }).catch(function (error){
+            console.warn('Something went wrong playing song')
+        })   
+
+        
+        // Hide the play button for track 
+        const playButtonID = song + "play"
+        const playButton = document.getElementById(playButtonID)
+        playButton.style.display="block"
+        
+
+        //Display the pause button for track 
+        const pauseButtonID = song + "pause"
+        const pauseButton = document.getElementById(pauseButtonID)
+        pauseButton.style.display="none"
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //Does the user follow the playlist
     const [isFollowingPlaylist, setisFollowingPlaylist] = React.useState(false);
@@ -437,11 +502,26 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                                             <td>{millisToMinutesAndSeconds(item.track.duration_ms)}</td>
                                             <td>{item.track.album.name}</td>
                                             <td>
-                                                <button className="button is-success is-outlined is-small" onClick={ e => {e.preventDefault(); SendSongToPlay(item)}}>
+                                                {/* Play button - Displayed when the song is not playing  */}
+                                                <button id={item.track.uri + "play"} className={`button is-success is-outlined is-small`} onClick={ e => {e.preventDefault(); SendSongToPlay(item)}}>
                                                     <span className="icon">
                                                     <i className="fas fa-play fa-xs"></i>
                                                     </span>
                                                 </button>
+
+
+
+                                                {/* Pause button - Displayed when the song is playing */}
+                                                <button id={item.track.uri + "pause"}   className={`button is-success is-outlined is-small`} style={{display:'none'}} onClick={ e => {e.preventDefault(); SendSongToPause(item)}}>
+                                                    <span className="icon">
+                                                        <i className="fas fa-pause fa-xs"></i>
+                                                    </span>
+                                                </button>
+
+
+
+
+
                                             </td>
                                         </tr>
 
