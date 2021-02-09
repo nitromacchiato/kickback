@@ -12,7 +12,7 @@ export default function IndexLayout( {NorthEastTop, WestTop, SouthEastTop, South
 
     return(
         <>
-            <section className="section is-vcentered margin_section desktop-max-section-width auto-mobile-width">
+            <section className="section is-vcentered margin_section desktop-max-section-width auto-mobile-width " style={{marginTop:'2em'}}>
 
 
                 {/* --------------------------------- TOP TEN RESULTS PER REGION ----------------------------- */}

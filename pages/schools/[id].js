@@ -31,9 +31,9 @@ export default function Schools({school,playlist,topSchoolPlaylists}){
                 <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
             </Head>
 
-            <Navbar />
+            <Navbar/>
 
-            <section className="section is-vcentered" style={{marginLeft:"2.0em", marginTop:"0"}}>
+            <section className="section is-vcentered small-screen-width-recently-added" style={{marginLeft:"2.0em", marginTop:"0"}} >
 
                 <div style={{marginBottom: "1.3em", marginTop: "1.2em"}} className="school_title">
                     <p className="title is-size-2">{school.name}</p>
@@ -85,13 +85,13 @@ export default function Schools({school,playlist,topSchoolPlaylists}){
                         <p>Recently Added</p>
                     </div>
 
-                    <div className="columns is-multiline is-vcentered is-mobile is-11" style={{marginTop:"10px", overflowY: "scroll"}}>
+                    <div className="columns is-multiline is-vcentered is-mobile is-11 small-screen-width-recently-added small-screen-margin-recently-added" style={{marginTop:"10px", overflowY: "scroll"}}>
 
 
                         {playlist.reverse().map((item) => (
 
                             <Link href={`/playlists/${item.playlist_id}`}>               
-                                        <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'.5em',marginTop:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
+                                        <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue " style={{marginLeft:'.5em',marginTop:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
                                             <div className="has-text-centered ">
 
                                                 <div>

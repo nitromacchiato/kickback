@@ -120,7 +120,7 @@ const options = {
 
        // Update the spotify token every hour while a session is active
        const generateToken = await GenerateNewRefreshToken(userName)
-
+        
 
        // Get Current User Playlists 
        session.playlist = await GetUserPlaylits(userName)

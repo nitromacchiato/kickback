@@ -291,7 +291,7 @@ export default function NavbarForSearch({ listOfSchools, search}){
 
 
 		{/* Start of Navbar  */}
-        <nav className="navbar" role="navigation" aria-label="main navigation">
+        <nav className="navbar is-fixed-top " role="navigation" aria-label="main navigation">
 
 
 			{/* Start of left Navbar */}

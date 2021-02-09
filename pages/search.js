@@ -110,7 +110,7 @@ export default function Search({colleges}){
 
 
         <section className="section is-fullheight">
-            <div className="container">
+            <div className="container mobile-margin-space" style={{marginTop:'5em'}}>
                 
       
 
@@ -130,7 +130,7 @@ export default function Search({colleges}){
                     
 
                     {/* ----------------- Results ----------------- */}
-                    <div className="columns is-mobile is-vcentered " key="school_results" style={{ overflow:'scroll'}}>
+                    <div className="columns is-mobile is-vcentered " key="school_results" style={{ overflowX:'scroll'}}>
 
                         {/* If there are school results display them */}
                         {areThereSchoolResults && 
@@ -190,7 +190,7 @@ export default function Search({colleges}){
                     </div>
 
    
-                    <div className="columns is-mobile is-vcentered" key="playlist_column" style={{ overflow:'scroll'}}>
+                    <div className="columns is-mobile is-vcentered" key="playlist_column" style={{ overflowX:'scroll'}}>
                         {/* If there are school results display them */}
                         {areTherePlaylistResults && 
 
