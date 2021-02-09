@@ -1,7 +1,6 @@
 import PauseSong from '../../../lib/spotify/pauseTrack'
 import { getSession } from 'next-auth/client'
-
-
+   
 export default async function handler(req, res) {
     
     // Header   

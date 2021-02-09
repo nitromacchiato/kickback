@@ -1,3 +1,5 @@
+import { schools } from '../../lib/db/getListOfSchools'
+
 import getPlaylistIds from '../../lib/playlists/getPlaylistsId'
 import getPlaylistInfo from '../../lib/playlists/getPlaylistInfo'
 
@@ -15,7 +17,6 @@ import Head from 'next/head'
 import React, { useEffect, useState  } from "react"
 import { useSession } from 'next-auth/client'
 import 'bulma/css/bulma.css'
-import { compileFunction } from 'vm'
 
 
 
@@ -23,9 +24,7 @@ import { compileFunction } from 'vm'
 
 
 
-
-
-export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks, description}){
+export default function PlaylistPage({colleges,id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks, description}){
 
     //Check session for user to see if they're logged in with NextAuth 
 	const [ session, loading ] = useSession(); 
@@ -33,8 +32,7 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
 
 
     //Check the status of a song playing
-    const [isPlaying, setIsPlaying] = React.useState(false)
-
+    const [isPlaying, setIsPlaying] = React.useState("")
 
 
 
@@ -50,10 +48,6 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
         return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
     }
 
-
-
-
-    //  Only check the status if the user is logged in by seeing if the session is true 
 
 
 
@@ -77,18 +71,50 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
             console.warn('Something went wrong playing song')
         })   
 
-        
+
+        //Set current song playing 
+        setIsPlaying(song)
+
+
+        //Display play button for all other tracks expect current song playing 
+        tracks.map((item) =>{
+            
+            if(setIsPlaying != item.track.uri){
+
+                //Show the play button
+                const playButtonID = item.track.uri + "play"
+                const playButton = document.getElementById(playButtonID)
+                playButton.style.display="block"
+                
+                //Hide the pause button for track 
+                const pauseButtonID = item.track.uri + "pause"
+                const pauseButton = document.getElementById(pauseButtonID)
+                pauseButton.style.display="none"
+
+                
+            }
+
+
+        })
+
+
+        // Now only display the song that is playing 
+
         // Hide the play button for track 
         const playButtonID = song + "play"
         const playButton = document.getElementById(playButtonID)
         playButton.style.display="none"
-        
 
         //Display the pause button for track 
         const pauseButtonID = song + "pause"
         const pauseButton = document.getElementById(pauseButtonID)
         pauseButton.style.display="block"
 
+
+
+
+
+        
     }
 
 
@@ -112,17 +138,22 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
             console.warn('Something went wrong playing song')
         })   
 
+
+
         
-        // Hide the play button for track 
+        // Display the play button for track 
         const playButtonID = song + "play"
         const playButton = document.getElementById(playButtonID)
         playButton.style.display="block"
         
 
-        //Display the pause button for track 
+        //Hide the pause button for track 
         const pauseButtonID = song + "pause"
         const pauseButton = document.getElementById(pauseButtonID)
         pauseButton.style.display="none"
+
+
+
 
     }
 
@@ -358,7 +389,7 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                 <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
             </Head>
 
-            <Navbar />
+            <Navbar listOfSchools={colleges}/>
 
             <section className="section is-vcentered" style={{marginTop: "2em"}}> 
 
@@ -481,8 +512,8 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                                     <th>#</th>
                                     <th>Track</th>
                                     <th>Artist</th>
-                                    <th>Time</th>
-                                    <th>Album</th>
+                                    <th className="hide_mobile">Time</th>
+                                    <th className="hide_mobile">Album</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -499,8 +530,8 @@ export default function PlaylistPage({id,playlistName,playlistOwner,playlistSpot
                                             <th>{i + 1}</th>
                                             <td>{item.track.name}</td>
                                             <td>{item.track.artists[0]['name']}</td>
-                                            <td>{millisToMinutesAndSeconds(item.track.duration_ms)}</td>
-                                            <td>{item.track.album.name}</td>
+                                            <td className="hide_mobile">{millisToMinutesAndSeconds(item.track.duration_ms)}</td>
+                                            <td className="hide_mobile">{item.track.album.name}</td>
                                             <td>
                                                 {/* Play button - Displayed when the song is not playing  */}
                                                 <button id={item.track.uri + "play"} className={`button is-success is-outlined is-small`} onClick={ e => {e.preventDefault(); SendSongToPlay(item)}}>
@@ -584,6 +615,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 
+    //Make a database request to get all the schools 
+    const school = await schools()
+    const colleges = school.schools
+    
     // Remove dashes from school url name and turn it to original format 
     const playlistID = params.id
 
@@ -615,7 +650,7 @@ export async function getStaticProps({ params }) {
     //Checks to see if there is anything in the description
 
     return {
-        props: {id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks,description},// will be passed to the page component as props
+        props: {colleges,id,playlistName,playlistOwner,playlistSpotifyID,externalHref,coverImage,tracks,description},// will be passed to the page component as props
         revalidate: 1,
     }
 

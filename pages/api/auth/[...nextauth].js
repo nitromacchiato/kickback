@@ -4,7 +4,7 @@ import Adapters from 'next-auth/adapters'
 import { PrismaClient } from '@prisma/client'
 import GenerateNewRefreshToken from '../../../lib/spotify/updateRefreshToken'
 import GetUserPlaylits from '../../../lib/spotify/getUserPlaylists'
-
+import isPlaylistInDB from '../../../lib/db/isPlaylistInDB'
 
 
 
@@ -124,6 +124,33 @@ const options = {
 
        // Get Current User Playlists 
        session.playlist = await GetUserPlaylits(userName)
+
+        //Check to see the user's playlist is already in the database 
+        const alreadyAdded = [] //Empty array to hold added databases
+        
+        try{
+          // Loop through the current users playlist and check if the playlist is added already 
+          for(const id of session.playlist){
+
+            //Set the playlist Id and then check to see if it's in the database 
+            const playlistID = id.uri
+            const answer = await isPlaylistInDB(playlistID,userName)
+
+            //Checks to see how many times the playlist is in the database
+            // If greater than 0 than the playlist is already in the database 
+            const count = answer[0]['COUNT(playlist_id)']
+            if(count > 0 ){
+              alreadyAdded.push(playlistID)
+            }
+
+          }
+
+          session.playlistAdded = alreadyAdded
+
+        }catch{
+          console.log('Error adding added playlists')
+        }
+  
 
 
 

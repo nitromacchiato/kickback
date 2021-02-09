@@ -88,6 +88,7 @@ model playlists {
   id                Int       @id @default(autoincrement())
   name              String
   owner             String
+  addedBy           String
   school            String
   region            String
   playlist_id       String
