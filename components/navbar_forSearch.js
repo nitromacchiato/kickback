@@ -50,7 +50,7 @@ export default function NavbarForSearch({ listOfSchools, search}){
 
 
 
-	//Handle Playlist Submission 
+	//Handle Playlist Submission to school page 
 	function handlePlaylistSubmission(PlaylistName,PlaylistOwner,PlaylistSpotifyID,PlaylistHref,UserSchool,PlaylistImage, Description){
 
 
@@ -74,6 +74,52 @@ export default function NavbarForSearch({ listOfSchools, search}){
 		})
 
 
+		//Change add button to remove 
+
+
+        // Hide the add button for playlist
+        const addButtonID = PlaylistSpotifyID + "add"
+        const addButton = document.getElementById(addButtonID)
+        addButton.style.display="none"
+
+        //Display the remove button for playlist
+        const removeButtonID = PlaylistSpotifyID + "remove"
+        const removeButton = document.getElementById(removeButtonID)
+        removeButton.style.display="block"
+
+
+
+
+	}
+
+
+	//Handle Playlist remove from school page
+	function RemovePlaylist(PlaylistSpotifyID){
+		
+		// Calls the api with a post request and submits the parameters in a body 
+		fetch('http://localhost:3000/api/user/removePlaylist',{
+			method:'POST',
+			body: JSON.stringify({
+				spotifyID: PlaylistSpotifyID,
+			}),
+			headers:{
+				'Content-type': 'application/json; charset=UTF-8'
+			}
+		}).catch(function (error){
+			console.warn('Something went wrong adding the playlist.', error)
+		})
+
+		// Show the add button for playlist
+		const addButtonID = PlaylistSpotifyID + "add"
+		const addButton = document.getElementById(addButtonID)
+		addButton.style.display="block"
+
+		//Hide the remove button for playlist
+		const removeButtonID = PlaylistSpotifyID + "remove"
+		const removeButton = document.getElementById(removeButtonID)
+		removeButton.style.display="none"
+
+		
 	}
 
 
@@ -170,6 +216,62 @@ export default function NavbarForSearch({ listOfSchools, search}){
 		
 	}
 
+	
+	// Check which playlist the user has already added to their school page
+	// Will update everytime a user makes a submission or deletion of a playlist 
+ 
+	useEffect(async () => {  
+
+		const userData = await getSession()
+	
+		if(userData != null){
+
+			//Get the added playlist from the current user session 
+			const playlistAdded = userData['playlistAdded']
+			
+			if(playlistAdded != undefined) {
+				
+				//If there is any playlist added 
+				if(playlistAdded.length > 0 ){
+	
+					//map each playlist 
+					playlistAdded.map(item => {
+				
+						//Change the button to remove if the playlist is added already 
+	
+						
+						//Hide the add button
+						const addButtonID = item + "add"
+						const addButton = document.getElementById(addButtonID)
+						if(addButton != null ){
+							addButton.style.display="none"
+						}
+	
+						//Show the remove button 
+						const removeButtonID = item + "remove"
+						const removeButton = document.getElementById(removeButtonID)
+						if(removeButton != null){
+							removeButton.style.display="block"
+						}
+	
+					
+						
+						
+	
+						
+	
+	
+					})
+	
+				}
+			}
+
+		} 
+		
+		
+	}),[];
+
+	
 
 
 
@@ -281,9 +383,6 @@ export default function NavbarForSearch({ listOfSchools, search}){
 									</Link>
 									
 									<button className="button is-success" onClick={() => {setPlaylists(!isShowingPlaylists);}}>
-										<span className="icon">
-											<i className="fas fa-plus"></i>
-										</span>
 										<span>Add a Playlist</span>
 									</button>
 									</>
@@ -310,6 +409,7 @@ export default function NavbarForSearch({ listOfSchools, search}){
 										<button className="delete" aria-label="close" onClick={()=>{setPlaylists(!isShowingPlaylists);}}></button>
 									</header>
 
+
 									<section className="modal-card-body" style={{height:"auto"}}>
 
 										{/* Table to hold playlists names and an add button */}
@@ -320,27 +420,42 @@ export default function NavbarForSearch({ listOfSchools, search}){
 											<thead>
 												<tr>
 													<th>Name</th>
-													<th>Add</th>
+													<th></th>
 												</tr>
 											</thead>
 
 											<tbody>
-												{/* If the user is logged in loop through their playlists */}
+												{/* If the user is logged in and the session.playlist data greater than 0 then loop through their playlists data */}
 												{session && 
-													session.playlist.map(item =>{
+													session.playlist != undefined && 
+														session.playlist.map(item =>{
 
-
-														return(
-															<>
-															<tr>
-																<td>{item.name}</td>
-
-																<td><span><button className='button is-small is-light' onClick={e => {e.preventDefault();  handlePlaylistSubmission(item.name, item.owner.display_name,  item.uri, item.external_urls.spotify, session.user.school, item.images[0]['url'], item.description )}}><i className="fas fa-plus"></i></button></span></td>
+															return(
+																<>
 																
-															</tr>	
-															</>
-														)
-													})	
+																<tr>
+																	<td>{item.name}</td>
+
+																	<td>
+																		<span>
+
+																			{/* Add Playlist Button */}
+																			<button id={item.uri + 'add'} className='button is-small is-primary' onClick={e => {e.preventDefault();  handlePlaylistSubmission(item.name, item.owner.display_name,  item.uri, item.external_urls.spotify, session.user.school, item.images[0]['url'], item.description )}}>
+																				ADD
+																			</button>
+
+																			{/* Remove Playlist button */}
+																			<button id={item.uri + 'remove'} className='button is-small is-danger' style={{display:'none'}}  onClick={e => {e.preventDefault();  RemovePlaylist(item.uri)}}>
+																				DEL
+																			</button>
+																			
+																		</span>
+																	</td>
+																	
+																</tr>	
+																</>
+															)
+														})	
 												}
 
 
