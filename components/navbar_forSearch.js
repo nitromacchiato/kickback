@@ -154,28 +154,29 @@ export default function NavbarForSearch({ listOfSchools, search}){
 
 
 	//Check to see if user has a school 
-	useEffect(async () => {  
+	useEffect(() => {  
+		const handleJob = async() =>{
+			const userData = await getSession()
 
-		const userData = await getSession()
+			if(userData != null){
+				const result = userData['user']['school_verified']
+				
 
-		if(userData != null){
-			const result = userData['user']['school_verified']
-			
+				if (result != null && result != 'false'){		
+					setVerified(true)
+		
+				} else {
+					setVerified(false)
+				}
+		
+				
 
-			if (result != null && result != 'false'){		
-				setVerified(true)
-	
 			} else {
+
 				setVerified(false)
-			}
-	
-			
 
-		} else {
-
-			setVerified(false)
-
-		}	
+			}	
+		}
 	},[]);
 	
 
@@ -220,53 +221,55 @@ export default function NavbarForSearch({ listOfSchools, search}){
 	// Check which playlist the user has already added to their school page
 	// Will update everytime a user makes a submission or deletion of a playlist 
  
-	useEffect(async () => {  
+	useEffect(() => {  
 
-		const userData = await getSession()
-	
-		if(userData != null){
+		const handleJob = async() =>{
+			const userData = await getSession()
+		
+			if(userData != null){
 
-			//Get the added playlist from the current user session 
-			const playlistAdded = userData['playlistAdded']
-			
-			if(playlistAdded != undefined) {
+				//Get the added playlist from the current user session 
+				const playlistAdded = userData['playlistAdded']
 				
-				//If there is any playlist added 
-				if(playlistAdded.length > 0 ){
-	
-					//map each playlist 
-					playlistAdded.map(item => {
-				
-						//Change the button to remove if the playlist is added already 
-	
-						
-						//Hide the add button
-						const addButtonID = item + "add"
-						const addButton = document.getElementById(addButtonID)
-						if(addButton != null ){
-							addButton.style.display="none"
-						}
-	
-						//Show the remove button 
-						const removeButtonID = item + "remove"
-						const removeButton = document.getElementById(removeButtonID)
-						if(removeButton != null){
-							removeButton.style.display="block"
-						}
-	
+				if(playlistAdded != undefined) {
 					
+					//If there is any playlist added 
+					if(playlistAdded.length > 0 ){
+		
+						//map each playlist 
+						playlistAdded.map(item => {
+					
+							//Change the button to remove if the playlist is added already 
+		
+							
+							//Hide the add button
+							const addButtonID = item + "add"
+							const addButton = document.getElementById(addButtonID)
+							if(addButton != null ){
+								addButton.style.display="none"
+							}
+		
+							//Show the remove button 
+							const removeButtonID = item + "remove"
+							const removeButton = document.getElementById(removeButtonID)
+							if(removeButton != null){
+								removeButton.style.display="block"
+							}
+		
 						
-						
-	
-						
-	
-	
-					})
-	
+							
+							
+		
+							
+		
+		
+						})
+		
+					}
 				}
-			}
 
-		} 
+			} 
+		}
 		
 		
 	}),[];

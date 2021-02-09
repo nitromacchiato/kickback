@@ -88,7 +88,7 @@ export default function Schools({school,playlist,topSchoolPlaylists}){
                     <div className="columns is-multiline is-vcentered is-mobile is-11" style={{marginTop:"10px", overflowY: "scroll"}}>
 
 
-                        {playlist.map((item) => (
+                        {playlist.reverse().map((item) => (
 
                             <Link href={`/playlists/${item.playlist_id}`}>               
                                         <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'.5em',marginTop:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>

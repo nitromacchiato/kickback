@@ -40,11 +40,10 @@ export async function getStaticProps(context) {
   const school = await schools()
   const colleges = school.schools
 
-
   
 
   // TOP 10 PER REGIONS PER 7 days 
-  const days = 15
+  const days = 20
 
   //  North East 
   const NorthEastTop = await TopTen('NE',days)
@@ -60,10 +59,6 @@ export async function getStaticProps(context) {
 
   // Mid West 
   const MidWestTop = await TopTen('MW',days)
-
-
-  
-
 
   
   if (colleges != null){
@@ -81,6 +76,8 @@ export async function getStaticProps(context) {
       props:{colleges}
     }
   }
+
+  
 }
 
 

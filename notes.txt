@@ -117,3 +117,4 @@ getstatic paths setpaths fallback to true
 - Make the section clear for the search column when backspaced and starting over 
 - For the index layout i could make a card component to keep resuing instead of repeating the same code over and over 
 - Get the current users devices and then stream the music when they click play to that device 
+- Have the pause button in the playlist page change back after a set amount of time

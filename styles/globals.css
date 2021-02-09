@@ -286,6 +286,9 @@
         margin-top: auto;
     }
 
+    .desktop-margin{
+        margin-top: 75%;
+    }
 }
 
 
@@ -297,6 +300,10 @@
         margin-top: 32em;
     }
 
+
+    .desktop-margin{
+        margin-top: 87%;
+    }
 }
 
 @media screen and (max-width:1280px){

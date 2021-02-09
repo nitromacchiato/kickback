@@ -240,34 +240,38 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
 
 
     //Checks to see if the user is already following the playlist 
-    useEffect(async () =>{
+    useEffect( () =>{
 
         if(session){
-            // Assign playlist id 
-            const split = playlistSpotifyID.split(':')
-            const id = split[2]
+
+            const handleJob = async() =>{
+                // Assign playlist id 
+                const split = playlistSpotifyID.split(':')
+                const id = split[2]
 
 
 
-            //Get the state which is either true or false 
-            const status = await isFollowingPlaylists(id)
-            //Error test status 
-            console.log('Is Status Empty - Playlist?', status)
+                //Get the state which is either true or false 
+                const status = await isFollowingPlaylists(id)
+                //Error test status 
+                console.log('Is Status Empty - Playlist?', status)
 
-            //Assign result 
-            const value = await status[0]
-            
-
-            console.log(value)
-            //Set the state depending on the value 
-            //if true then is following , if false then not following
-            if(value  == true){
-                setisFollowingPlaylist(true)
+                //Assign result 
+                const value = await status[0]
                 
-            } else {
-                setisFollowingPlaylist(false)
-                
+
+                console.log(value)
+                //Set the state depending on the value 
+                //if true then is following , if false then not following
+                if(value  == true){
+                    setisFollowingPlaylist(true)
+                    
+                } else {
+                    setisFollowingPlaylist(false)
+                    
+                }
             }
+            handleJob()
         }
     },[])
 
@@ -306,50 +310,55 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
 
 
     //Checks to see if they are already following user 
-    useEffect(async () =>{
+    useEffect(() =>{
 
 
         // Check playlist Owner 
         console.log(playlistOwner)
 
         if(session){
-            //Get the state which is either true or false 
-            const status = await isFollowingUser(playlistOwner)
-            
 
-            //Check if status is undefined 
-            if (status === undefined){
-
-                const value = false
-
-                //Set the state depending on the value 
-                //if true then is following , if false then not following
-                if(value  == true){
-                    setisFollowingOwner(true)
-                    
-                } else {
-                    setisFollowingOwner(false)
-                    
-                }
-
-
-            } else {
-
-
+            const handleJob = async() => {
+                //Get the state which is either true or false 
+                const status = await isFollowingUser(playlistOwner)
                 
-                //Assign result 
-                const value = await status[0]   
 
-                //Set the state depending on the value 
-                //if true then is following , if false then not following
-                if(value  == true){
-                    setisFollowingOwner(true)
-                    
+                //Check if status is undefined 
+                if (status === undefined){
+
+                    const value = false
+
+                    //Set the state depending on the value 
+                    //if true then is following , if false then not following
+                    if(value  == true){
+                        setisFollowingOwner(true)
+                        
+                    } else {
+                        setisFollowingOwner(false)
+                        
+                    }
+
+
                 } else {
-                    setisFollowingOwner(false)
+
+
                     
+                    //Assign result 
+                    const value = await status[0]   
+
+                    //Set the state depending on the value 
+                    //if true then is following , if false then not following
+                    if(value  == true){
+                        setisFollowingOwner(true)
+                        
+                    } else {
+                        setisFollowingOwner(false)
+                        
+                    }
                 }
             }
+
+            handleJob()
         }
 
 
@@ -411,8 +420,12 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
 
 
                         {/* <!-- INFO --> */}
-                        <div className="column is-centered detail_top_margin" style={{margin: "0em 2em 0em 2em"}}>
+                        <div className="column is-centered detail_top_margin" style={{margin: "0em 2em 0em 2em", maxHeight:'10%'}}>
+                            
+                            {/* If there is a description */}
+                            
 
+                              
                             <div className="iphone-height desktop-size">
 
                                 <div className="block">
@@ -423,6 +436,12 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
                                 </div>
 
                             </div>
+                    
+
+        
+
+
+    
 
                             <div style={{marginTop: "auto"}}>
                                 <span>
@@ -432,9 +451,9 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
                                         {/*--------- BUTTONS FOR FOLLOW/UNFOLLOWING PLAYLIST OWNER---------- */}
                                             {/* IF THE USER IS FOLLOWING THE USER */}
                                       
-                                        <div class="buttons iphone-button-width smaller-screen-mobile button-tablet-spacing" style={{marginTop:'2em'}}>
+                                        <div class="buttons desktop-margin iphone-button-width smaller-screen-mobile button-tablet-spacing">
 
-                                                    <button  className={`button padding_mobile_button is-danger is-rounded  ${isFollowingOwner ? "is-active" : "is-hidden"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  UnfollowOwner() }}>
+                                                    <button  className={`button padding_mobile_button is-danger is-rounded  ${isFollowingOwner ? "is-active" : "is-hidden"}`}  onClick={e => {e.preventDefault();  UnfollowOwner() }}>
                                                             <span className="icon">
                                                                 <i className="fab fa-spotify"></i>
                                                             </span>
@@ -447,7 +466,7 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
                                                     {/* IF THE USER IS NOT FOLLOWING THE USER */}
                                             
                                                     
-                                                    <button className={`button padding_mobile_button is-success is-rounded ${isFollowingOwner ? "is-hidden" : "is-active"}`} style={{marginTop:"auto"}} onClick={e => {e.preventDefault();  FollowOwner() }}>
+                                                    <button className={`button padding_mobile_button is-success is-rounded ${isFollowingOwner ? "is-hidden" : "is-active"}`}  onClick={e => {e.preventDefault();  FollowOwner() }}>
                                                         <span className="icon">
                                                             <i className="fab fa-spotify"></i>
                                                         </span>
@@ -463,8 +482,8 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
 
                                             {/*-------------- BUTTONS FOR ADDING/REMOVING PLAYLIST-----------------*/}
                                         
-                                                <button className={`button padding_mobile_button is-primary is-rounded ${isFollowingPlaylist ? 'is-hidden': 'is-active'}`} style={{marginTop:"auto", marginRight: "4em"}} onClick={e => {e.preventDefault();  FollowPlaylist() }}>Add Playlist</button>
-                                                <button className={`button padding_mobile_button is-danger is-rounded ${isFollowingPlaylist ? 'is-active': 'is-hidden'}`} style={{marginTop:"auto", marginRight: "4em"}} onClick={e => {e.preventDefault();  UnfollowPlaylist() }}>Remove Playlist</button>
+                                                <button className={`button padding_mobile_button is-primary is-rounded ${isFollowingPlaylist ? 'is-hidden': 'is-active'}`}  onClick={e => {e.preventDefault();  FollowPlaylist() }}>Add Playlist</button>
+                                                <button className={`button padding_mobile_button is-danger is-rounded ${isFollowingPlaylist ? 'is-active': 'is-hidden'}`}  onClick={e => {e.preventDefault();  UnfollowPlaylist() }}>Remove Playlist</button>
 
                                             {/* ----------------------------------------------------------- */}                                    
                                         </div>
