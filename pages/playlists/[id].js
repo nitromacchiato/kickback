@@ -399,8 +399,8 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
             </Head>
 
             <Navbar listOfSchools={colleges}/>
-
-            <section className="section is-vcentered" style={{marginTop: "2em"}}> 
+            <body>
+                <section className="section is-vcentered" style={{marginTop: "2em"}}> 
 
                 {/* <!-- CONTAINER FOR TOP OF PLAYLIST -->  */}
                 <div className="container">
@@ -607,7 +607,7 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
 
                 </div>
                 </section>
-
+            </body>
 
 
 

@@ -166,8 +166,10 @@ const options = {
         })
 
 
-        const accessToken = getAccountInfo[0]['refresh_token']
-        session.user.refreshToken = accessToken
+        const RefreshToken = getAccountInfo[0]['refresh_token']
+        const AccessToken = getAccountInfo[0]['access_token']
+        session.user.refreshToken = RefreshToken
+        session.user.accessToken = AccessToken
         
 
 

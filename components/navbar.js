@@ -249,7 +249,7 @@ export default function Navbar({ listOfSchools }){
 
 
 		{/* Start of Navbar  */}
-        <nav className="navbar is-fixed-top mobile touch " role="navigation" aria-label="main navigation">
+        <nav className="navbar is-fixed-top mobile touch" role="navigation" aria-label="main navigation">
 
 
 			{/* Start of left Navbar */}
