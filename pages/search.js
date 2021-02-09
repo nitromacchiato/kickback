@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import React, { useState, useEffect } from "react"
 import NavbarForSearch from '../components/navbar_forSearch'
 import { schools } from '../lib/db/getListOfSchools'
@@ -129,7 +130,7 @@ export default function Search({colleges}){
                     
 
                     {/* ----------------- Results ----------------- */}
-                    <div className="columns" key="school_results">
+                    <div className="columns is-mobile is-vcentered " key="school_results" style={{ overflow:'scroll'}}>
 
                         {/* If there are school results display them */}
                         {areThereSchoolResults && 
@@ -138,11 +139,11 @@ export default function Search({colleges}){
                                 return(
                                     <>
                                         
-                                    
-                                        <div className="column is-one-fifth box has-text-centered" style={{height:'50px', width:'15em', marginLeft:'1em'}} key={item.name}>
-                                            <p className="subtitle">{item.name} </p>
-                                        </div>
-                                
+                                        <Link href={'http://localhost:3000/schools/'+item.name.split(' ').join('-')}>
+                                            <div className="column is-one-fifth box has-text-centered button" style={{height:'50px', width:'15em', marginLeft:'1em', marginBottom:'auto'}} key={item.name}>
+                                                <p className="subtitle">{item.name} </p>
+                                            </div>
+                                        </Link>
                                         
 
                                     </>
@@ -188,26 +189,25 @@ export default function Search({colleges}){
                         <hr className="solid" />
                     </div>
 
-
-                    <div className="columns" key="playlist_column">
+   
+                    <div className="columns is-mobile is-vcentered" key="playlist_column" style={{ overflow:'scroll'}}>
                         {/* If there are school results display them */}
                         {areTherePlaylistResults && 
 
                             PlaylistResults.map(item => {
                                 return(
                                     <>
-                                        
-                                        <div className="column is-one-fifth box has-text-centered " style={{width:'154px',height:'222px', marginLeft:'1em'}} key={item.playlist_id}>
-                                            <a href={"http://localhost:3000/playlists/"+item.playlist_id}>
+                                        <Link href={"http://localhost:3000/playlists/"+item.playlist_id}>
+                                        <div className="column is-one-fifth box has-text-centered button" style={{width:'154px',height:'222px', marginLeft:'1em', marginBottom:'auto'}} key={item.playlist_id}>
+                                            
                                                 <figure className="image is-128x128">
                                                     <img src={item.cover_image}/>
-                                                </figure>       
-                                            </a>    
+                                                </figure>         
                                             <p className="hideOverFlowText">{item.name}</p>
                                             <p className="hideOverFlowText">{item.owner}</p>
                                             <p className="hideOverFlowText">{item.school}</p>                 
                                         </div>
-                                    
+                                        </Link>
                                     </>
                                 )
                             })

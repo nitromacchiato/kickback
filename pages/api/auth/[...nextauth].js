@@ -20,7 +20,7 @@ const options = {
     Providers.Spotify({
         clientId: process.env.SPOTIFY_CLIENT_ID,
         clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-        scope: 'user-read-private user-read-email playlist-read-private playlist-read-collaborative user-read-currently-playing user-top-read playlist-modify-public playlist-modify-private user-follow-modify user-follow-read user-library-modify streaming',
+        scope: 'user-read-private user-read-email playlist-read-private playlist-read-collaborative user-read-currently-playing user-top-read playlist-modify-public playlist-modify-private user-follow-modify user-follow-read user-library-modify streaming user-read-playback-state',
         accessTokenUrl: 'https://accounts.spotify.com/api/token',
         profile(profile) {
           return {

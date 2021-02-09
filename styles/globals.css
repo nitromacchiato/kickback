@@ -179,10 +179,34 @@
 .is-hidden{
     display: none !important;
 }
+  
+.deskto-size{
+    height: "35em";
+    width:"auto";
+}
 
-
-
+/* Large Screen Phones  */
 @media screen and (max-width:768px){
+
+    /* adjust screen sizes to iphone sizes  */
+    .iphone-button-width{
+        margin-top: 2em;
+        width:400px;
+    }
+
+
+    .iphone-height{
+        height:auto;
+    }
+
+    /* Font */
+    .mobile-title{
+        font-size: 24px !important;
+    }
+
+    .mobile-subtitle{
+        font-size: 16px !important;
+    }
 
 
 
@@ -207,6 +231,34 @@
 		margin-left:1em;
 	}
 }
+
+
+/* Smaller Screen Phones  */
+@media screen and (max-width:568px){
+    .smaller-screen-mobile{
+        width: 300px;
+    }
+
+
+    
+}
+
+
+/* Tablets */
+
+@media screen and (max-width:1280px){
+    
+    .button-tablet-spacing{
+        margin-top: 3em;
+    }
+
+}
+
+
+
+
+
+
 
 
 
@@ -234,4 +286,10 @@ hr.solid {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+
+
+.fix-last-margin-issue{
+    margin-bottom: auto !important;
 }

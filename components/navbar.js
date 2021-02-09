@@ -173,7 +173,7 @@ export default function Navbar({ listOfSchools }){
 			setVerified(false)
 
 		}	
-	});
+	}),[];
 
 
  
