@@ -152,9 +152,14 @@ export async function schools() {
 
 
 
+
+
 <detail>
+
 <summary> Login </summary>
-</details>
+
+
+    </details>
 
 
 <detail>
