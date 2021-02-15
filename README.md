@@ -162,4 +162,27 @@ export async function schools() {
 
 
 
-### Get Top Ten Playlists 
+<details>
+<summary> Login </summary>
+</details>
+
+
+<details>
+<summary> Email Confirmation </summary>
+</details>
+
+
+<details>
+<summary> Add A Playlist </summary>
+</details>
+
+
+<details>
+<summary> Follow/Unfollow A User/Playlist </summary>
+</details>
+
+<details>
+<summary> Play Music </summary>
+</details>
+
+
