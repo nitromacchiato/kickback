@@ -4,8 +4,9 @@ An environment for you to discover different music cultures at different unviers
 
 
 ## Table of Contents 
-* [Dependencies](#dependencies)
-* [Features](#features)
+* [Dependencies](#Dependencies)
+* [Examples](#Examples)
+* [Features](#Features)
 
 
 
@@ -32,11 +33,23 @@ An environment for you to discover different music cultures at different unviers
 
 
 
-
-
-
-
 ## Features 
+
+### Intergration with Spotify API to 
+    * Login with Spotify and access your playlist information 
+    * Unfollow/Follow users 
+    * Add/Remove Playlist from your library 
+    * Play/Pause Tracks 
+
+### Discover universities 
+    * acceess to a growing network of schools 
+    * find verified users that are apart of that university 
+    * see what playlist are trending at that university 
+
+
+
+
+## Examples 
 Able to share, stream and add music you discover. 
 
 
