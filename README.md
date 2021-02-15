@@ -48,12 +48,12 @@ An environment for you to discover different music cultures at different unviers
 * see what playlist are trending at each university 
 
 
-## Ranking 
+### Ranking 
 * see what playlist are top in each region 
 * only ranks playlist trending in the application 
 
 
-## Secure 
+### Secure 
 * Use [NextAuth](https://github.com/nextauthjs/next-auth/blob/main/README.md) to provide security 
 
 
