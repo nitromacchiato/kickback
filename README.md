@@ -37,15 +37,24 @@ An environment for you to discover different music cultures at different unviers
 ## Features 
 
 ### Intergration with Spotify API to 
-    * Login with Spotify and access your playlist information 
+    * Access your playlist information 
     * Unfollow/Follow users 
     * Add/Remove Playlist from your library 
     * Play/Pause Tracks 
 
-### Discover universities 
+### Discover universities and music culture 
     * acceess to a growing network of schools 
     * find verified users that are apart of that university 
-    * see what playlist are trending at that university 
+    * see what playlist are trending at each university 
+
+
+## Ranking 
+    * see what playlist are top in each region 
+    * only ranks playlist trending in the application 
+
+
+## Secure 
+    * Use [NextAuth](https://github.com/nextauthjs/next-auth/blob/main/README.md) to provide security 
 
 
 
