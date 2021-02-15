@@ -37,8 +37,9 @@ Able to share, stream and add music you discover.
 <details>
 
 <summary> Select Your School </summary> 
-![Getting the list of schools demo](C:\Users\Pineda\Documents\GitHub\kickback\demo\listofschools.gif)
-
+<p align="center">
+ <img align="center" alt="start up" src="demo/listofschools.gif" />
+</p>
 
 1.First we load the data at build time by using getStaticProps from Nextjs. This allows us to get the list of schools 
 and pass them to the component as a prop. 
