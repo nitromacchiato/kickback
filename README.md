@@ -9,7 +9,8 @@ Description about kickback
 
 ## Dependencies
 
-
+* NextAuth 
+    - asdas
 
 
 
