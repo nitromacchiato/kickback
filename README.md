@@ -613,6 +613,89 @@ Display the pop up to send you to the spotify login from nextAuth
 ```
 
 
+Playlist Submission 
+```javascript 
+// components/navbar 
+
+//Handle Playlist Submission to school page 
+function handlePlaylistSubmission(PlaylistName,PlaylistOwner,PlaylistSpotifyID,PlaylistHref,UserSchool,PlaylistImage, Description){
+
+
+    // Calls the api with a post request and submits the parameters in a body 
+    fetch('http://localhost:3000/api/user/playlistSubmission',{
+        method:'POST',
+        body: JSON.stringify({
+            name: PlaylistName,
+            owner: PlaylistOwner,
+            spotifyID: PlaylistSpotifyID,
+            href: PlaylistHref,
+            image: PlaylistImage,
+            school: UserSchool, 
+            description: Description,
+        }),
+        headers:{
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+    }).catch(function (error){
+        console.warn('Something went wrong adding the playlist.', error)
+    })
+
+
+    //Change add button to remove 
+
+
+    // Hide the add button for playlist
+    const addButtonID = PlaylistSpotifyID + "add"
+    const addButton = document.getElementById(addButtonID)
+    addButton.style.display="none"
+
+    //Display the remove button for playlist
+    const removeButtonID = PlaylistSpotifyID + "remove"
+    const removeButton = document.getElementById(removeButtonID)
+    removeButton.style.display="block"
+}
+
+```
+
+
+
+Remove Playlist 
+```javascript 
+
+// components/navbar 
+
+//Handle Playlist remove from school page
+function RemovePlaylist(PlaylistSpotifyID){
+    
+    // Calls the api with a post request and submits the parameters in a body 
+    fetch('http://localhost:3000/api/user/removePlaylist',{
+        method:'POST',
+        body: JSON.stringify({
+            spotifyID: PlaylistSpotifyID,
+        }),
+        headers:{
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+    }).catch(function (error){
+        console.warn('Something went wrong adding the playlist.', error)
+    })
+
+    // Show the add button for playlist
+    const addButtonID = PlaylistSpotifyID + "add"
+    const addButton = document.getElementById(addButtonID)
+    addButton.style.display="block"
+
+    //Hide the remove button for playlist
+    const removeButtonID = PlaylistSpotifyID + "remove"
+    const removeButton = document.getElementById(removeButtonID)
+    removeButton.style.display="none"
+
+    
+}
+
+
+```
+
 
 
 </details>
