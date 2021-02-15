@@ -24,7 +24,10 @@ Able to share, stream and add music you discover.
 <details>
 
 <summary> Select Your School </summary> 
-<p>
+<p style=" margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;">
  <img  alt="start up" src="demo/listofschools.gif" />
 </p>
 
