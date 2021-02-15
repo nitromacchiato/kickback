@@ -146,37 +146,12 @@ export async function schools() {
 
 
 ```
-</detail>
 
 
 
 <summary> Login </summary>
 2.  Pass the list of schools as a prop to our home component and passing our list of schools to 
 our Navbar component. 
-
-```javascript 
-function Home({colleges, ...}) {
-return (
-    <>
-    <Head>
-        ...
-        <title>Kickback</title>
-        ...
-    </Head>
-
-
-    <body>
-        <Navbar listOfSchools={colleges}/>
-        ...
-    </body>
-    </>
-)
-}
-
-
-
-```
-
 
 
 
