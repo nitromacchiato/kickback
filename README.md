@@ -148,12 +148,6 @@ export async function schools() {
 ```
 
 
-
-
-
-
-
-
 </details>
 
 
@@ -165,25 +159,22 @@ our Navbar component.
 </details>
 
 
-
+<detail>
 <summary> Email Confirmation </summary>
-
-
-
-
-<summary> Add A Playlist </summary>
-
-
-
-
-<summary> Follow/Unfollow A User/Playlist </summary>
-
-
-
-<summary> Play Music </summary>
-
-
-
 </details>
+
+
+<details>
+<summary> Add A Playlist </summary>
+</details>
+
+
+<details>
+<summary> Follow/Unfollow A User/Playlist </summary>
+</details>
+
+<details>
+<summary> Play Music </summary>
+<details>
 
 
