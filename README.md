@@ -43,14 +43,14 @@ An environment for you to discover different music cultures at different unviers
 * Play/Pause Tracks 
 
 ### Discover universities and music culture 
-* acceess to a growing network of schools 
-* find verified users that are apart of that university 
-* see what playlist are trending at each university 
+* Acceess to a growing network of schools 
+* Find verified users that are apart of that university 
+* See what playlist are trending at each university 
 
 
 ### Ranking 
-* see what playlist are top in each region 
-* only ranks playlist trending in the application 
+* See what playlist are top in each region 
+* Only ranks application that are trending within the application
 
 
 ### Secure 
