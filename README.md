@@ -12,10 +12,11 @@ An environment for you to discover different music cultures at different unviers
 
 ## Developers
 
+### Andy Pineda 
 Hi my name is Andy Pineda, I'm a senior studying Information Science at the University of Maryland graduting May 2021. I'm pursing a career in software engineering and 
 enjoy developing my own projects on my free time. I focused on developing the full stack application from working on the front end to engineering the database and createing the api routes to access the data. 
 
-
+### Sydney Bullock
 My partner Sydney Bullock focused on marketing and branding the product. Sydney helped guide the design proccess helping make alterations to the application and deciding what we should foucs on 
 based off our own research. 
 
