@@ -366,82 +366,11 @@ Display the pop up to send you to the spotify login from nextAuth
 
 
 
-1. For user login we use NextAuth which is a open source 
+1. If the user is logged in and their school email is verified then display the add a playlist button  
 
 
 ```javascript
-// pages/api/auth/[...nextauth].js
-
-// For more information on each option (and a full list of options) go to
-// https://next-auth.js.org/configuration/options
-const options = {
-  // https://next-auth.js.org/configuration/providers
-  providers: [
-    Providers.Spotify({
-        clientId: process.env.SPOTIFY_CLIENT_ID,
-        clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-        scope: 'scopes',
-        accessTokenUrl: 'https://accounts.spotify.com/api/token',
-        profile(profile) {
-          return {
-            id: profile.id,
-            name: profile.display_name,
-            email: profile.email,
-            image: profile.images?.[0]?.url,
-            uri: profile.uri,
-            link: profile.href,
-            country: profile.country,
-            
-          }
-        },
-
-    })
-  ],
-
-  adapter: Adapters.Prisma.Adapter({ prisma }),
-
-
-  callbacks: {
-    signIn: async (user, account, profile) => {
-      return Promise.resolve(true)
-    },
-    redirect: async (url, baseUrl) => {
-      return Promise.resolve(baseUrl)
-    },
-    session: async (session, user) => {
-        ....
-      return Promise.resolve(session)
-    },
-    jwt: async (token, user, account, profile, isNewUser) => {
-      return Promise.resolve(token)
-    }
-  }
-
-
-}
-
-
-
-```
-
-
-
-2.  Pass the list of schools as a prop to our home component and passing our list of schools to 
-our Navbar component. 
-
-```javascript 
-
-{/* If the user is not Logged in  */}
-{!session && 
-
-    <button className="button is-primary" onClick={() => {isHidden(!isShown);}}>
-        <strong>Connect</strong>
-    </button>
-
-}
-
-
-
+// components/navbar.js
 
 {/* If the user is logged in */}
 {session &&
@@ -487,12 +416,115 @@ our Navbar component.
 </>
 }
 
+
+
+
+
+```
+
+
+
+2.  Loop through their playlist which is gathered from their sesson  
+
+
+ - Check if the users school email is verified 
+```javascript 
+try{
+    //Search in database for user based of their email
+    const result = await prisma.user.findUnique({
+    where: {
+        email:  userEmail,
+    },
+    })
+    .catch(e => {
+    throw e
+    })
+    .finally(async () => {
+    await prisma.$disconnect()
+    })
+
+
+
+    //Assign the school to the session 
+    session.user.school = result.school
+    session.user.school_verified = result.schoolEmailVerified
+} catch (error) {
+    console.log('No School was found for user or school email was not verified',error)
+}
+    
+```
+
+
+- Get their playlist from spotify and assign it to their user session provided by NextAuth 
+
+```javascript 
+// pages/apit/auth/[...nextauth].js 
+// Get Current User Playlists 
+session.playlist = await GetUserPlaylits(userName)
+
+```
+
+
+- Function for getting user playlist 
+```javascript 
+
+// lib/spotify/getUserPlaylists 
+import prisma from '../db/prisma'
+var SpotifyWebApi = require('spotify-web-api-node');
+
+async function GetUserPlaylits(userName){
+
+
+    try{
+
+        //Get the user access token from the database 
+        const searchAccountTable = await prisma.$queryRaw`SELECT * FROM accounts 
+        WHERE provider_account_id=${userName};`
+        .catch(e => {
+          throw e
+          })
+        .finally(async () => {
+          await prisma.$disconnect()
+        })
+
+        const UserRefreshToken = await searchAccountTable[0]['refresh_token']
+        
+        //Setting up information for Spotify Api Wrapper 
+        var spotifyApi = new SpotifyWebApi();
+
+
+        spotifyApi.setAccessToken(UserRefreshToken);
+
+        const userPlaylist = await spotifyApi.getUserPlaylists(userName)
+        .then(function(data) {
+          
+          return data.body.items
+
+        },function(err) {
+          console.log('Something went wrong getting the user spotify playlist!', err);
+        });
+
+        
+        return userPlaylist
+
+      }catch(error){
+        console.log('error adding user playlist to user session')
+      }
+
+
+
+}
+
+export default GetUserPlaylits
 ```
 
 
 
 
-3. Connect Modal Popup 
+
+
+
+3. Display playlist for user  
 
 - Create a react state to trigger when to show the pop up 
 ``` javascript 
