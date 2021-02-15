@@ -376,22 +376,16 @@ Display the pop up to send you to the spotify login from nextAuth
 {session &&
 
     <>	
-
-    
     {/* If the user school email is not verified then show the add school button */}
     {!isVerified && 
-
         <button className="button is-primary" onClick={() => {isHidingSchool(!isShowingSchool);}}>
         <strong>Add School</strong>
         </button>
-
-    
     }
     
 
 
     {/* If the user school email is verified then show a custom button with a href link to their school page */}
-
     {isVerified && 
         <>
             <Link href='http://localhost:3000/schools/University-of-Maryland'>
@@ -594,7 +588,7 @@ Display the pop up to send you to the spotify login from nextAuth
                                         
                                     </tr>	
                                     </>
-                                )
+                                    )
                             })	
                     }
 
