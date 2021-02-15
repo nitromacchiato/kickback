@@ -24,11 +24,8 @@ Able to share, stream and add music you discover.
 <details>
 
 <summary> Select Your School </summary> 
-<p style=" margin: auto;
-  width: 50%;
-  border: 3px solid green;
-  padding: 10px;">
- <img  alt="start up" src="demo/listofschools.gif" />
+<p style="align:center;">
+ <img style="align:center;" alt="start up" src="demo/listofschools.gif" />
 </p>
 
 1.First we load the data at build time by using getStaticProps from Nextjs. This allows us to get the list of schools 
