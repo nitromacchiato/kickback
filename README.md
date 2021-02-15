@@ -233,61 +233,61 @@ our Navbar component.
 
 ```javascript 
 
-							{/* If the user is not Logged in  */}
-							{!session && 
-							
-								<button className="button is-primary" onClick={() => {isHidden(!isShown);}}>
-									<strong>Connect</strong>
-								</button>
+{/* If the user is not Logged in  */}
+{!session && 
 
-							}
+    <button className="button is-primary" onClick={() => {isHidden(!isShown);}}>
+        <strong>Connect</strong>
+    </button>
 
-
+}
 
 
-							{/* If the user is logged in */}
-							{session &&
-
-								<>	
-
-								
-								{/* If the user school email is not verified then show the add school button */}
-								{!isVerified && 
-
-									<button className="button is-primary" onClick={() => {isHidingSchool(!isShowingSchool);}}>
-									<strong>Add School</strong>
-									</button>
-
-								
-								}
-								
 
 
-								{/* If the user school email is verified then show a custom button with a href link to their school page */}
+{/* If the user is logged in */}
+{session &&
 
-								{isVerified && 
-									<>
-										<Link href='http://localhost:3000/schools/University-of-Maryland'>
-											<button className="button is-light">
-												<span className="icon">
-													<i className="fas fa-graduation-cap"></i>
-												</span>
-												<span>{session.user.school}</span>
-											</button>
-										</Link>
-										
-										<button className="button is-success" onClick={() => {setPlaylists(!isShowingPlaylists);}}>
-											<p>Add a Playlist</p>
-										</button>
-									</>
-								}
+    <>	
+
+    
+    {/* If the user school email is not verified then show the add school button */}
+    {!isVerified && 
+
+        <button className="button is-primary" onClick={() => {isHidingSchool(!isShowingSchool);}}>
+        <strong>Add School</strong>
+        </button>
+
+    
+    }
+    
 
 
-								<button className="button is-warning" onClick={signOut}>
-									<strong>Sign Out</strong>
-								</button>
-							</>
-							}
+    {/* If the user school email is verified then show a custom button with a href link to their school page */}
+
+    {isVerified && 
+        <>
+            <Link href='http://localhost:3000/schools/University-of-Maryland'>
+                <button className="button is-light">
+                    <span className="icon">
+                        <i className="fas fa-graduation-cap"></i>
+                    </span>
+                    <span>{session.user.school}</span>
+                </button>
+            </Link>
+            
+            <button className="button is-success" onClick={() => {setPlaylists(!isShowingPlaylists);}}>
+                <p>Add a Playlist</p>
+            </button>
+        </>
+    }
+
+
+    <button className="button is-warning" onClick={signOut}>
+        <strong>Sign Out</strong>
+    </button>
+</>
+}
 
 ```
 
@@ -298,10 +298,10 @@ our Navbar component.
 
 - Create a react state to trigger when to show the pop up 
 ``` javascript 
-    //components/navbar 
+//components/navbar 
 
-	//Show modal card to connect to provider 
-	const [isShown, isHidden] = React.useState(false);
+//Show modal card to connect to provider 
+const [isShown, isHidden] = React.useState(false);
 
 ```
 
@@ -309,38 +309,38 @@ Display the pop up to send you to the spotify login from nextAuth
 ```javascript 
 
 // components/navbar 
-	<div className={`modal ${isShown ? "is-active" : ""}`}>
-        <div className="modal-background"></div>
-        <div className="modal-content">
-            <div className="box is-primary has-text-centered">
+<div className={`modal ${isShown ? "is-active" : ""}`}>
+    <div className="modal-background"></div>
+    <div className="modal-content">
+        <div className="box is-primary has-text-centered">
 
-                <div className="is-right small_height">
-                    <button className="button is-white exit_icon" onClick={() => {isHidden(!isShown);}}>
-                        <span className="icon is-small">
-                            <i className="fas fa-times"></i>
-                        </span>
-                    </button>
-                </div>
-                
-                <div className="block">
-                    <p className="title">Connect Account</p>
-                    <p className="subtitle">To follow, add and sync playlist you must connect with your music provider</p>
-                </div> 
-
-
-                <div className="block">		
-                    <button className="button is-success is-rounded" onClick={e => { e.preventDefault(); signIn('spotify') }}>
-                        <span className="icon">
-                            <i className="fab fa-spotify"></i>
-                        </span>
-                        <span>
-                            Spotify
-                        </span>
-                    </button>										
-                </div>							                                          
+            <div className="is-right small_height">
+                <button className="button is-white exit_icon" onClick={() => {isHidden(!isShown);}}>
+                    <span className="icon is-small">
+                        <i className="fas fa-times"></i>
+                    </span>
+                </button>
             </div>
-        </div>		
-    </div>
+            
+            <div className="block">
+                <p className="title">Connect Account</p>
+                <p className="subtitle">To follow, add and sync playlist you must connect with your music provider</p>
+            </div> 
+
+
+            <div className="block">		
+                <button className="button is-success is-rounded" onClick={e => { e.preventDefault(); signIn('spotify') }}>
+                    <span className="icon">
+                        <i className="fab fa-spotify"></i>
+                    </span>
+                    <span>
+                        Spotify
+                    </span>
+                </button>										
+            </div>							                                          
+        </div>
+    </div>		
+</div>
 
 
 ```
