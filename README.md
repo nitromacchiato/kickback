@@ -9,7 +9,6 @@ Description about kickback
 
 ## Dependencies
 
-<a href="https://next-auth.js.org" target="_blank"><img width="50px" height="50px" src="https://next-auth.js.org/img/logo/logo-sm.png" /></a> 
 * @material-ui/core@4.11.2
 * @material-ui/lab@4.0.0-alpha.57
 * @prisma/cli@2.15.0
