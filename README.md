@@ -9,7 +9,7 @@ Description about kickback
 
 ## Dependencies
 
-* NextAuth  <a href="https://next-auth.js.org" target="_blank"><img width="150px" src="https://next-auth.js.org/img/logo/logo-sm.png" /></a>
+* NextAuth  <a href="https://next-auth.js.org" target="_blank"><img width="50px" height="50px" src="https://next-auth.js.org/img/logo/logo-sm.png" /></a>
     - asdas
 
 
