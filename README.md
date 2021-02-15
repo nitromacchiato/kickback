@@ -530,8 +530,8 @@ export default GetUserPlaylits
 ``` javascript 
 //components/navbar 
 
-//Show modal card to connect to provider 
-const [isShown, isHidden] = React.useState(false);
+//Show user playlists 
+const [isShowingPlaylists, setPlaylists] = React.useState(false)
 
 ```
 
@@ -539,38 +539,81 @@ Display the pop up to send you to the spotify login from nextAuth
 ```javascript 
 
 // components/navbar 
-<div className={`modal ${isShown ? "is-active" : ""}`}>
+
+{/* <!-- Modal popup to show user playlists --> */}
+<div  className={`modal ${isShowingPlaylists? "is-active": " "}  `}>
     <div className="modal-background"></div>
-    <div className="modal-content">
-        <div className="box is-primary has-text-centered">
+    <div className="modal-card" style={{width:"350px"}}>
 
-            <div className="is-right small_height">
-                <button className="button is-white exit_icon" onClick={() => {isHidden(!isShown);}}>
-                    <span className="icon is-small">
-                        <i className="fas fa-times"></i>
-                    </span>
-                </button>
-            </div>
-            
-            <div className="block">
-                <p className="title">Connect Account</p>
-                <p className="subtitle">To follow, add and sync playlist you must connect with your music provider</p>
-            </div> 
+        <header className="modal-card-head">
+            <p className="modal-card-title">My Playlists</p>
+            <button className="delete" aria-label="close" onClick={()=>{setPlaylists(!isShowingPlaylists);}}></button>
+        </header>
+
+        <section className="modal-card-body" style={{height:"auto"}}>
+
+            {/* Table to hold playlists names and an add button */}
+
+            <table className="table" style={{width:'300px'}}>
 
 
-            <div className="block">		
-                <button className="button is-success is-rounded" onClick={e => { e.preventDefault(); signIn('spotify') }}>
-                    <span className="icon">
-                        <i className="fab fa-spotify"></i>
-                    </span>
-                    <span>
-                        Spotify
-                    </span>
-                </button>										
-            </div>							                                          
-        </div>
-    </div>		
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {/* If the user is logged in and the session.playlist data greater than 0 then loop through their playlists data */}
+                    {session && 
+                        session.playlist != undefined && 
+                            session.playlist.map(item =>{
+
+                                return(
+                                    <>
+                                    
+                                    <tr>
+                                        <td>{item.name}</td>
+
+                                        <td>
+                                            <span>
+
+                                                {/* Add Playlist Button */}
+                                                <button id={item.uri + 'add'} className='button is-small is-primary' onClick={e => {e.preventDefault();  handlePlaylistSubmission(item.name, item.owner.display_name,  item.uri, item.external_urls.spotify, session.user.school, item.images[0]['url'], item.description )}}>
+                                                    ADD
+                                                </button>
+
+                                                {/* Remove Playlist button */}
+                                                <button id={item.uri + 'remove'} className='button is-small is-danger' style={{display:'none'}}  onClick={e => {e.preventDefault();  RemovePlaylist(item.uri)}}>
+                                                    DEL
+                                                </button>
+                                                
+                                            </span>
+                                        </td>
+                                        
+                                    </tr>	
+                                    </>
+                                )
+                            })	
+                    }
+
+
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <footer className="modal-card-foot">
+            <p> Any playlist you add will only be uploaded to your school </p>
+
+        </footer>
+
+    </div>
 </div>
+
 
 
 ```
