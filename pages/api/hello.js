@@ -42,10 +42,7 @@ export default async function handler(req, res) {
         console.log('Something went wrong!', err);
       }
     );
-
-
-    res.statusCode = 200
-    res.setHeader('Content-Type', 'application/json')
+    
     res.end(JSON.stringify({accessToken:userToken}))
 
 

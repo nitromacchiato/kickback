@@ -468,7 +468,7 @@ export default function Navbar({ listOfSchools }){
 										
 										<div className="block" style={{marginTop:"4em"}}>
 											<p className=""> Enter your school email </p>
-											<input required className="input is-info block" type="email" placeholder="ex kickback@kyleroger.uni.edu" onChange={event => setSchoolEmail(event.target.value)}></input>
+											<input required className="input is-info block" type="email" placeholder="exex firstlast@name.uni.edu" onChange={event => setSchoolEmail(event.target.value)}></input>
 										</div>
 
 

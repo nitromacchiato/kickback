@@ -303,10 +303,13 @@
 /* Smaller Screen Phones  */
 @media screen and (max-width:568px){
     .smaller-screen-mobile{
-        width: 300px !important;
+        width: 300px;
+        max-width: 300px !important;
     }
 
-
+    .smaller-device-screen-width-navbar{
+        max-width: 320px !important;
+    }
     
 }
 

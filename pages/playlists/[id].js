@@ -35,8 +35,11 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
     const [isPlaying, setIsPlaying] = React.useState("")
 
 
-
-
+    function TrackInfo(){
+        console.log(tracks[0]['track']['album']['href'])
+        console.log(tracks[0]['track']['album'])
+    }
+    TrackInfo()
 
 
 
@@ -451,30 +454,28 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
                                         {/*--------- BUTTONS FOR FOLLOW/UNFOLLOWING PLAYLIST OWNER---------- */}
                                             {/* IF THE USER IS FOLLOWING THE USER */}
                                       
-                                        <div class="buttons desktop-margin iphone-button-width smaller-screen-mobile button-tablet-spacing">
+                                            <div class="buttons iphone-button-width smaller-screen-mobile button-tablet-spacing smaller-device-screen-width-navbar desktop-button-spacing" style={{marginTop:'86%',marginRight:'auto',marginLeft:'auto'}}>
 
-                                                    <button  className={`button padding_mobile_button is-danger is-rounded  ${isFollowingOwner ? "is-active" : "is-hidden"}`}  onClick={e => {e.preventDefault();  UnfollowOwner() }}>
-                                                            <span className="icon">
-                                                                <i className="fab fa-spotify"></i>
-                                                            </span>
-                                                            <span>
-                                                                Unfollow
-                                                            </span> 
-                                                    </button>
+                                                <button  className={`button padding_mobile_button is-danger is-rounded  ${isFollowingOwner ? "is-active" : "is-hidden"}`}  onClick={e => {e.preventDefault();  UnfollowOwner() }}>
+                                                    <span className="icon">
+                                                        <i className="fab fa-spotify"></i>
+                                                    </span>
+                                                    <span>
+                                                        Unfollow
+                                                    </span> 
+                                                </button>
 
-                                                
-                                                    {/* IF THE USER IS NOT FOLLOWING THE USER */}
                                             
-                                                    
-                                                    <button className={`button padding_mobile_button is-success is-rounded ${isFollowingOwner ? "is-hidden" : "is-active"}`}  onClick={e => {e.preventDefault();  FollowOwner() }}>
-                                                        <span className="icon">
-                                                            <i className="fab fa-spotify"></i>
-                                                        </span>
-                                                        <span>
-                                                            Follow
-                                                        </span> 
-                                                    </button>      
-                                                
+                                                {/* IF THE USER IS NOT FOLLOWING THE USER */}
+                                                <button className={`button padding_mobile_button is-success is-rounded ${isFollowingOwner ? "is-hidden" : "is-active"}`}  onClick={e => {e.preventDefault();  FollowOwner() }}>
+                                                    <span className="icon">
+                                                        <i className="fab fa-spotify"></i>
+                                                    </span>
+                                                    <span>
+                                                        Follow
+                                                    </span> 
+                                                </button>      
+                                            
                                             
                                             {/* ------------------------------------------------------------- */}
 
@@ -493,7 +494,7 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
                                     {/* If the user is not logged in redirect them to the spotify page to add the playlist manually */}
                                     {!session &&
                                         <>      
-                                            <div class="buttons iphone-button-width smaller-screen-mobile button-tablet-spacing">
+                                            <div class="buttons iphone-button-width smaller-screen-mobile button-tablet-spacing smaller-device-screen-width-navbar desktop-button-spacing" style={{marginTop:'86%',marginRight:'auto',marginLeft:'auto'}}>
                                                 <a href={"https://open.spotify.com/user/"+playlistOwner} target="_blank">
                                                     <button className="button padding_mobile_button is-success is-rounded" style={{marginTop:"auto"}}>
                                                         <span className="icon">
@@ -526,7 +527,7 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
 
 
 
-                        <table className="table is-fullwidth is-hoverable is-striped is-narrow">
+                        <table className="table is-fullwidth is-hoverable is-striped is-narrow ">
 
                             {/* <!-- TABLE HEADER --> */}
                             <thead>
@@ -586,7 +587,9 @@ export default function PlaylistPage({colleges,id,playlistName,playlistOwner,pla
                                     tracks.map((item,i)=> (
                                         <tr>
                                             <th>{i + 1}</th>
+
                                             <td>{item.track.name}</td>
+
                                             <td>{item.track.artists[0]['name']}</td>
                                             <td className="hide_mobile">{millisToMinutesAndSeconds(item.track.duration_ms)}</td>
                                             <td className="hide_mobile " >{item.track.album.name}</td>

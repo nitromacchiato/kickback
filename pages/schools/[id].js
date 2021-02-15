@@ -34,93 +34,93 @@ export default function Schools({school,playlist,topSchoolPlaylists}){
             
             <body>
                 <Navbar/>
-                <section className="section is-vcentered small-screen-width-recently-added" style={{marginLeft:"2.0em", marginTop:"0"}} >
+                <section className="section is-vcentered small-screen-width-recently-added desktop-max-section-width auto-mobile-width" style={{marginLeft:"auto", marginTop:"2em"}} >
 
-                <div style={{marginBottom: "1.3em", marginTop: "1.2em"}} className="school_title">
-                    <p className="title is-size-2">{school.name}</p>
-                </div>
-
-
-                    <div style={{marginBottom: "0.5em"}}>
-                        <p>Top Playlists</p>
-                    </div>
-
-                    {/* <!-- TOP PLAYLISTS --> */}
-                    <div className="columns is-mobile is-vcentered" style={{marginTop:'.5em',overflowX:"scroll"}} >
-
-                        
-                        {topSchoolPlaylists.map((item) =>
-                            <Link href={'http://localhost:3000/playlists/'+ item.playlist_id}>
-
-                                        <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
-                                            <div className="has-text-centered ">
-
-                                                <div>
-                                                    <figure className="image is-128x128 image_placement">
-                                                        <img src={item.cover_image} />
-                                                    </figure>
-                                                </div>
-                                                
-                                                <div>
-                                                    <p className="playlist_name" style={{overflow:'hidden'}}>{item.name}</p>
-                                                    <p className="has-text-weight-light playlist_subtitles">{item.owner}</p>
-                                                </div>
-
-                                            </div>
-                                        </div>    
-
-
-
-
-                            </Link>                            
-                        )}
-
+                    <div style={{marginBottom: "1.3em", marginTop: "1.2em"}} className="school_title">
+                        <p className="title is-size-2">{school.name}</p>
                     </div>
 
 
+                        <div style={{marginBottom: "0.5em"}}>
+                            <p>Top Playlists</p>
+                        </div>
 
+                        {/* <!-- TOP PLAYLISTS --> */}
+                        <div className="columns is-mobile is-vcentered" style={{marginTop:'.5em',overflowX:"scroll"}} >
 
+                            
+                            {topSchoolPlaylists.map((item) =>
+                                <Link href={'http://localhost:3000/playlists/'+ item.playlist_id}>
 
-                    {/* <!-- Recently Added --> */}
-                    <div style={{marginBottom:"0"}}>
-                        <p>Recently Added</p>
-                    </div>
+                                            <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
+                                                <div className="has-text-centered ">
 
-                    <div className="columns is-multiline is-vcentered is-mobile is-11 small-screen-width-recently-added small-screen-margin-recently-added" style={{marginTop:"10px", overflowY: "scroll"}}>
+                                                    <div>
+                                                        <figure className="image is-128x128 image_placement">
+                                                            <img src={item.cover_image} />
+                                                        </figure>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <p className="playlist_name" style={{overflow:'hidden'}}>{item.name}</p>
+                                                        <p className="has-text-weight-light playlist_subtitles">{item.owner}</p>
+                                                    </div>
 
-
-                        {playlist.slice(0).reverse().map((item) => (
-
-                            <Link href={`/playlists/${item.playlist_id}`}>               
-                                        <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue " style={{marginLeft:'.5em',marginTop:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
-                                            <div className="has-text-centered ">
-
-                                                <div>
-                                                    <figure className="image is-128x128 image_placement">
-                                                        <img src={item.cover_image} />
-                                                    </figure>
                                                 </div>
-                                                
-                                                <div>
-                                                    <p className="playlist_name" style={{overflow:'hidden'}}>{item.name}</p>
-                                                    <p className="has-text-weight-light playlist_subtitles">{item.owner}</p>
+                                            </div>    
+
+
+
+
+                                </Link>                            
+                            )}
+
+                        </div>
+
+
+
+
+
+                        {/* <!-- Recently Added --> */}
+                        <div style={{marginBottom:"0"}}>
+                            <p>Recently Added</p>
+                        </div>
+
+                        <div className="columns is-multiline is-vcentered is-mobile is-11 small-screen-width-recently-added small-screen-margin-recently-added" style={{marginTop:"10px", overflowY: "scroll"}}>
+
+
+                            {playlist.slice(0).reverse().map((item) => (
+
+                                <Link href={`/playlists/${item.playlist_id}`}>               
+                                            <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue " style={{marginLeft:'.5em',marginTop:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
+                                                <div className="has-text-centered ">
+
+                                                    <div>
+                                                        <figure className="image is-128x128 image_placement">
+                                                            <img src={item.cover_image} />
+                                                        </figure>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <p className="playlist_name" style={{overflow:'hidden'}}>{item.name}</p>
+                                                        <p className="has-text-weight-light playlist_subtitles">{item.owner}</p>
+                                                    </div>
+
                                                 </div>
-
-                                            </div>
-                                        </div>    
-                            </Link>
-                        ))}
-                        
+                                            </div>    
+                                </Link>
+                            ))}
+                            
 
 
-                    </div>
-                    {/* <!-- END of Recently Added --> */}
+                        </div>
+                        {/* <!-- END of Recently Added --> */}
 
 
 
 
 
-		    </section>	
+                </section>	
             </body>                    
 
 
