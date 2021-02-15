@@ -164,25 +164,30 @@ export async function schools() {
 
 <details>
 <summary> Login </summary>
+login
 </details>
 
 
 <details>
 <summary> Email Confirmation </summary>
+a
 </details>
 
 
 <details>
 <summary> Add A Playlist </summary>
+d
 </details>
 
 
 <details>
 <summary> Follow/Unfollow A User/Playlist </summary>
+d
 </details>
 
 <details>
 <summary> Play Music </summary>
+f
 </details>
 
 
