@@ -4,6 +4,7 @@ An environment for you to discover different music cultures at different unviers
 
 
 ## Table of Contents 
+* [Developer](#Developer)
 * [Dependencies](#Dependencies)
 * [Examples](#Examples)
 * [Features](#Features)
