@@ -154,7 +154,11 @@ export async function schools() {
 
 
 
-<details>
+</details>
+
+
+
+<detail>
 <summary> Login </summary>
 2.  Pass the list of schools as a prop to our home component and passing our list of schools to 
 our Navbar component. 
