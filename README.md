@@ -160,7 +160,7 @@ export async function schools() {
 
 
     </details>
-
+</details>
 
 <detail>
 <summary> Email Confirmation </summary>
