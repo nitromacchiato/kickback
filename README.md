@@ -10,26 +10,22 @@ Description about kickback
 ## Dependencies
 
 <a href="https://next-auth.js.org" target="_blank"><img width="50px" height="50px" src="https://next-auth.js.org/img/logo/logo-sm.png" /></a> 
-+-- @material-ui/core@4.11.2
-+-- @material-ui/lab@4.0.0-alpha.57
-+-- @prisma/cli@2.15.0
-+-- @prisma/client@2.14.0
-+-- @sendgrid/mail@7.4.2
-+-- @types/node@14.14.20
-+-- @types/react@17.0.0
-+-- and@0.0.3
-+-- bulma@0.9.1
-+-- bulma-divider@0.2.0
-+-- eslint@3.0.0
-+-- eslint-plugin-react-hooks@4.2.0
-+-- heroku@7.47.7
-+-- next@10.0.4
-+-- next-auth@3.1.0
-+-- react@17.0.1
-+-- react-dom@16.13.1
-+-- spotify-web-api-node@5.0.0
-+-- superagent@6.1.0
-`-- typescript@4.1.3
+* @material-ui/core@4.11.2
+* @material-ui/lab@4.0.0-alpha.57
+* @prisma/cli@2.15.0
+* @prisma/client@2.14.0
+* @sendgrid/mail@7.4.2
+* @types/node@14.14.20
+* @types/react@17.0.0
+* and@0.0.3
+* bulma@0.9.1
+* next@10.0.4
+* next-auth@3.1.0
+* react@17.0.1
+* react-dom@16.13.1
+* spotify-web-api-node@5.0.0
+* superagent@6.1.0
+* typescript@4.1.3
 
 
 ## Features 
