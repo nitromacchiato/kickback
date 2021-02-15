@@ -156,10 +156,17 @@ export async function schools() {
 
 <details>
 
-<summary> Select Your School </summary> 
+<summary> Login </summary> 
+
+
 <p align="center">
  <img align="center" alt="start up" src="demo/listofschools.gif" />
 </p>
+
+
+
+
+
 
 1.First we load the data at build time by using getStaticProps from Nextjs. This allows us to get the list of schools 
 and pass them to the component as a prop. 
