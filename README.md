@@ -21,11 +21,12 @@ Able to share, stream and add music you discover.
 
 
 
+
 <details>
 
 <summary> Select Your School </summary> 
-<p style="align:center;">
- <img style="align:center;" alt="start up" src="demo/listofschools.gif" />
+<p align="center">
+ <img align="center" alt="start up" src="demo/listofschools.gif" />
 </p>
 
 1.First we load the data at build time by using getStaticProps from Nextjs. This allows us to get the list of schools 
@@ -151,13 +152,65 @@ export async function schools() {
 
 <details>
 <summary> Login </summary>
-login
+2.  Pass the list of schools as a prop to our home component and passing our list of schools to 
+our Navbar component. 
+
+```javascript 
+function Home({colleges, ...}) {
+return (
+    <>
+    <Head>
+        ...
+        <title>Kickback</title>
+        ...
+    </Head>
+
+
+    <body>
+        <Navbar listOfSchools={colleges}/>
+        ...
+    </body>
+    </>
+)
+}
+
+
+
+```
+
+
 </details>
 
 
 <details>
 <summary> Email Confirmation </summary>
-a
+2.  Pass the list of schools as a prop to our home component and passing our list of schools to 
+our Navbar component. 
+
+```javascript 
+function Home({colleges, ...}) {
+return (
+    <>
+    <Head>
+        ...
+        <title>Kickback</title>
+        ...
+    </Head>
+
+
+    <body>
+        <Navbar listOfSchools={colleges}/>
+        ...
+    </body>
+    </>
+)
+}
+
+
+
+```
+
+
 </details>
 
 
