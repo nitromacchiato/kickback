@@ -1,6 +1,6 @@
 # Kickback 
 
-Description about kickback 
+An environment for you to discover different music cultures at different unviersities. Be able to discover what other students listen to for music. 
 
 
 ## Table of Contents 
