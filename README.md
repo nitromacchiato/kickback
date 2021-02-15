@@ -354,7 +354,7 @@ Display the pop up to send you to the spotify login from nextAuth
 
 <details>
 
-<summary> Add/Remove Playlist </summary> 
+<summary> Add/Remove Playlist To School </summary> 
 
 
 <p align="center">
@@ -700,3 +700,11 @@ function RemovePlaylist(PlaylistSpotifyID){
 
 </details>
 
+
+
+<details>
+<summary> Add/Remove Playlist From Your Library </summary>
+1. Demo 
+
+
+</deatils>
