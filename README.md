@@ -160,7 +160,7 @@ export async function schools() {
 
 
 <p align="center">
- <img align="center" alt="start up" src="demo/listofschools.gif" />
+ <img align="center" alt="start up" src="demo/login.gif" />
 </p>
 
 
