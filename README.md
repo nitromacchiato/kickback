@@ -36,6 +36,11 @@ An environment for you to discover different music cultures at different unviers
 
 ## Features 
 
+### School Verification 
+* Verify each school email through our database 
+* Recieve a confirmation link using [SendGrid](https://github.com/sendgrid/sendgrid-nodejs)
+* Assign a school to a users profile
+
 ### Intergration with Spotify API to 
 * Access your playlist information 
 * Unfollow/Follow users 
