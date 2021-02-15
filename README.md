@@ -54,7 +54,9 @@ An environment for you to discover different music cultures at different unviers
 
 
 ### Secure 
-* Use [NextAuth](https://github.com/nextauthjs/next-auth/blob/main/README.md) to provide security 
+*  Use [NextAuth](https://github.com/nextauthjs/next-auth/blob/main/README.md) to provide passwordless login and extra security
+*  Protected API routes 
+*  Using Spotify API token for each request 
 
 
 
