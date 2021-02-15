@@ -7,31 +7,9 @@ Description about kickback
 * [Dependencies](#dependencies)
 * [Features](#features)
 
-## Dependencies
-
-* @material-ui/core@4.11.2
-* @material-ui/lab@4.0.0-alpha.57
-* @prisma/cli@2.15.0
-* @prisma/client@2.14.0
-* @sendgrid/mail@7.4.2
-* @types/node@14.14.20
-* @types/react@17.0.0
-* and@0.0.3
-* bulma@0.9.1
-* next@10.0.4
-* next-auth@3.1.0
-* react@17.0.1
-* react-dom@16.13.1
-* spotify-web-api-node@5.0.0
-* superagent@6.1.0
-* typescript@4.1.3
-
 
 ## Features 
 Able to share, stream and add music you discover. 
-
-
-
 
 
 <details>
@@ -720,3 +698,34 @@ function RemovePlaylist(PlaylistSpotifyID){
 
 
 </deatils>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Dependencies
+* @material-ui/core@4.11.2
+* @material-ui/lab@4.0.0-alpha.57
+* @prisma/cli@2.15.0
+* @prisma/client@2.14.0
+* @sendgrid/mail@7.4.2
+* @types/node@14.14.20
+* @types/react@17.0.0
+* and@0.0.3
+* bulma@0.9.1
+* next@10.0.4
+* next-auth@3.1.0
+* react@17.0.1
+* react-dom@16.13.1
+* spotify-web-api-node@5.0.0
+* superagent@6.1.0
+* typescript@4.1.3
