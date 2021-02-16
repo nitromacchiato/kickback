@@ -13,6 +13,11 @@ An environment for you to discover different music cultures at different unviers
 
 ## Demo 
 
+<p align="center">
+ <img align="center" alt="start up" src="demo/demo_start.gif" />
+</p>
+
+
 
 
 
