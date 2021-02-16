@@ -94,6 +94,8 @@ Following a methodology of building fast and breaking things. Our goal is to be 
 
 ## Examples 
 Able to share, stream and add music you discover. 
+</br>
+More examples will be added in the near feature. If you'd like to view more or get a live demo contact me [andy.pinedar@gmail.com](mailto:andy.pinedar@gmail.com)
 
 
 <details>
@@ -747,9 +749,3 @@ function RemovePlaylist(PlaylistSpotifyID){
 
 
 
-<details>
-<summary> Add/Remove Playlist From Your Library </summary>
-1. Demo 
-
-
-</deatils>
