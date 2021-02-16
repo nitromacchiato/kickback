@@ -223,7 +223,7 @@ return (
 
 
 
-1. For user login we use NextAuth which is a open source 
+1. First we set up our NextAuth configuartion to allow Spotify logins in our application
 
 
 ```javascript
@@ -258,23 +258,6 @@ const options = {
   adapter: Adapters.Prisma.Adapter({ prisma }),
 
 
-  callbacks: {
-    signIn: async (user, account, profile) => {
-      return Promise.resolve(true)
-    },
-    redirect: async (url, baseUrl) => {
-      return Promise.resolve(baseUrl)
-    },
-    session: async (session, user) => {
-        ....
-      return Promise.resolve(session)
-    },
-    jwt: async (token, user, account, profile, isNewUser) => {
-      return Promise.resolve(token)
-    }
-  }
-
-
 }
 
 
@@ -283,10 +266,12 @@ const options = {
 
 
 
-2.  Pass the list of schools as a prop to our home component and passing our list of schools to 
-our Navbar component. 
+2.  We now use the NextAuth getSession to create a React state that then allows us to see if the user is logged in or not. 
+Bellow we decide whether to display the connect button or user options depending on whether the user is logged in or not. 
 
 ```javascript 
+// components/navbar.js 
+
 
 {/* If the user is not Logged in  */}
 {!session && 
@@ -299,13 +284,10 @@ our Navbar component.
 
 
 
-
 {/* If the user is logged in */}
 {session &&
 
     <>	
-
-    
     {/* If the user school email is not verified then show the add school button */}
     {!isVerified && 
 
@@ -313,13 +295,11 @@ our Navbar component.
         <strong>Add School</strong>
         </button>
 
-    
     }
     
 
 
     {/* If the user school email is verified then show a custom button with a href link to their school page */}
-
     {isVerified && 
         <>
             <Link href='http://localhost:3000/schools/University-of-Maryland'>
@@ -337,10 +317,10 @@ our Navbar component.
         </>
     }
 
-
     <button className="button is-warning" onClick={signOut}>
         <strong>Sign Out</strong>
     </button>
+
 </>
 }
 
@@ -349,9 +329,9 @@ our Navbar component.
 
 
 
-3. Connect Modal Popup 
+3. If the user clicks connect then change the React state isShown to true to display the modal popup that provides the login instructions 
 
-- Create a react state to trigger when to show the pop up 
+* Create a react state to trigger when to show the pop up 
 ``` javascript 
 //components/navbar 
 
@@ -360,7 +340,7 @@ const [isShown, isHidden] = React.useState(false);
 
 ```
 
-Display the pop up to send you to the spotify login from nextAuth 
+* Display the pop up to send you to the spotify login from nextAuth 
 ```javascript 
 
 // components/navbar 
@@ -400,10 +380,9 @@ Display the pop up to send you to the spotify login from nextAuth
 
 ```
 
-
-
-
 </details>
+
+
 
 
 
@@ -421,7 +400,8 @@ Display the pop up to send you to the spotify login from nextAuth
 
 
 
-1. If the user is logged in and their school email is verified then display the add a playlist button  
+1. Only if the user is logged in and their school email is verified that we then display the add a playlist button. If not we display the Add School button
+so the user can select their university and verify their school email. 
 
 
 ```javascript
@@ -466,17 +446,12 @@ Display the pop up to send you to the spotify login from nextAuth
 }
 
 
-
-
-
 ```
 
 
 
-2.  Loop through their playlist which is gathered from their sesson  
+2.  Using NextAuth we gather information of whether the users school email is verified at the start of the session 
 
-
- - Check if the users school email is verified 
 ```javascript 
 try{
     //Search in database for user based of their email
@@ -504,7 +479,7 @@ try{
 ```
 
 
-- Get their playlist from spotify and assign it to their user session provided by NextAuth 
+3.  In NextAuth session callback we make a request to gather the users playlist information from Spotify 
 
 ```javascript 
 // pages/apit/auth/[...nextauth].js 
@@ -514,7 +489,7 @@ session.playlist = await GetUserPlaylits(userName)
 ```
 
 
-- Function for getting user playlist 
+- Function for getting user playlist using SpotifyApi wrapper and Prisma 
 ```javascript 
 
 // lib/spotify/getUserPlaylists 
@@ -573,7 +548,7 @@ export default GetUserPlaylits
 
 
 
-3. Display playlist for user  
+4. Display the users playlist 
 
 - Create a react state to trigger when to show the pop up 
 ``` javascript 
@@ -584,7 +559,8 @@ const [isShowingPlaylists, setPlaylists] = React.useState(false)
 
 ```
 
-Display the pop up to send you to the spotify login from nextAuth 
+- Loop through the users session playlist callback and display their playlist 
+
 ```javascript 
 
 // components/navbar 
@@ -667,6 +643,7 @@ Display the pop up to send you to the spotify login from nextAuth
 
 ```
 
+* Bellow are the two options of Adding and Deleting a playlist using API's created by me 
 
 Playlist Submission 
 ```javascript 
