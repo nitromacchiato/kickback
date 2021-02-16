@@ -16,7 +16,8 @@ An environment for you to discover different music cultures at different unviers
 
 
 
-To view more examples go to [Examples](#Examples)
+To view more examples with code blocks go to [Examples](#Examples)
+For a live demo feel free to contact me [andy.pinedar@gmail.com](andy.pinedar@gmail.com)
 
 ## Developers
 
