@@ -18,8 +18,9 @@ Hi my name is [Andy Pineda](https://www.linkedin.com/in/andy-pineda/), I'm a sen
 enjoy developing my own projects on my free time. I focused on developing the full stack application from working on the front end to engineering the database and createing the api routes to access data from the database. 
 
 ### Sydney Bullock
-My partner [Sydney Bullock](https://www.linkedin.com/in/sydney-bullock/) focused on marketing and branding the product. Sydney helped guide the design proccess helping make alterations to the application and deciding what features we should foucs on 
-based off our own research. 
+My partner [Sydney Bullock](https://www.linkedin.com/in/sydney-bullock/) is a senior studying Journalism at the University of Maryland graduating July 2021 focused on Product Development and Marketing. 
+Sydney focused on marketing and branding the product. Sydney helped guide the design proccess helping make alterations to the application and deciding what features we should foucs on 
+based off our own research and understanding. 
 
 
 ## Dependencies
@@ -90,7 +91,7 @@ Able to share, stream and add music you discover.
 </p>
 
 1.First we load the data at build time by using getStaticProps from Nextjs. This allows us to get the list of schools 
-and pass them to the component as a prop. 
+and pass them to our React component as a prop. 
 
 
 ```javascript
@@ -122,38 +123,8 @@ if (colleges != null){
 ```
 
 
-
-2.  Pass the list of schools as a prop to our home component and passing our list of schools to 
-our Navbar component. 
-
-```javascript 
-function Home({colleges, ...}) {
-return (
-    <>
-    <Head>
-        ...
-        <title>Kickback</title>
-        ...
-    </Head>
-
-
-    <body>
-        <Navbar listOfSchools={colleges}/>
-        ...
-    </body>
-    </>
-)
-}
-
-
-
-```
-
-
-
-
-3. We use the imported school function to make a query to the database and select all 
-schools. 
+2. We use the imported school function to make a query to our database and to select all 
+school and return it into the proper json structure required by Nextjs. 
 
 ```javascript 
 
@@ -181,6 +152,30 @@ export async function schools() {
 
 ```
 
+3.  We pass the schools as a prop to our Home compoenent and then pass it to our Navbar component as a parm for list of schools.  
+
+```javascript 
+function Home({colleges, ...}) {
+return (
+    <>
+    <Head>
+        ...
+        <title>Kickback</title>
+        ...
+    </Head>
+
+
+    <body>
+        <Navbar listOfSchools={colleges}/>
+        ...
+    </body>
+    </>
+)
+}
+
+
+
+```
 
 
 4. Using Material UI to display an autocomplete box by passing in the list of school props to the options parameter. 
