@@ -1,6 +1,6 @@
 # Kickback 
 
-An environment for you to discover different music cultures at different unviersities. Be able to discover what other students listen to for music. 
+An environment for you to discover different music cultures from different unviersities. Discover what other students listen to. 
 
 
 ## Table of Contents 
