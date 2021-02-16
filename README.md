@@ -13,11 +13,11 @@ An environment for you to discover different music cultures at different unviers
 ## Developers
 
 ### Andy Pineda 
-Hi my name is Andy Pineda, I'm a senior studying Information Science at the University of Maryland graduting May 2021. I'm pursing a career in software engineering and 
-enjoy developing my own projects on my free time. I focused on developing the full stack application from working on the front end to engineering the database and createing the api routes to access the data. 
+Hi my name is [Andy Pineda](https://www.linkedin.com/in/andy-pineda/), I'm a senior studying Information Science at the University of Maryland graduting May 2021. I'm pursing a career in software engineering and 
+enjoy developing my own projects on my free time. I focused on developing the full stack application from working on the front end to engineering the database and createing the api routes to access data from the database. 
 
 ### Sydney Bullock
-My partner Sydney Bullock focused on marketing and branding the product. Sydney helped guide the design proccess helping make alterations to the application and deciding what we should foucs on 
+My partner [Sydney Bullock](https://www.linkedin.com/in/sydney-bullock/) focused on marketing and branding the product. Sydney helped guide the design proccess helping make alterations to the application and deciding what features we should foucs on 
 based off our own research. 
 
 
@@ -50,26 +50,27 @@ based off our own research.
 * Assign a school to a users profile
 
 ### Intergration with Spotify API to 
-* Access your playlist information 
+* Access user playlist information 
 * Unfollow/Follow users 
-* Add/Remove Playlist from your library 
+* Add/Remove Playlist from user library 
 * Play/Pause Tracks 
 
-### Discover universities and music culture 
+### Discover universities  
 * Acceess to a growing network of schools 
-* Find verified users that are apart of that university 
-* See what playlist are trending at each university 
+* Find verified users that are apart of different university 
+* See what playlist are trending at each university and region
 
 
 ### Ranking 
 * See what playlist are top in each region 
-* Only ranks application that are trending within the application
+* See what playlist are trending at your school 
+* Only aplpications that are trending in kickback are ranked 
 
 
 ### Secure 
 *  Use [NextAuth](https://github.com/nextauthjs/next-auth/blob/main/README.md) to provide passwordless login and extra security
-*  Protected API routes 
-*  Using Spotify API token for each request 
+*  Protected API routes using [NextAuth](https://github.com/nextauthjs/next-auth/blob/main/README.md) session and .env screat key
+*  All request to Spotify are protected with oAuth 
 
 
 
