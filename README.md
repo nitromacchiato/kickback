@@ -6,8 +6,9 @@ An environment for you to discover different music cultures at different unviers
 ## Table of Contents 
 * [Developers](#Developers)
 * [Dependencies](#Dependencies)
-* [Examples](#Examples)
 * [Features](#Features)
+* [Examples](#Examples)
+
 
 
 ## Developers
@@ -22,6 +23,8 @@ based off our own research.
 
 
 ## Dependencies
+Following a methodology of building fast and breaking things. Our goal is to be able to get an up and running Kickback as soon as possible. In order to do that we rely on some notable dependencies for styling, authentication and email services. As the application develops the goal will be to improve based off user feedback and slowly remove dependencies.
+
 * @material-ui/core@4.11.2
 * @material-ui/lab@4.0.0-alpha.57
 * @prisma/cli@2.15.0
