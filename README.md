@@ -643,7 +643,7 @@ const [isShowingPlaylists, setPlaylists] = React.useState(false)
 
 ```
 
-* Bellow are the two options of Adding and Deleting a playlist using API's created by me 
+5. Bellow are the two options of Adding and Deleting a playlist using API's created by me 
 
 Playlist Submission 
 ```javascript 
