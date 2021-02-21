@@ -1,3 +1,6 @@
+
+-------------------------------------------     RANDOM NOTES ------------------------------------------------
+
 #REMEMBER 
 - Remove comments from javascript files 
 
@@ -69,3 +72,49 @@ getstatic paths setpaths fallback to true
 # PLAYLIST 
     - Edit the size ratios for mobile and desktop and create a template chart for them 
     - work on avoding the error of data[user][token] is undefined when the user is not logged in 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------ IMPROVEMENTS ---------------------
+
+- School options could be passed down from the _app.js page to any component instead of having to call get static props from every navbar 
+- Redux could be used to import and pass the data to components 
+- Instead of post in the search I should implement a GET request to be safer and it just makes sense
+- With the search limit results to unique by users
+- Make the section clear for the search column when backspaced and starting over 
+- For the index layout i could make a card component to keep resuing instead of repeating the same code over and over 
+- Get the current users devices and then stream the music when they click play to that device 
+- Have the pause button in the playlist page change back after a set amount of time

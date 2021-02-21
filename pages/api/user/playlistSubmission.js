@@ -1,6 +1,6 @@
 import SubmitPlaylist from '../../../lib/db/handlePlaylistSubmission'
 import GetPlaylistFollowers from '../../../lib/playlists/getPlaylistFollowers'
-
+import { getSession } from 'next-auth/client'
 
 
 export default async function handler(req, res) {
@@ -8,7 +8,20 @@ export default async function handler(req, res) {
     res.statusCode = 200
 
 
+    //Get the current user session 
+    const session = await getSession({ req })
+
+
     if (req.method === 'POST') {
+
+
+
+      //Only run the request if the user is logged in 
+      if (session){
+
+        //Set the refresh token needed for the api request 
+        const user= session.user.name
+        
         // Process a POST request
         console.log(req.body)
 
@@ -28,15 +41,16 @@ export default async function handler(req, res) {
 
 
         // Handle Submission to Database 
-        SubmitPlaylist(name,owner,spotifyId,href,school,playlistImage,description,followers)
+        SubmitPlaylist(name,owner,user,spotifyId,href,school,playlistImage,description,followers)
 
-        
+      }
 
-      } else {
-        // Handle any other HTTP method
-        console.log('Not a post')
-    }
-      
+
+    } else {
+      // Handle any other HTTP method
+      console.log('Not a post')
+  }
+    
       
 
 

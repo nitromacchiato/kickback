@@ -21,13 +21,14 @@ function Home({colleges, NorthEastTop, WestTop, SouthEastTop, SouthWestTop, MidW
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css"></link>
       </Head>
 
-
-      <Navbar listOfSchools={colleges}/>
-      <IndexLayout  NorthEastTop={NorthEastTop} WestTop={WestTop} SouthEastTop={SouthEastTop} SouthWestTop={SouthWestTop} MidWestTop={MidWestTop} />
-      
+      <body>
+        <Navbar listOfSchools={colleges}/>
+        <IndexLayout  NorthEastTop={NorthEastTop} WestTop={WestTop} SouthEastTop={SouthEastTop} SouthWestTop={SouthWestTop} MidWestTop={MidWestTop} />
+      </body>
     </>
   )
 }
+
 
 
 
@@ -38,10 +39,11 @@ export async function getStaticProps(context) {
   //Make a database request to get all the schools 
   const school = await schools()
   const colleges = school.schools
+
   
 
   // TOP 10 PER REGIONS PER 7 days 
-  const days = 7
+  const days = 30
 
   //  North East 
   const NorthEastTop = await TopTen('NE',days)
@@ -57,10 +59,6 @@ export async function getStaticProps(context) {
 
   // Mid West 
   const MidWestTop = await TopTen('MW',days)
-
-
-  
-
 
   
   if (colleges != null){
@@ -78,6 +76,8 @@ export async function getStaticProps(context) {
       props:{colleges}
     }
   }
+
+  
 }
 
 

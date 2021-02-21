@@ -7,6 +7,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Link from 'next/link'
 
 
+
    
 
 
@@ -25,7 +26,7 @@ export default function Navbar({ listOfSchools }){
 	const [isShowingSchool, isHidingSchool ] = React.useState(false);
 
 	//Check session for user to see if they're logged in with NextAuth 
-	const [ session, loading ] = useSession(); 
+	const [ session, loading ] = useSession();  
 
 	//User Email for school selection 
 	const [schoolEmail, setSchoolEmail] = React.useState('')
@@ -43,14 +44,13 @@ export default function Navbar({ listOfSchools }){
 	const [isShowingPlaylists, setPlaylists] = React.useState(false)
 
 
-
 	//Router to redirect user to pages 
 	const router = useRouter()
 
 
 
 
-	//Handle Playlist Submission 
+	//Handle Playlist Submission to school page 
 	function handlePlaylistSubmission(PlaylistName,PlaylistOwner,PlaylistSpotifyID,PlaylistHref,UserSchool,PlaylistImage, Description){
 
 
@@ -74,9 +74,53 @@ export default function Navbar({ listOfSchools }){
 		})
 
 
+		//Change add button to remove 
+
+
+        // Hide the add button for playlist
+        const addButtonID = PlaylistSpotifyID + "add"
+        const addButton = document.getElementById(addButtonID)
+        addButton.style.display="none"
+
+        //Display the remove button for playlist
+        const removeButtonID = PlaylistSpotifyID + "remove"
+        const removeButton = document.getElementById(removeButtonID)
+        removeButton.style.display="block"
+
+
+
+
 	}
 
 
+	//Handle Playlist remove from school page
+	function RemovePlaylist(PlaylistSpotifyID){
+		
+		// Calls the api with a post request and submits the parameters in a body 
+		fetch('http://localhost:3000/api/user/removePlaylist',{
+			method:'POST',
+			body: JSON.stringify({
+				spotifyID: PlaylistSpotifyID,
+			}),
+			headers:{
+				'Content-type': 'application/json; charset=UTF-8'
+			}
+		}).catch(function (error){
+			console.warn('Something went wrong adding the playlist.', error)
+		})
+
+		// Show the add button for playlist
+		const addButtonID = PlaylistSpotifyID + "add"
+		const addButton = document.getElementById(addButtonID)
+		addButton.style.display="block"
+
+		//Hide the remove button for playlist
+		const removeButtonID = PlaylistSpotifyID + "remove"
+		const removeButton = document.getElementById(removeButtonID)
+		removeButton.style.display="none"
+
+		
+	}
 
 
 
@@ -89,51 +133,104 @@ export default function Navbar({ listOfSchools }){
 
 
 		// Validates user email is correct 
-		if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
+		if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)){
 
-			{
+			//Reroute user to api to handle submission 
+			router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', query: { email: schoolEmail, school: schoolChoice, username: session.user.name }})
 
-				//Reroute user to api to handle submission 
-				router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', query: { email: schoolEmail, school: schoolChoice, username: session.user.name }})
+		} else {
 
-			} else {
-
-				//Display error message on form if email is invalid 
-				isHiddenError(!isShownError)
+			//Display error message on form if email is invalid 
+			isHiddenError(!isShownError)
+		}
 
 
-			}
 	}
 
 
 
 	//Check to see if user has a school 
-	useEffect(async () => {  
 
-		const userData = await getSession()
+	useEffect(() => { 
 
-		if(userData != null){
-			const result = userData['user']['school_verified']
-			
+		const handleJob = async() =>{
+			const userData = await getSession()
 
-			if (result != null && result != 'false'){		
-				setVerified(true)
-	
+			if(userData != null){
+				const result = userData['user']['school_verified']
+				
+
+				if (result != null && result != 'false'){		
+					setVerified(true)
+		
+				} else {
+					setVerified(false)
+				}
+		
+				
+
 			} else {
+
 				setVerified(false)
-			}
-	
-			
 
-		} else {
+			}	
+		}
+		handleJob()
+	}),[];
 
-			setVerified(false)
-
-		}	
-	},[]);
-	
 
  
+
+	// Check which playlist the user has already added to their school page
+	// Will update everytime a user makes a submission or deletion of a playlist 
+ 
+	useEffect(() => {  
+		const handleJob = async() =>{
+			const userData = await getSession()
+		
+			if(userData != null){
+
+				//Get the added playlist from the current user session 
+				const playlistAdded = userData['playlistAdded']
+				
+				if(playlistAdded != undefined) {
+					
+					//If there is any playlist added 
+					if(playlistAdded.length > 0 ){
+		
+						//map each playlist 
+						playlistAdded.map(item => {
+					
+							//Change the button to remove if the playlist is added already 
+		
+							
+							//Hide the add button
+							const addButtonID = item + "add"
+							const addButton = document.getElementById(addButtonID)
+							if(addButton != null ){
+								addButton.style.display="none"
+							}
+		
+							//Show the remove button 
+							const removeButtonID = item + "remove"
+							const removeButton = document.getElementById(removeButtonID)
+							if(removeButton != null){
+								removeButton.style.display="block"
+							}
+
+						})
+		
+					}
+				}
+
+			} 
+		}
+		handleJob()
+		
+		
+	}),[];
+
+	
 
 
 
@@ -152,18 +249,18 @@ export default function Navbar({ listOfSchools }){
 
 
 		{/* Start of Navbar  */}
-        <nav class="navbar" role="navigation" aria-label="main navigation">
+        <nav className="navbar is-fixed-top mobile touch" role="navigation" aria-label="main navigation">
 
 
 			{/* Start of left Navbar */}
-			<div class="navbar-brand">
+			<div className="navbar-brand">
 				
 
 				{/* Navbar Logo */}
 				<Link href="/">
-				<a class="navbar-item" href="">
-					<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
-				</a>
+					<a className="navbar-item" href="">
+						<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
+					</a>
 				</Link>
 
 
@@ -185,22 +282,17 @@ export default function Navbar({ listOfSchools }){
 			<div className={`navbar-menu ${isActive ? "is-active" : ""}`}>
 
 				{/* Searchbar for Navbar */}
-				<div class="navbar-start">
-					<div class="navbar-item">
-						<div class="control has-icons-left has-icons-right my-2">
-							<input class="input is-normal" type="email" placeholder="Search" />
-							<span class="icon is-small is-left">
-							<i class="fas fa-search fa-lg"></i>
-							</span>
-						</div>
+				<div className="navbar-start">
+					<div className="navbar-item">
+						<Link href="/search"><input className="input is-normal" type="email" placeholder="Search" /></Link>
 					</div>
 				</div>
 
 
 				{/* Right Side of Navbar  */}
-				<div class="navbar-end">
-					<div class="navbar-item">
-						<div class="buttons">
+				<div className="navbar-end">
+					<div className="navbar-item">
+						<div className="buttons">
 
 
 
@@ -208,7 +300,7 @@ export default function Navbar({ listOfSchools }){
 							{/* If the user is not Logged in  */}
 							{!session && 
 							
-								<button class="button is-primary" onClick={() => {isHidden(!isShown);}}>
+								<button className="button is-primary" onClick={() => {isHidden(!isShown);}}>
 									<strong>Connect</strong>
 								</button>
 
@@ -220,13 +312,13 @@ export default function Navbar({ listOfSchools }){
 							{/* If the user is logged in */}
 							{session &&
 
-							<>	
+								<>	
 
 								
 								{/* If the user school email is not verified then show the add school button */}
 								{!isVerified && 
 
-									<button class="button is-primary" onClick={() => {isHidingSchool(!isShowingSchool);}}>
+									<button className="button is-primary" onClick={() => {isHidingSchool(!isShowingSchool);}}>
 									<strong>Add School</strong>
 									</button>
 
@@ -239,26 +331,23 @@ export default function Navbar({ listOfSchools }){
 
 								{isVerified && 
 									<>
-									<Link href='http://localhost:3000/schools/University-of-Maryland'>
-										<button class="button is-light">
-											<span class="icon">
-												<i class="fas fa-graduation-cap"></i>
-											</span>
-											<span>{session.user.school}</span>
+										<Link href='http://localhost:3000/schools/University-of-Maryland'>
+											<button className="button is-light">
+												<span className="icon">
+													<i className="fas fa-graduation-cap"></i>
+												</span>
+												<span>{session.user.school}</span>
+											</button>
+										</Link>
+										
+										<button className="button is-success" onClick={() => {setPlaylists(!isShowingPlaylists);}}>
+											<p>Add a Playlist</p>
 										</button>
-									</Link>
-									
-									<button class="button is-success" onClick={() => {setPlaylists(!isShowingPlaylists);}}>
-										<span class="icon">
-											<i class="fas fa-plus"></i>
-										</span>
-										<span>Add a Playlist</span>
-									</button>
 									</>
 								}
 
 
-								<button class="button is-warning" onClick={signOut}>
+								<button className="button is-warning" onClick={signOut}>
 									<strong>Sign Out</strong>
 								</button>
 							</>
@@ -269,46 +358,61 @@ export default function Navbar({ listOfSchools }){
 
 
 							{/* <!-- Modal popup to show user playlists --> */}
-							<div  class={`modal ${isShowingPlaylists? "is-active": " "}  `}>
-								<div class="modal-background"></div>
-								<div class="modal-card" style={{width:"350px"}}>
+							<div  className={`modal ${isShowingPlaylists? "is-active": " "}  `}>
+								<div className="modal-background"></div>
+								<div className="modal-card" style={{width:"350px"}}>
 
-									<header class="modal-card-head">
-										<p class="modal-card-title">My Playlists</p>
-										<button class="delete" aria-label="close" onClick={()=>{setPlaylists(!isShowingPlaylists);}}></button>
+									<header className="modal-card-head">
+										<p className="modal-card-title">My Playlists</p>
+										<button className="delete" aria-label="close" onClick={()=>{setPlaylists(!isShowingPlaylists);}}></button>
 									</header>
 
-									<section class="modal-card-body" style={{height:"auto"}}>
+									<section className="modal-card-body" style={{height:"auto"}}>
 
 										{/* Table to hold playlists names and an add button */}
 
-										<table class="table" style={{width:'300px'}}>
+										<table className="table" style={{width:'300px'}}>
 
 
 											<thead>
 												<tr>
 													<th>Name</th>
-													<th>Add</th>
+													<th></th>
 												</tr>
 											</thead>
 
 											<tbody>
-												
+												{/* If the user is logged in and the session.playlist data greater than 0 then loop through their playlists data */}
 												{session && 
-													session.playlist.map(item =>{
+													session.playlist != undefined && 
+														session.playlist.map(item =>{
 
-
-														return(
-															<>
-															<tr>
-																<td>{item.name}</td>
-
-																<td><span><button class='button is-small is-light' onClick={e => {e.preventDefault();  handlePlaylistSubmission(item.name, item.owner.display_name,  item.uri, item.external_urls.spotify, session.user.school, item.images[0]['url'], item.description )}}><i class="fas fa-plus"></i></button></span></td>
+															return(
+																<>
 																
-															</tr>	
-															</>
-														)
-													})	
+																<tr>
+																	<td>{item.name}</td>
+
+																	<td>
+																		<span>
+
+																			{/* Add Playlist Button */}
+																			<button id={item.uri + 'add'} className='button is-small is-primary' onClick={e => {e.preventDefault();  handlePlaylistSubmission(item.name, item.owner.display_name,  item.uri, item.external_urls.spotify, session.user.school, item.images[0]['url'], item.description )}}>
+																				ADD
+																			</button>
+
+																			{/* Remove Playlist button */}
+																			<button id={item.uri + 'remove'} className='button is-small is-danger' style={{display:'none'}}  onClick={e => {e.preventDefault();  RemovePlaylist(item.uri)}}>
+																				DEL
+																			</button>
+																			
+																		</span>
+																	</td>
+																	
+																</tr>	
+																</>
+															)
+														})	
 												}
 
 
@@ -319,7 +423,7 @@ export default function Navbar({ listOfSchools }){
 
 									</section>
 
-									<footer class="modal-card-foot">
+									<footer className="modal-card-foot">
 										<p> Any playlist you add will only be uploaded to your school </p>
 
 									</footer>
@@ -329,16 +433,16 @@ export default function Navbar({ listOfSchools }){
 
 
 							{/* <!-- Modal popup to select school --> */}
-							<div  class={`modal ${isShowingSchool? "is-active": " "}  `}>
-								<div class="modal-background"></div>
-								<div class="modal-card" style={{width:"350px"}}>
+							<div  className={`modal ${isShowingSchool? "is-active": " "}  `}>
+								<div className="modal-background"></div>
+								<div className="modal-card" style={{width:"350px"}}>
 
-									<header class="modal-card-head">
-										<p class="modal-card-title">Select School</p>
-										<button class="delete" aria-label="close" onClick={()=>{isHidingSchool(!isShowingSchool);}}></button>
+									<header className="modal-card-head">
+										<p className="modal-card-title">Select School</p>
+										<button className="delete" aria-label="close" onClick={()=>{isHidingSchool(!isShowingSchool);}}></button>
 									</header>
 
-									<section class="modal-card-body" style={{height:"auto"}}>
+									<section className="modal-card-body" style={{height:"auto"}}>
 										{/* <!-- Content ... --> */}
 
 
@@ -347,8 +451,8 @@ export default function Navbar({ listOfSchools }){
 
 
 										{/* Search Bar for School */}
-										<div class='block'>
-											<p class={`error_message_font_color ${isShownError ? " ": "hide_error_message"}`}>Pick a school and enter a valid email</p>
+										<div className='block'>
+											<p className={`error_message_font_color ${isShownError ? " ": "hide_error_message"}`}>Pick a school and enter a valid email</p>
 										</div>
 
 
@@ -362,22 +466,22 @@ export default function Navbar({ listOfSchools }){
 										onChange={(event, value) => setSchoolChoice(value.name)}
 										/>
 										
-										<div class="block" style={{marginTop:"4em"}}>
-											<p class=""> Enter your school email </p>
-											<input required class="input is-info block" type="email" placeholder="ex kickback@kyleroger.uni.edu" onChange={event => setSchoolEmail(event.target.value)}></input>
+										<div className="block" style={{marginTop:"4em"}}>
+											<p className=""> Enter your school email </p>
+											<input required className="input is-info block" type="email" placeholder="exex firstlast@name.uni.edu" onChange={event => setSchoolEmail(event.target.value)}></input>
 										</div>
 
 
 
 									</section>
 
-									<footer class="modal-card-foot">
+									<footer className="modal-card-foot">
 
 										{/* Checks to see whether the user has entered a schoolemail and school choice */}
 										{schoolEmail && schoolChoice &&
 											<>
-											{/* <button class="button is-success" onClick={() => {router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', query: { email: schoolEmail, school: schoolChoice }})}}>Send Email</button> */}
-											<button class="button is-success" onClick={e => { e.preventDefault(); handleSchoolSubmission(schoolChoice,schoolEmail)}}>Submit</button>
+											{/* <button className="button is-success" onClick={() => {router.push({ pathname: '/api/schoolEmailVerification/getSchoolSubmission', query: { email: schoolEmail, school: schoolChoice }})}}>Send Email</button> */}
+											<button className="button is-success" onClick={e => { e.preventDefault(); handleSchoolSubmission(schoolChoice,schoolEmail)}}>Submit</button>
 											
 											
 											</>
@@ -394,29 +498,29 @@ export default function Navbar({ listOfSchools }){
 
 
 							{/* Modal Popup to connect to music provider. Only pops up when the user clicks the connect button */}
-							<div class={`modal ${isShown ? "is-active" : ""}`}>
-								<div class="modal-background"></div>
-								<div class="modal-content">
-									<div class="box is-primary has-text-centered">
+							<div className={`modal ${isShown ? "is-active" : ""}`}>
+								<div className="modal-background"></div>
+								<div className="modal-content">
+									<div className="box is-primary has-text-centered">
 
-										<div class="is-right small_height">
-											<button class="button is-white exit_icon" onClick={() => {isHidden(!isShown);}}>
-												<span class="icon is-small">
-													<i class="fas fa-times"></i>
+										<div className="is-right small_height">
+											<button className="button is-white exit_icon" onClick={() => {isHidden(!isShown);}}>
+												<span className="icon is-small">
+													<i className="fas fa-times"></i>
 												</span>
 											</button>
 										</div>
 										
-										<div class="block">
-											<p class="title">Connect Account</p>
-											<p class="subtitle">To follow, add and sync playlist you must connect with your music provider</p>
+										<div className="block">
+											<p className="title">Connect Account</p>
+											<p className="subtitle">To follow, add and sync playlist you must connect with your music provider</p>
 										</div> 
 
 
-										<div class="block">		
-											<button class="button is-success is-rounded" onClick={e => { e.preventDefault(); signIn('spotify') }}>
-												<span class="icon">
-													<i class="fab fa-spotify"></i>
+										<div className="block">		
+											<button className="button is-success is-rounded" onClick={e => { e.preventDefault(); signIn('spotify') }}>
+												<span className="icon">
+													<i className="fab fa-spotify"></i>
 												</span>
 												<span>
 													Spotify

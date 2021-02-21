@@ -1,5 +1,7 @@
 import getSchoolIds from '../../lib/school/getAllSchoolIds'
 import getSchoolInfo from '../../lib/school/getSchoolData'
+import TopTenPerSchool from '../../lib/school/getTopPlaylists'
+
 import Navbar from '../../components/navbar'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -10,7 +12,7 @@ import 'bulma/css/bulma.css'
 
 
 
-export default function Schools({school,playlist}){
+export default function Schools({school,playlist,topSchoolPlaylists}){
 
 
 
@@ -29,18 +31,14 @@ export default function Schools({school,playlist}){
                 <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
             </Head>
 
-            <Navbar />
+            
+            <body>
+                <Navbar/>
+                <section className="section is-vcentered small-screen-width-recently-added desktop-max-section-width auto-mobile-width" style={{marginLeft:"auto", marginTop:"2em"}} >
 
-            <section class="section is-vcentered" style={{marginLeft:"2.0em", marginTop:"0"}}>
-			    <div class="columns is-centered">
-
-
-                    {/* <!-- TOP playlist -->  */}
-                    <div class="column is-11">
-
-                        <div style={{marginBottom: "1.3em", marginTop: "1.2em"}} class="school_title">
-                            <p class="title is-size-2">{school.name}</p>
-                        </div>
+                    <div style={{marginBottom: "1.3em", marginTop: "1.2em"}} className="school_title">
+                        <p className="title is-size-2">{school.name}</p>
+                    </div>
 
 
                         <div style={{marginBottom: "0.5em"}}>
@@ -48,22 +46,37 @@ export default function Schools({school,playlist}){
                         </div>
 
                         {/* <!-- TOP PLAYLISTS --> */}
-                        <div class="columns is-mobile is-vcentered" style={{sarginTop:"10px", overflow:"auto"}} >
-
-
-                            {/* <!-- First Playlist Album --> */}
-                            <div class="column is-vcentered is-narrow">
-                                <div class="has-text-centered">
-                                    <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
-                                        <img src="https://bulma.io/images/placeholders/128x128.png" />
-                                    </figure>
-                                    <p style={{fontSize:"12pt"}}>Vamp Anthem</p>
-                                    <p style={{fontSize:"9pt"}} class="has-text-weight-light">@Pinex08</p>
-                                </div>
-                            </div>
+                        <div className="columns is-mobile is-vcentered" style={{marginTop:'.5em',overflowX:"scroll"}} >
 
                             
-                     </div>
+                            {topSchoolPlaylists.map((item) =>
+                                <Link href={'http://localhost:3000/playlists/'+ item.playlist_id}>
+
+                                            <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue" style={{marginLeft:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
+                                                <div className="has-text-centered ">
+
+                                                    <div>
+                                                        <figure className="image is-128x128 image_placement">
+                                                            <img src={item.cover_image} />
+                                                        </figure>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <p className="playlist_name" style={{overflow:'hidden'}}>{item.name}</p>
+                                                        <p className="has-text-weight-light playlist_subtitles">{item.owner}</p>
+                                                    </div>
+
+                                                </div>
+                                            </div>    
+
+
+
+
+                                </Link>                            
+                            )}
+
+                        </div>
+
 
 
 
@@ -73,21 +86,28 @@ export default function Schools({school,playlist}){
                             <p>Recently Added</p>
                         </div>
 
-                        <div class="columns is-multiline is-vcentered is-mobile is-11" style={{marginTop:"10px", overflowY: "scroll"}}>
+                        <div className="columns is-multiline is-vcentered is-mobile is-11 small-screen-width-recently-added small-screen-margin-recently-added" style={{marginTop:"10px", overflowY: "scroll"}}>
 
 
-                            {playlist.map((item) => (
+                            {playlist.slice(0).reverse().map((item) => (
 
                                 <Link href={`/playlists/${item.playlist_id}`}>               
-                                    <div class="column is-vcentered is-narrow">
-                                        <div class="has-text-centered">
-                                            <figure class="image is-128x128" style={{marginLeft: "auto", marginRight: "auto"}}>
-                                                <img src={item.cover_image} />
-                                            </figure>
-                                            <p style={{fontSize:"12pt"}}>{item.name}</p>
-                                            <p style={{fontSize:"9pt"}} class="has-text-weight-light">{item.owner}</p>
-                                        </div>
-                                    </div>
+                                            <div className="column is-one-fifth  box has-text-centered button hideOverFlowText fix-last-margin-issue " style={{marginLeft:'.5em',marginTop:'.5em',width:'154px',height:'222px'}} key={item['playlist_id'].split(':')[2]}>
+                                                <div className="has-text-centered ">
+
+                                                    <div>
+                                                        <figure className="image is-128x128 image_placement">
+                                                            <img src={item.cover_image} />
+                                                        </figure>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <p className="playlist_name" style={{overflow:'hidden'}}>{item.name}</p>
+                                                        <p className="has-text-weight-light playlist_subtitles">{item.owner}</p>
+                                                    </div>
+
+                                                </div>
+                                            </div>    
                                 </Link>
                             ))}
                             
@@ -98,10 +118,10 @@ export default function Schools({school,playlist}){
 
 
 
-                    </div>
-			    </div>
-		    </section>	
 
+
+                </section>	
+            </body>                    
 
 
 
@@ -136,6 +156,10 @@ export async function getStaticProps({ params }) {
     const school = await getSchoolInfo(school_name)
 
 
+    //Get the top playlist for the school for the past day 
+    const topSchoolPlaylists = await TopTenPerSchool(school_name,7)
+    
+
     //Get recently added playlists by the school name
     // Send the name as a query in the url
     const getPlaylists = await fetch('http://localhost:3000/api/schools/getRecentlyAdded?name='+school_name,{
@@ -147,7 +171,7 @@ export async function getStaticProps({ params }) {
     
 
     return {
-        props: {school, playlist}, // will be passed to the page component as props
+        props: {school, playlist, topSchoolPlaylists}, // will be passed to the page component as props
         revalidate: 1,
     }
 }
